@@ -73,7 +73,7 @@ strong {
   background-color: var(--violet);
 }
 .about-background {
-  background-color: antiquewhite;
+  background-color: var(--a-white);
   position: absolute;
   z-index: 0;
   width: 70rem;

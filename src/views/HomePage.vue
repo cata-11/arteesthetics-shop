@@ -6,6 +6,8 @@
   <NavMenu />
   <AboutSection />
   <SneakPeeks />
+  <FAQSection />
+
   <base-section id="start-shopping" border="left top" title="start">
     <template v-slot:title="">
       <base-title
@@ -67,6 +69,7 @@ import BaseSection from '../components/base/BaseSection.vue';
 import BaseTitle from '../components/base/BaseTitle.vue';
 import AboutSection from '../components/home/AboutSection.vue';
 import SneakPeeks from '../components/home/SneakPeeks.vue';
+import FAQSection from '../components/home/FAQSection.vue';
 
 export default {
   components: {
@@ -76,7 +79,8 @@ export default {
     BaseSection,
     BaseTitle,
     AboutSection,
-    SneakPeeks
+    SneakPeeks,
+    FAQSection
   }
 };
 </script>

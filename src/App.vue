@@ -25,6 +25,7 @@ export default {
   --violet: rgb(105, 90, 205);
   --black: rgb(19, 19, 19);
   --white: whitesmoke;
+  --a-white: antiquewhite;
 }
 @import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@900&display=swap');
 html,
@@ -40,5 +41,11 @@ body {
   height: fit-content;
   margin: auto;
   box-sizing: border-box;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 </style>
