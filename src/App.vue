@@ -2,18 +2,21 @@
   <main id="main">
     <TheHeader />
     <HomePage />
+    <TheFooter />
   </main>
 </template>
 
 <script>
 import TheHeader from './components/layout/TheHeader.vue';
+import TheFooter from './components/layout/TheFooter.vue';
 import HomePage from './views/HomePage.vue';
 
 export default {
   name: 'App',
   components: {
     HomePage,
-    TheHeader
+    TheHeader,
+    TheFooter
   }
 };
 </script>
@@ -47,5 +50,9 @@ ul {
   padding: 0;
   margin: 0;
   list-style: none;
+}
+
+a {
+  text-decoration: none;
 }
 </style>
