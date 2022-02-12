@@ -76,7 +76,7 @@ export default {
       const answers = list.querySelectorAll('#answer');
       const colors = ['violet', 'pink'];
       answers.forEach((a) => {
-        const n = Math.floor(Math.random() * 2);
+        const n = Math.round(Math.random());
         a.style.backgroundColor = `var(--${colors[n]})`;
       });
     }
