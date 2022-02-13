@@ -1,36 +1,16 @@
 <template>
-  <div>
-    <span
-      v-for="(lettter, idx) in title"
-      :key="idx"
-      :class="colors[idx]"
-      class="element"
-      >{{ title[idx] }}</span
-    ><!-- -->
-  </div>
+  <span
+    v-for="(lettter, idx) in title"
+    :key="idx"
+    :class="colors[idx]"
+    class="element"
+    >{{ title[idx] }}</span
+  >
 </template>
 
 <script>
 export default {
-  props: {
-    title: {
-      type: String,
-      required: true
-    },
-    colors: {
-      type: Array,
-      required: true
-    }
-  },
-  data() {
-    return {};
-  },
-  methods: {
-    assignColors() {}
-  },
-  mounted() {
-    this.assignColors();
-  }
+  props: ['title', 'colors']
 };
 </script>
 
@@ -44,7 +24,7 @@ span {
 .v {
   background-color: var(--violet);
 }
-.p{
+.p {
   background-color: var(--pink);
 }
 .t {

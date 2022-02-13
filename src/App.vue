@@ -1,58 +1,74 @@
 <template>
-  <main id="main">
+  <main>
     <TheHeader />
+    <NavigationMenu />
     <HomePage />
     <TheFooter />
   </main>
 </template>
 
 <script>
+import NavigationMenu from './components/layout/NavigationMenu.vue';
 import TheHeader from './components/layout/TheHeader.vue';
 import TheFooter from './components/layout/TheFooter.vue';
 import HomePage from './views/HomePage.vue';
 
 export default {
-  name: 'App',
   components: {
     HomePage,
     TheHeader,
-    TheFooter
+    TheFooter,
+    NavigationMenu
   }
 };
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@900&display=swap');
 :root {
   --red: rgb(250, 90, 60);
   --pink: rgb(165, 90, 150);
   --violet: rgb(105, 90, 205);
   --black: rgb(19, 19, 19);
-  --white: whitesmoke;
-  --a-white: antiquewhite;
+  --white: rgb(245, 245, 245);
+  --a-white: rgb(250, 235, 215);
+  --main-width: 70rem;
 }
-@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@900&display=swap');
 html,
 body {
   margin: 0;
   box-sizing: border-box;
   background-color: var(--black);
+  color: var(--white);
   user-select: none;
-  color: whitesmoke;
 }
-#main {
-  width: 70rem;
+main {
+  width: var(--main-width);
   height: fit-content;
   margin: auto;
   box-sizing: border-box;
 }
-
 ul {
-  padding: 0;
   margin: 0;
+  padding: 0;
+}
+li {
   list-style: none;
 }
-
 a {
   text-decoration: none;
+  color: var(--white);
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+@media only screen and (max-width: 23rem) {
+  :root {
+    --main-width: 23rem;
+  }
 }
 </style>

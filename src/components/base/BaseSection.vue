@@ -9,15 +9,7 @@
 
 <script>
 export default {
-  props: {
-    border: {
-      type: String,
-      required: true
-    },
-    title: {
-      type: String
-    }
-  }
+  props: ['border', 'title']
 };
 </script>
 
@@ -57,5 +49,30 @@ h2 {
   transform: translateY(-2rem) translateX(2rem);
   margin-right: 0;
   margin-left: auto;
+}
+
+@media only screen and (max-width: 23rem) {
+  section {
+    padding: 0 1rem;
+    margin-top: 3.5rem;
+  }
+  h2 {
+    font-size: 1.7rem;
+    letter-spacing: 0.8rem;
+  }
+  .start {
+    transform: translateY(-1.5rem) translateX(0);
+    margin: auto;
+  }
+  .end {
+    transform: translateY(-1.5rem) translateX(0);
+    margin: auto;
+  }
+  .left {
+    border-left: none;
+  }
+  .right {
+    border-right: none;
+  }
 }
 </style>

@@ -7,13 +7,13 @@
       ></base-title>
     </template>
     <template v-slot:content>
-      <ul id="faq">
-        <faq
+      <ul id="guide-list">
+        <guide-item
           v-for="faq in faqs"
           :key="faq.id"
           :faq="faq"
           @show-answer="showAnswer"
-        ></faq>
+        ></guide-item>
       </ul>
     </template>
   </base-section>
@@ -22,7 +22,7 @@
 <script>
 import BaseSection from '../base/BaseSection.vue';
 import BaseTitle from '../base/BaseTitle.vue';
-import FAQ from './FAQ.vue';
+import GuideItem from './GuideItem.vue';
 
 export default {
   data() {
@@ -72,7 +72,7 @@ export default {
       });
     },
     randomizeColors() {
-      const list = document.getElementById('faq');
+      const list = document.getElementById('guide-list');
       const answers = list.querySelectorAll('#answer');
       const colors = ['violet', 'pink'];
       answers.forEach((a) => {
@@ -87,9 +87,8 @@ export default {
   components: {
     BaseSection,
     BaseTitle,
-    faq: FAQ
+    GuideItem
   }
 };
 </script>
 
-<style scoped></style>

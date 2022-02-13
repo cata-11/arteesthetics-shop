@@ -44,7 +44,7 @@ div:nth-of-type(1) {
   background-color: var(--a-white);
   color: var(--black);
   cursor: pointer;
-  border-bottom: 5px solid var(--black);
+  margin-bottom: 5px;
   position: relative;
 }
 div:nth-of-type(2) {
@@ -68,5 +68,21 @@ span {
 }
 .rotate {
   transform: rotateZ(180deg) translateY(15%);
+}
+
+@media only screen and (max-width: 23rem) {
+  p {
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+  div:nth-of-type(2) {
+    transform: translateY(-20%);
+    margin: auto;
+  }
+  span {
+    top: 30%;
+    right: 2%;
+    font-size: 1rem;
+  }
 }
 </style>

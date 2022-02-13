@@ -30,6 +30,7 @@
 <script>
 import BaseSection from '../base/BaseSection.vue';
 import BaseTitle from '../base/BaseTitle.vue';
+
 export default {
   components: {
     BaseSection,
@@ -53,7 +54,6 @@ form > input[type='text'] {
   background-color: antiquewhite;
   color: var(--black);
   font-size: 2rem;
-
   border: none;
   outline: none;
   padding: 1rem;
@@ -61,11 +61,16 @@ form > input[type='text'] {
 form > button {
   border: none;
   background-color: var(--pink);
-  color: var(--white);
+  color: var(--a-white);
   font-size: 1.5rem;
   letter-spacing: 0.2rem;
   padding: 1rem;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+form > button:hover {
+  background-color: var(--violet);
+  color: var(--white);
 }
 
 .social-icons {
@@ -81,8 +86,42 @@ form > button {
   width: 5rem;
   height: 5rem;
 }
-a {
-  text-decoration: none;
-  color: var(--white);
+
+@media only screen and (max-width: 23rem) {
+  form > input[type='text'] {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+  form > button {
+    border: none;
+    background-color: var(--pink);
+    color: var(--white);
+    font-size: 0.8rem;
+    letter-spacing: 0.1rem;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+  .form-container > form {
+    display: flex;
+    flex-direction: column;
+  }
+  .social-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .social-icons > a > img {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .social-icons {
+    width: 50%;
+    transform: translateX(0);
+    justify-content: space-evenly;
+    margin-top: 1rem;
+  }
+  #follow-us {
+    margin-bottom: 2rem;
+  }
 }
 </style>

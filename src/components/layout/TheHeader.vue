@@ -33,18 +33,19 @@ export default {
 </script>
 
 <style scoped>
-header {
-  width: 100%;
-  box-sizing: border-box;
-}
 h1 {
   margin: 0 auto;
+  padding: 1rem 0;
+  font-size: 4.1rem;
+  letter-spacing: 3rem;
   width: fit-content;
-  font-size: 4rem;
-  padding: 0;
   font-family: 'Zen Kaku Gothic Antique', sans-serif;
-  letter-spacing: 2.2rem;
-  text-indent: 2.2rem;
-  padding: 1rem;
+}
+
+@media only screen and (max-width: 23rem) {
+  h1 {
+    font-size: 2rem;
+    letter-spacing: 0.5rem;
+  }
 }
 </style>

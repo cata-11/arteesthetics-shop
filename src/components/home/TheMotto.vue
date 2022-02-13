@@ -1,5 +1,5 @@
 <template>
-  <div class="description-container">
+  <div class="container">
     <span>
       <h1>elite</h1>
     </span>
@@ -16,9 +16,9 @@
 </template>
 
 <style scoped>
-.description-container {
+.container {
   width: 35rem;
-  height: 500px;
+  height: 35rem;
   display: flex;
   align-items: left;
   flex-direction: column;
@@ -126,6 +126,23 @@ span:nth-of-type(4)::after {
   }
   to {
     opacity: 1;
+  }
+}
+
+@media only screen and (max-width: 23rem) {
+  .container {
+    width: 17rem;
+    height: fit-content;
+    align-items: center;
+    justify-content: start;
+    margin-top: 2rem;
+  }
+  h1 {
+    font-size: 1.2rem;
+    letter-spacing: 0.5rem;
+    width: fit-content;
+    position: relative;
+    line-height: 1.4rem;
   }
 }
 </style>

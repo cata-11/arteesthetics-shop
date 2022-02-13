@@ -135,4 +135,5 @@ export default {
   /* border: 1px solid white; */
   z-index: 2;
 }
+
 </style>
