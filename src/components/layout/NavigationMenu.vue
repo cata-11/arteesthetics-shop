@@ -80,6 +80,37 @@ img {
   display: none;
 }
 
+@media only screen and (max-width: 480px) {
+  nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    background-color: var(--pink);
+  }
+  div {
+    display: none;
+  }
+  ul {
+    justify-content: space-evenly;
+    border: none;
+  }
+  li {
+    padding: 0.5rem;
+  }
+  img {
+    display: block;
+    padding: 0.5rem 1rem;
+  }
+  .active img {
+    background-color: antiquewhite;
+  }
+  img {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
 @media only screen and (max-width: 420px) {
   nav {
     position: fixed;

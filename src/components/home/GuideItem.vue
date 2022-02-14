@@ -52,6 +52,7 @@ div:nth-of-type(1) {
 }
 div:nth-of-type(2) {
   color: var(--white);
+  background-color: var(--violet);
   overflow-y: hidden;
   transform: translateY(-15%) translateX(2%);
   width: 95%;
@@ -73,17 +74,26 @@ span {
   transform: rotateZ(180deg) translateY(15%);
 }
 
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 480px) {
   p {
     padding: 0.5rem;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
   div:nth-of-type(2) {
     transform: translateY(-14%);
     margin: auto;
   }
   span {
-    top: 15%;
+    right: 1%;
+    font-size: 1.8rem;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  p {
+    font-size: 1.3rem;
+  }
+  span {
     right: 2%;
     font-size: 1.7rem;
   }

@@ -93,13 +93,13 @@ form > button:hover {
   background-color: var(--white);
 }
 
-@media only screen and (max-width: 420px) {
- form > input[type='text'] {
-    font-size: 1.2rem;
+@media only screen and (max-width: 480px) {
+  form > input[type='text'] {
+    font-size: 1.4rem;
     padding: 0.5rem;
   }
   form > button {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     letter-spacing: 0.1rem;
     padding: 0.5rem;
   }
@@ -110,8 +110,8 @@ form > button:hover {
     flex-direction: column;
   }
   .social-icons > a > img {
-    width: 3rem;
-    height: 3rem;
+    width: 3.5rem;
+    height: 3.5rem;
   }
   .social-icons {
     width: 50%;
@@ -124,35 +124,25 @@ form > button:hover {
   }
 }
 
-
-@media only screen and (max-width: 380px) {
+@media only screen and (max-width: 420px) {
   form > input[type='text'] {
-    font-size: 1.2rem;
-    padding: 0.5rem;
+    font-size: 1.3rem;
   }
   form > button {
-    font-size: 1.2rem;
-    letter-spacing: 0.1rem;
-    padding: 0.5rem;
-  }
-  .form-container > form {
-    flex-direction: column;
-  }
-  .social-container {
-    flex-direction: column;
+    font-size: 1.3rem;
   }
   .social-icons > a > img {
     width: 3rem;
     height: 3rem;
   }
-  .social-icons {
-    width: 50%;
-    transform: translateX(0);
-    justify-content: space-evenly;
-    margin-top: 1rem;
+}
+
+@media only screen and (max-width: 380px) {
+  form > input[type='text'] {
+    font-size: 1.2rem;
   }
-  #follow-us {
-    margin-bottom: 1rem;
+  form > button {
+    font-size: 1.2rem;
   }
 }
 

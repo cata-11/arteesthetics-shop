@@ -137,21 +137,27 @@ img {
   left: 0;
 }
 
+@media only screen and (max-width: 480px) {
+  .sneak-peeks-container {
+    height: 21rem;
+  }
+}
+
 @media only screen and (max-width: 420px) {
-    .sneak-peeks-container {
-    height: 17rem;
+  .sneak-peeks-container {
+    height: 20rem;
   }
 }
 
 @media only screen and (max-width: 380px) {
-    .sneak-peeks-container {
-    height: 17rem;
+  .sneak-peeks-container {
+    height: 19rem;
   }
 }
 
 @media only screen and (max-width: 360px) {
   .sneak-peeks-container {
-    height: 17rem;
+    height: 18rem;
   }
 }
 

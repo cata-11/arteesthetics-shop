@@ -51,21 +51,21 @@ h2 {
   margin-left: auto;
 }
 
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 480px) {
   section {
     padding: 0 1rem;
     margin-top: 3.5rem;
   }
   h2 {
-    font-size: 2.1rem;
+    font-size: 2.4rem;
     letter-spacing: 0.8rem;
   }
   .start {
-    transform: translateY(-1.75rem) translateX(0);
+    transform: translateY(-2rem) translateX(0);
     margin: auto;
   }
   .end {
-    transform: translateY(-1.75rem) translateX(0);
+    transform: translateY(-2rem) translateX(0);
     margin: auto;
   }
   .left {
@@ -76,10 +76,26 @@ h2 {
   }
 }
 
+@media only screen and (max-width: 420px) {
+  section {
+    padding: 0 1rem;
+    margin-top: 3.5rem;
+  }
+  h2 {
+    font-size: 2.1rem;
+    letter-spacing: 0.8rem;
+  }
+  .start {
+    transform: translateY(-1.75rem);
+  }
+  .end {
+    transform: translateY(-1.75rem);
+  }
+}
+
 @media only screen and (max-width: 380px) {
   h2 {
     font-size: 2rem;
-    letter-spacing: 0.8rem;
   }
   .start {
     transform: translateY(-1.6rem);

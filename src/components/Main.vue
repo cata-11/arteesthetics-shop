@@ -68,6 +68,12 @@ p {
   margin: 0;
 }
 
+@media only screen and (max-width: 480px) {
+  :root {
+    --main-width: 30rem;
+  }
+}
+
 @media only screen and (max-width: 420px) {
   :root {
     --main-width: 26.25rem;

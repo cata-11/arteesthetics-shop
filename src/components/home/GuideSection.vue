@@ -30,7 +30,8 @@ export default {
       faqs: [
         {
           id: 0,
-          question: 'Is shipping free Is shipping free Is shipping free ?????????????? or not ?',
+          question:
+            'Is shipping free Is shipping free Is shipping free ?????????????? or not ?',
           answer: 'Yes, shipping around country is free and bla bla',
           show: true
         },
@@ -70,19 +71,7 @@ export default {
           faq.show = false;
         }
       });
-    },
-    randomizeColors() {
-      const list = document.getElementById('guide-list');
-      const answers = list.querySelectorAll('#answer');
-      const colors = ['violet', 'pink'];
-      answers.forEach((a) => {
-        const n = Math.round(Math.random());
-        a.style.backgroundColor = `var(--${colors[n]})`;
-      });
     }
-  },
-  mounted() {
-    this.randomizeColors();
   },
   components: {
     BaseSection,
