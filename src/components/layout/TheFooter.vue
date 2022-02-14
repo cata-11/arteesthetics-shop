@@ -72,9 +72,9 @@ a:hover {
   border-color: var(--pink);
 }
 
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 380px) {
   footer {
-    font-size: 0.8rem;
+    font-size: 1rem;
     margin-bottom: 4rem;
   }
   p {
@@ -86,6 +86,18 @@ a:hover {
   }
   .separator {
     opacity: 0;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  footer {
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  footer {
+    font-size: 0.8rem;
   }
 }
 </style>

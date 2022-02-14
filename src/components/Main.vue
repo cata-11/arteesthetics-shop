@@ -41,6 +41,8 @@ body {
   background-color: var(--black);
   color: var(--white);
   user-select: none;
+  font-family: 'Times New Roman', Times, serif;
+  letter-spacing: 0.1rem;
 }
 main {
   width: var(--main-width);
@@ -66,6 +68,16 @@ p {
   margin: 0;
 }
 
+@media only screen and (max-width: 380px) {
+  :root {
+    --main-width: 23.75rem;
+  }
+}
+@media only screen and (max-width: 360px) {
+  :root {
+    --main-width: 22.5rem;
+  }
+}
 @media only screen and (max-width: 320px) {
   :root {
     --main-width: 20rem;

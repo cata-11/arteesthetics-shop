@@ -48,11 +48,21 @@ strong {
   letter-spacing: 0.2rem;
 }
 
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 380px) {
   #about-paragraph {
     padding: 1rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
     letter-spacing: 0.1rem;
+  }
+}
+@media only screen and (max-width: 360px) {
+  #about-paragraph {
+    font-size: 1.1rem;
+  }
+}
+@media only screen and (max-width: 320px) {
+  #about-paragraph {
+    font-size: 1rem;
   }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <li>
     <div @click="showAnswer">
-      <p>
+      <p class="question">
         {{ faq.question }}
       </p>
       <span :class="{ rotate: faq.show }">&#9661;</span>
@@ -32,6 +32,9 @@ export default {
 </script>
 
 <style scoped>
+.question {
+  margin-right: 2rem;
+}
 p {
   font-size: 2rem;
   padding: 1rem;
@@ -50,7 +53,7 @@ div:nth-of-type(1) {
 div:nth-of-type(2) {
   color: var(--white);
   overflow-y: hidden;
-  transform: translateY(-15%) translateX(2%);
+  transform: translateY(-15%) translateX(1%);
   width: 95%;
 }
 .hide {
@@ -70,19 +73,37 @@ span {
   transform: rotateZ(180deg) translateY(15%);
 }
 
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 380px) {
   p {
     padding: 0.5rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
   div:nth-of-type(2) {
-    transform: translateY(-20%);
+    transform: translateY(-14%);
     margin: auto;
   }
   span {
-    top: 30%;
+    top: 15%;
     right: 2%;
+    font-size: 1.7rem;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  p {
+    font-size: 1.1rem;
+  }
+  span {
+    font-size: 1.6rem;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  p {
     font-size: 1rem;
+  }
+  span {
+    font-size: 1.5rem;
   }
 }
 </style>

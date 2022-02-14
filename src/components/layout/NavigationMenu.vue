@@ -62,12 +62,13 @@ span:hover {
   border-color: var(--violet);
 }
 img {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 2rem;
+  height: 2rem;
   /* filter: invert(100%); */
   display: none;
 }
-@media only screen and (max-width: 320px) {
+
+@media only screen and (max-width: 380px) {
   nav {
     position: fixed;
     z-index: 999;
@@ -91,6 +92,20 @@ img {
   }
   .active img {
     background-color: antiquewhite;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  img {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  img {
+    width: 1.5rem;
+    height: 1.5rem;
   }
 }
 </style>

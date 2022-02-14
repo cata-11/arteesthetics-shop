@@ -93,32 +93,25 @@ form > button:hover {
   background-color: var(--white);
 }
 
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 380px) {
   form > input[type='text'] {
-    font-size: 1rem;
+    font-size: 1.2rem;
     padding: 0.5rem;
   }
   form > button {
-    border: none;
-    background-color: var(--pink);
-    color: var(--white);
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     letter-spacing: 0.1rem;
     padding: 0.5rem;
-    cursor: pointer;
   }
   .form-container > form {
-    display: flex;
     flex-direction: column;
   }
   .social-container {
-    display: flex;
-    align-items: center;
     flex-direction: column;
   }
   .social-icons > a > img {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 3rem;
+    height: 3rem;
   }
   .social-icons {
     width: 50%;
@@ -127,7 +120,29 @@ form > button:hover {
     margin-top: 1rem;
   }
   #follow-us {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  form > input[type='text'] {
+    font-size: 1.1rem;
+  }
+  form > button {
+    font-size: 1.1rem;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  form > input[type='text'] {
+    font-size: 1rem;
+  }
+  form > button {
+    font-size: 1rem;
+  }
+  .social-icons > a > img {
+    width: 2.5rem;
+    height: 2.5rem;
   }
 }
 </style>

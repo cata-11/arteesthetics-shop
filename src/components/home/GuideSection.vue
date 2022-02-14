@@ -30,8 +30,8 @@ export default {
       faqs: [
         {
           id: 0,
-          question: 'Is shipping free ?',
-          answer: 'Yes, shipping around country is free',
+          question: 'Is shipping free Is shipping free Is shipping free ?????????????? or not ?',
+          answer: 'Yes, shipping around country is free and bla bla',
           show: true
         },
         {
@@ -91,4 +91,3 @@ export default {
   }
 };
 </script>
-

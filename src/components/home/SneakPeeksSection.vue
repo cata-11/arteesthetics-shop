@@ -137,6 +137,18 @@ img {
   left: 0;
 }
 
+@media only screen and (max-width: 380px) {
+    .sneak-peeks-container {
+    height: 17rem;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .sneak-peeks-container {
+    height: 17rem;
+  }
+}
+
 @media only screen and (max-width: 320px) {
   .sneak-peeks-container {
     height: 17rem;

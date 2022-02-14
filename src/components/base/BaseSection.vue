@@ -51,21 +51,21 @@ h2 {
   margin-left: auto;
 }
 
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 380px) {
   section {
     padding: 0 1rem;
     margin-top: 3.5rem;
   }
   h2 {
-    font-size: 1.5rem;
+    font-size: 2rem;
     letter-spacing: 0.8rem;
   }
   .start {
-    transform: translateY(-1.3rem) translateX(0);
+    transform: translateY(-1.5rem) translateX(0);
     margin: auto;
   }
   .end {
-    transform: translateY(-1.3rem) translateX(0);
+    transform: translateY(-1.5rem) translateX(0);
     margin: auto;
   }
   .left {
@@ -73,6 +73,24 @@ h2 {
   }
   .right {
     border-right: none;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  h2 {
+    font-size: 1.9rem;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  h2 {
+    font-size: 1.5rem;
+  }
+  .start {
+    transform: translateY(-1.3rem);
+  }
+  .end {
+    transform: translateY(-1.3rem);
   }
 }
 </style>
