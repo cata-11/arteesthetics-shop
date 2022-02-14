@@ -137,6 +137,12 @@ img {
   left: 0;
 }
 
+@media only screen and (max-width: 420px) {
+    .sneak-peeks-container {
+    height: 17rem;
+  }
+}
+
 @media only screen and (max-width: 380px) {
     .sneak-peeks-container {
     height: 17rem;

@@ -77,12 +77,10 @@ div:hover {
 }
 
 img {
-  width: 2rem;
-  height: 2rem;
   display: none;
 }
 
-@media only screen and (max-width: 380px) {
+@media only screen and (max-width: 420px) {
   nav {
     position: fixed;
     bottom: 0;
@@ -90,7 +88,7 @@ img {
     margin: 0;
     background-color: var(--pink);
   }
-  span {
+  div {
     display: none;
   }
   ul {
@@ -105,6 +103,17 @@ img {
   }
   .active img {
     background-color: antiquewhite;
+  }
+  img {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+@media only screen and (max-width: 380px) {
+  img {
+    width: 1.9rem;
+    height: 1.9rem;
   }
 }
 

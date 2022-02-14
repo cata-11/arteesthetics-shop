@@ -73,19 +73,25 @@ span {
   transform: rotateZ(180deg) translateY(15%);
 }
 
-@media only screen and (max-width: 380px) {
+@media only screen and (max-width: 420px) {
   p {
     padding: 0.5rem;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
   div:nth-of-type(2) {
     transform: translateY(-14%);
     margin: auto;
   }
   span {
-    top: 10%;
+    top: 15%;
     right: 2%;
     font-size: 1.7rem;
+  }
+}
+
+@media only screen and (max-width: 380px) {
+  p {
+    font-size: 1.2rem;
   }
 }
 

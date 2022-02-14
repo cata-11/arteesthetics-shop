@@ -129,7 +129,7 @@ span:nth-of-type(4)::after {
   }
 }
 
-@media only screen and (max-width: 380px) {
+@media only screen and (max-width: 420px) {
   .container {
     width: 100%;
     margin-top: 2rem;
@@ -140,9 +140,16 @@ span:nth-of-type(4)::after {
   h1 {
     width: fit-content;
     position: relative;
+    font-size: 2rem;
+    line-height: 2.1rem;
+    letter-spacing: 0.6rem;
+  }
+}
+
+@media only screen and (max-width: 380px) {
+  h1 {
     font-size: 1.8rem;
     line-height: 1.9rem;
-    letter-spacing: 0.6rem;
   }
 }
 
