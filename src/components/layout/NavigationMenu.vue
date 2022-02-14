@@ -3,25 +3,25 @@
     <ul>
       <li class="active">
         <a href="#">
-          <span>home</span>
+          <div>home</div>
           <img src="house.svg" alt="" />
         </a>
       </li>
       <li>
         <a href="#">
-          <span>shop</span>
+          <div>shop</div>
           <img src="shop.svg" alt="" />
         </a>
       </li>
       <li>
         <a href="#">
-          <span>account</span>
+          <div>account</div>
           <img src="account.svg" alt="" />
         </a>
       </li>
       <li>
         <a href="#">
-          <span>cart</span>
+          <div>cart</div>
           <img src="cart.svg" alt="" />
         </a>
       </li>
@@ -36,42 +36,55 @@ export default {};
 <style scoped>
 nav {
   width: 100%;
-  margin: 1rem auto 2.7rem auto;
-  box-sizing: border-box;
+  z-index: 999;
+  margin: 1rem auto 2rem auto;
 }
 ul {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
   width: 100%;
+  margin: 0;
+  border-bottom: 1px solid white;
+  border-top: 1px solid white;
 }
-span {
+li {
+  width: 25%;
+}
+a {
+  display: flex;
+}
+
+div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+
   font-size: 2.5rem;
-  padding: 1rem 4.78rem;
+  letter-spacing: 0.2rem;
+  border-bottom: 0.25rem solid transparent;
+
   text-transform: uppercase;
-  font-family: 'Zen Kaku Gothic Antique', sans-serif;
   transition: all 0.3s ease-in-out;
-  border-bottom: 10px solid var(--black);
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
 }
-span:hover {
+div:hover {
   color: var(--black);
   background-color: var(--a-white);
-  border-color: var(--pink);
 }
-.active > a > span {
-  border-color: var(--violet);
+.active > a > div {
+  color: var(--black);
+  background-color: var(--a-white);
 }
+
 img {
   width: 2rem;
   height: 2rem;
-  /* filter: invert(100%); */
   display: none;
 }
 
 @media only screen and (max-width: 380px) {
   nav {
     position: fixed;
-    z-index: 999;
     bottom: 0;
     left: 0;
     margin: 0;

@@ -53,7 +53,7 @@ div:nth-of-type(1) {
 div:nth-of-type(2) {
   color: var(--white);
   overflow-y: hidden;
-  transform: translateY(-15%) translateX(1%);
+  transform: translateY(-15%) translateX(2%);
   width: 95%;
 }
 .hide {
@@ -83,7 +83,7 @@ span {
     margin: auto;
   }
   span {
-    top: 15%;
+    top: 10%;
     right: 2%;
     font-size: 1.7rem;
   }
