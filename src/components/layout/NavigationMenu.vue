@@ -37,6 +37,7 @@ export default {};
 nav {
   width: 100%;
   margin: 1rem auto 2.7rem auto;
+  box-sizing: border-box;
 }
 ul {
   display: flex;
@@ -52,7 +53,6 @@ span {
   transition: all 0.3s ease-in-out;
   border-bottom: 10px solid var(--black);
 }
-
 span:hover {
   color: var(--black);
   background-color: var(--a-white);
@@ -67,31 +67,27 @@ img {
   /* filter: invert(100%); */
   display: none;
 }
-
-@media only screen and (max-width: 23rem) {
+@media only screen and (max-width: 320px) {
   nav {
     position: fixed;
+    z-index: 999;
     bottom: 0;
+    left: 0;
     margin: 0;
     background-color: var(--pink);
-    z-index: 999;
   }
   span {
     display: none;
   }
   ul {
-    display: flex;
     justify-content: space-evenly;
-    align-items: center;
-    width: 100%;
   }
   li {
     padding: 0.5rem;
   }
   img {
     display: block;
-    padding: 0.5rem 1.5rem;
-    margin: 0 auto;
+    padding: 0.5rem 1rem;
   }
   .active img {
     background-color: antiquewhite;

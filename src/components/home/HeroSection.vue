@@ -32,7 +32,7 @@ section {
   background-color: var(--pink);
 }
 
-@media only screen and (max-width: 23rem) {
+@media only screen and (max-width: 320px) {
   section {
     flex-direction: column;
   }

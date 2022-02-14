@@ -72,7 +72,7 @@ a:hover {
   border-color: var(--pink);
 }
 
-@media only screen and (max-width: 23rem) {
+@media only screen and (max-width: 320px) {
   footer {
     font-size: 0.8rem;
     margin-bottom: 4rem;

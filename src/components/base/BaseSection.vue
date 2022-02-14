@@ -51,21 +51,21 @@ h2 {
   margin-left: auto;
 }
 
-@media only screen and (max-width: 23rem) {
+@media only screen and (max-width: 320px) {
   section {
     padding: 0 1rem;
     margin-top: 3.5rem;
   }
   h2 {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     letter-spacing: 0.8rem;
   }
   .start {
-    transform: translateY(-1.5rem) translateX(0);
+    transform: translateY(-1.3rem) translateX(0);
     margin: auto;
   }
   .end {
-    transform: translateY(-1.5rem) translateX(0);
+    transform: translateY(-1.3rem) translateX(0);
     margin: auto;
   }
   .left {

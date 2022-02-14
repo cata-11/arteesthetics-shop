@@ -70,7 +70,7 @@ span {
   transform: rotateZ(180deg) translateY(15%);
 }
 
-@media only screen and (max-width: 23rem) {
+@media only screen and (max-width: 320px) {
   p {
     padding: 0.5rem;
     font-size: 1rem;

@@ -48,7 +48,7 @@ strong {
   letter-spacing: 0.2rem;
 }
 
-@media only screen and (max-width: 23rem) {
+@media only screen and (max-width: 320px) {
   #about-paragraph {
     padding: 1rem;
     font-size: 1rem;

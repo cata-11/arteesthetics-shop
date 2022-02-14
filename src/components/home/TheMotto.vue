@@ -129,20 +129,20 @@ span:nth-of-type(4)::after {
   }
 }
 
-@media only screen and (max-width: 23rem) {
+@media only screen and (max-width: 320px) {
   .container {
     width: 17rem;
     height: fit-content;
     align-items: center;
     justify-content: start;
-    margin-top: 2rem;
+    margin-top: 1rem;
   }
   h1 {
-    font-size: 1.2rem;
-    letter-spacing: 0.5rem;
+    font-size: 1.6rem;
+    letter-spacing: 0.6rem;
     width: fit-content;
     position: relative;
-    line-height: 1.4rem;
+    line-height: 1.6rem;
   }
 }
 </style>

@@ -42,10 +42,10 @@ h1 {
   font-family: 'Zen Kaku Gothic Antique', sans-serif;
 }
 
-@media only screen and (max-width: 23rem) {
+@media only screen and (max-width: 320px) {
   h1 {
-    font-size: 2rem;
-    letter-spacing: 0.5rem;
+    font-size: 1.75rem;
+    letter-spacing: 0.4rem;
   }
 }
 </style>

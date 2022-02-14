@@ -69,8 +69,8 @@ export default {
 
       const imgWidth = relativeWidth / images.length;
 
-      const minWidth = Math.round(relativeWidth / 10),
-        maxWidth = Math.round(relativeWidth / 10) + 2;
+      const minWidth = imgWidth,
+        maxWidth = imgWidth + 2;
 
       images.forEach((img, i) => {
         const width = this.getRandomNumber(minWidth, maxWidth);
@@ -82,8 +82,10 @@ export default {
 
         const imgHeight = img.height / 16;
 
-        const posX = imgWidth * i;
+        const posX = i == 9 ? imgWidth * i - maxWidth : imgWidth * i;
         const posY = (relativeHeight / imgHeight) * 100 - 100;
+
+        // if (i == 9) posX -= maxWidth;
 
         const keyframes = `@keyframes float_${i} {                            
                               0% {
@@ -135,12 +137,9 @@ img {
   left: 0;
 }
 
-@media only screen and (max-width: 23rem) {
+@media only screen and (max-width: 320px) {
   .sneak-peeks-container {
-    width: 17rem;
     height: 17rem;
-    position: relative;
-    box-sizing: border-box;
   }
 }
 </style>

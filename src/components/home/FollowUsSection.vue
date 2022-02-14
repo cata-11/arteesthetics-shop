@@ -85,9 +85,15 @@ form > button:hover {
   filter: invert(100%);
   width: 5rem;
   height: 5rem;
+  padding: 0.2rem;
+  transition: all 0.2s ease-in-out;
+}
+.social-icons > a > img:hover {
+  filter: invert(15%);
+  background-color: var(--white);
 }
 
-@media only screen and (max-width: 23rem) {
+@media only screen and (max-width: 320px) {
   form > input[type='text'] {
     font-size: 1rem;
     padding: 0.5rem;
