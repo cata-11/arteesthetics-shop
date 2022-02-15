@@ -137,6 +137,21 @@ img {
   left: 0;
 }
 
+@media only screen and (max-width: 768px) {
+    .sneak-peeks-container {
+    height: 21rem;
+  }
+
+}
+@media only screen and (max-width: 680px) {
+
+}
+@media only screen and (max-width: 600px) {
+  .sneak-peeks-container {
+    height: 21rem;
+  }
+}
+
 @media only screen and (max-width: 480px) {
   .sneak-peeks-container {
     height: 21rem;

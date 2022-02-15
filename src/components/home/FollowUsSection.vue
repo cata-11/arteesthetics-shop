@@ -6,15 +6,14 @@
         :colors="['v', 'p', 'r', 'v', 'r', 'r', 't', 'p', 'v']"
       ></base-title>
     </template>
+
     <template v-slot:content>
-      <div class="social-container">
-        <div class="form-container">
-          <form action="">
-            <input type="text" placeholder="Enter your email" />
-            <button>SUBSCRIBE</button>
-          </form>
-        </div>
-        <div class="social-icons">
+      <div class="follow-us-container">
+        <form action="">
+          <input type="text" placeholder="Enter your email" />
+          <button>subscribe</button>
+        </form>
+        <div id="icons">
           <a href="">
             <img src="instagram.svg" alt="instagram.svg" />
           </a>
@@ -43,126 +42,157 @@ export default {
 #follow-us {
   margin-bottom: 4rem;
 }
-.social-container {
+.follow-us-container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
-.form-container > form {
+form {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--a-white);
 }
-form > input[type='text'] {
-  background-color: antiquewhite;
-  color: var(--black);
-  font-size: 2rem;
+input {
   border: none;
   outline: none;
   padding: 1rem;
+  color: var(--black);
+  box-sizing: border-box;
+  font-size: var(--basic-font-size);
+  background-color: var(--a-white);
 }
-form > button {
+button {
   border: none;
-  background-color: var(--pink);
-  color: var(--a-white);
-  font-size: 1.5rem;
-  letter-spacing: 0.2rem;
-  padding: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  padding: 1rem;
+  color: var(--a-white);
+  text-transform: uppercase;
+  background-color: var(--pink);
+  font-size: var(--basic-font-size);
+  transition: all 0.2s ease-in-out;
 }
-form > button:hover {
+button:hover {
   background-color: var(--violet);
   color: var(--white);
 }
-
-.social-icons {
-  color: var(--white);
+#icons {
   width: 100%;
-  transform: translateX(12%);
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  transform: translateX(2.5rem);
 }
-.social-icons > a > img {
+a {
+  width: 4.5rem;
+  height: 4.5rem;
+}
+img {
   filter: invert(100%);
-  width: 5rem;
-  height: 5rem;
-  padding: 0.2rem;
-  transition: all 0.2s ease-in-out;
-}
-.social-icons > a > img:hover {
-  filter: invert(15%);
-  background-color: var(--white);
+  width: 100%;
+  height: 100%;
 }
 
+@media only screen and (max-width: 768px) {
+  #follow-us {
+    margin-bottom: 3.5rem;
+  }
+  form {
+    width: 100%;
+    flex-direction: column;
+  }
+  button {
+    width: 100%;
+  }
+  input {
+    width: 100%;
+  }
+  #icons {
+    width: 25%;
+    justify-content: space-between;
+    flex-direction: column;
+    transform: translateX(0);
+  }
+  a {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+@media only screen and (max-width: 680px) {
+  #follow-us {
+    margin-bottom: 2rem;
+  }
+  .follow-us-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 75%;
+    margin: 0 auto;
+  }
+  form {
+    width: 100%;
+    flex-direction: column;
+  }
+  #icons {
+    width: 70%;
+    justify-content: space-evenly;
+    flex-direction: row;
+    margin-top: 2rem;
+  }
+  a {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+}
+@media only screen and (max-width: 600px) {
+  a {
+    width: 4rem;
+    height: 4rem;
+  }
+}
 @media only screen and (max-width: 480px) {
-  form > input[type='text'] {
-    font-size: 1.4rem;
-    padding: 0.5rem;
+  input {
+    padding: 0.75rem;
   }
-  form > button {
-    font-size: 1.4rem;
-    letter-spacing: 0.1rem;
-    padding: 0.5rem;
+  button {
+    padding: 0.75rem;
   }
-  .form-container > form {
-    flex-direction: column;
-  }
-  .social-container {
-    flex-direction: column;
-  }
-  .social-icons > a > img {
+  a {
     width: 3.5rem;
     height: 3.5rem;
   }
-  .social-icons {
-    width: 50%;
-    transform: translateX(0);
-    justify-content: space-evenly;
-    margin-top: 1rem;
+}
+@media only screen and (max-width: 420px) {
+  .follow-us-container {
+    width: 80%;
   }
+}
+@media only screen and (max-width: 380px) {
   #follow-us {
     margin-bottom: 1rem;
   }
-}
-
-@media only screen and (max-width: 420px) {
-  form > input[type='text'] {
-    font-size: 1.3rem;
+  .follow-us-container {
+    width: 85%;
   }
-  form > button {
-    font-size: 1.3rem;
+  input {
+    padding: 0.5rem;
   }
-  .social-icons > a > img {
+  button {
+    padding: 0.5rem;
+  }
+  #icons {
+    margin-top: 1rem;
+  }
+  a {
     width: 3rem;
     height: 3rem;
   }
 }
-
-@media only screen and (max-width: 380px) {
-  form > input[type='text'] {
-    font-size: 1.2rem;
-  }
-  form > button {
-    font-size: 1.2rem;
-  }
-}
-
 @media only screen and (max-width: 360px) {
-  form > input[type='text'] {
-    font-size: 1.1rem;
-  }
-  form > button {
-    font-size: 1.1rem;
-  }
 }
-
 @media only screen and (max-width: 320px) {
-  form > input[type='text'] {
-    font-size: 1rem;
-  }
-  form > button {
-    font-size: 1rem;
-  }
-  .social-icons > a > img {
+  a {
     width: 2.5rem;
     height: 2.5rem;
   }

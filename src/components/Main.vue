@@ -25,6 +25,7 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap');
 :root {
   --red: rgb(250, 90, 60);
   --pink: rgb(165, 90, 150);
@@ -33,22 +34,24 @@ export default {
   --white: rgb(245, 245, 245);
   --a-white: rgb(250, 235, 215);
   --main-width: 70rem;
+  --basic-font-size: 2rem;
 }
 html,
 body {
   margin: 0;
-  box-sizing: border-box;
-  background-color: var(--black);
-  color: var(--white);
+  padding: 0;
   user-select: none;
-  font-family: 'Times New Roman', Times, serif;
-  letter-spacing: 0.1rem;
+  color: var(--white);
+  box-sizing: border-box;
+  letter-spacing: 0.05rem;
+  background-color: var(--black);
+  font-family: 'Roboto Slab', serif;
 }
 main {
-  width: var(--main-width);
+  margin: 0 auto;
   height: fit-content;
-  margin: auto;
   box-sizing: border-box;
+  width: var(--main-width);
 }
 ul {
   margin: 0;
@@ -56,6 +59,8 @@ ul {
 }
 li {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 a {
   text-decoration: none;
@@ -66,32 +71,55 @@ h2,
 h3,
 p {
   margin: 0;
+  padding: 0;
 }
 
+@media only screen and (max-width: 768px) {
+  :root {
+    --main-width: 40rem;
+    --basic-font-size: 1.7rem;
+  }
+}
+@media only screen and (max-width: 680px) {
+  :root {
+    --main-width: 42.5rem;
+    --basic-font-size: 1.8rem;
+  }
+}
+@media only screen and (max-width: 600px) {
+  :root {
+    --main-width: 37.5rem;
+    --basic-font-size: 1.6rem;
+  }
+}
 @media only screen and (max-width: 480px) {
   :root {
     --main-width: 30rem;
+    --basic-font-size: 1.4rem;
   }
 }
-
 @media only screen and (max-width: 420px) {
   :root {
     --main-width: 26.25rem;
+    --basic-font-size: 1.3rem;
   }
 }
 @media only screen and (max-width: 380px) {
   :root {
     --main-width: 23.75rem;
+    --basic-font-size: 1.2rem;
   }
 }
 @media only screen and (max-width: 360px) {
   :root {
     --main-width: 22.5rem;
+    --basic-font-size: 1.1rem;
   }
 }
 @media only screen and (max-width: 320px) {
   :root {
     --main-width: 20rem;
+    --basic-font-size: 1rem;
   }
 }
 </style>

@@ -129,10 +129,10 @@ span:nth-of-type(4)::after {
   }
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 768px) {
   .container {
     width: 100%;
-    margin-top: 2rem;
+    margin-top: 3rem;
     height: fit-content;
     align-items: center;
     justify-content: center;
@@ -140,6 +140,26 @@ span:nth-of-type(4)::after {
   h1 {
     width: fit-content;
     position: relative;
+    font-size: 2.9rem;
+    line-height: 3rem;
+    letter-spacing: 1.2rem;
+  }
+}
+@media only screen and (max-width: 680px) {
+}
+@media only screen and (max-width: 600px) {
+  .container {
+    margin-top: 1.5rem;
+  }
+  h1 {
+    font-size: 2.6rem;
+    line-height: 2.7rem;
+    letter-spacing: 1rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  h1 {
     font-size: 2.2rem;
     line-height: 2.3rem;
     letter-spacing: 0.7rem;

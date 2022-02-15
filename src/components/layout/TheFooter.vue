@@ -43,11 +43,12 @@ export default {
 
 <style scoped>
 footer {
-  font-size: 1.2rem;
+  font-size: calc(var(--basic-font-size) / 1.25);
   border-top: 2px solid var(--a-white);
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Roboto Slab', serif;
 }
 span {
   padding: 0 5px;
@@ -72,42 +73,45 @@ a:hover {
   border-color: var(--pink);
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 768px) {
   footer {
-    font-size: 1.2rem;
-    margin-bottom: 4.5rem;
+    margin-bottom: 5.5rem;
   }
   p {
-    padding: 0.5rem;
+    padding: 1rem;
     flex-direction: column;
   }
   span {
-    padding: 3px 3px;
+    padding: 5px;
   }
   .separator {
     opacity: 0;
   }
 }
-
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 680px) {
+}
+@media only screen and (max-width: 600px) {
   footer {
-    font-size: 1.1rem;
+    margin-bottom: 4.5rem;
   }
 }
-
-@media only screen and (max-width: 380px) {
+@media only screen and (max-width: 480px) {
   footer {
-    font-size: 1rem;
     margin-bottom: 4rem;
   }
 }
-
-@media only screen and (max-width: 360px) {
+@media only screen and (max-width: 420px) {
 }
-
+@media only screen and (max-width: 380px) {
+}
+@media only screen and (max-width: 360px) {
+  footer {
+    margin-bottom: 3.75rem;
+  }
+}
 @media only screen and (max-width: 320px) {
   footer {
-    font-size: 0.9rem;
+    margin-bottom: 3.5rem;
   }
 }
 </style>

@@ -52,7 +52,6 @@ li {
 a {
   display: flex;
 }
-
 div {
   width: 100%;
   display: flex;
@@ -75,12 +74,11 @@ div:hover {
   color: var(--black);
   background-color: var(--a-white);
 }
-
 img {
   display: none;
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 768px) {
   nav {
     position: fixed;
     bottom: 0;
@@ -97,6 +95,8 @@ img {
   }
   li {
     padding: 0.5rem;
+    display: flex;
+    justify-content: center;
   }
   img {
     display: block;
@@ -105,6 +105,26 @@ img {
   .active img {
     background-color: antiquewhite;
   }
+  img {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+@media only screen and (max-width: 680px) {
+  img {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  img {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
   img {
     width: 2rem;
     height: 2rem;
@@ -112,29 +132,6 @@ img {
 }
 
 @media only screen and (max-width: 420px) {
-  nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    margin: 0;
-    background-color: var(--pink);
-  }
-  div {
-    display: none;
-  }
-  ul {
-    justify-content: space-evenly;
-  }
-  li {
-    padding: 0.5rem;
-  }
-  img {
-    display: block;
-    padding: 0.5rem 1rem;
-  }
-  .active img {
-    background-color: antiquewhite;
-  }
   img {
     width: 2rem;
     height: 2rem;

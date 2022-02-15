@@ -32,12 +32,27 @@ section {
   background-color: var(--pink);
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 768px) {
   section {
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+  #temp-canvas {
+    width: 32rem;
+    height: 32rem;
+  }
+}
+@media only screen and (max-width: 680px) {
+}
+@media only screen and (max-width: 600px) {
+  #temp-canvas {
+    width: 29rem;
+    height: 29rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
   #temp-canvas {
     width: 23rem;
     height: 23rem;

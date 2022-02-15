@@ -1,10 +1,12 @@
 <template>
   <li>
-    <div @click="showAnswer">
-      <p class="question">
+    <div @click="showAnswer" id="question">
+      <p>
         {{ faq.question }}
       </p>
-      <span :class="{ rotate: faq.show }">&#9661;</span>
+      <div id="symbol" :class="{ rotate: faq.show }">
+        <span>&#9661;</span>
+      </div>
     </div>
     <div :class="[faq.show ? 'show' : 'hide']" id="answer">
       <p>
@@ -16,13 +18,13 @@
 
 <script>
 export default {
+  emits: ['show-answer'],
   props: {
     faq: {
       type: Object,
       required: true
     }
   },
-
   methods: {
     showAnswer() {
       this.$emit('show-answer', this.faq.id);
@@ -32,94 +34,85 @@ export default {
 </script>
 
 <style scoped>
-.question {
-  margin-right: 2rem;
-}
 p {
-  font-size: 2rem;
+  font-size: var(--basic-font-size);
   padding: 1rem;
-  margin: 0;
 }
-div {
-  transition: max-height 0.3s linear;
-}
-div:nth-of-type(1) {
-  background-color: var(--a-white);
-  color: var(--black);
-  cursor: pointer;
+#question {
   margin-bottom: 5px;
+  cursor: pointer;
   position: relative;
+  color: var(--black);
+  background-color: var(--a-white);
+  transition: all 0.3s ease-in-out;
 }
-div:nth-of-type(2) {
+#question > p {
+  margin-right: 3rem;
+}
+#answer {
   color: var(--white);
   background-color: var(--violet);
   overflow-y: hidden;
-  transform: translateY(-15%) translateX(2%);
+  transform: translateY(-0.7rem) translateX(0.7rem);
   width: 95%;
+  transition: all 0.3s ease-in-out;
+}
+#symbol {
+  top: 0;
+  bottom: 0;
+  right: 1%;
+  height: fit-content;
+  margin-top: auto;
+  margin-bottom: auto;
+
+  position: absolute;
+  transition: all 0.3s linear;
+}
+span {
+  font-size: calc(var(--basic-font-size) * 1.5);
+  height: 2rem;
+  margin: auto;
 }
 .hide {
   max-height: 0;
 }
 .show {
-  max-height: 5rem;
-}
-span {
-  position: absolute;
-  top: 15%;
-  right: 1%;
-  font-size: 3rem;
-  transition: 0.3s linear;
+  max-height: 7rem;
 }
 .rotate {
-  transform: rotateZ(180deg) translateY(15%);
+  transform: rotateZ(180deg);
+}
+
+@media only screen and (max-width: 768px) {
+  #answer {
+    transform: translateX(0) translateY(-0.5rem);
+    margin: 0 auto;
+  }
+  p {
+    padding: 0.75rem;
+  }
+}
+@media only screen and (max-width: 680px) {
+}
+
+@media only screen and (max-width: 600px) {
 }
 
 @media only screen and (max-width: 480px) {
-  p {
-    padding: 0.5rem;
-    font-size: 1.4rem;
-  }
-  div:nth-of-type(2) {
-    transform: translateY(-14%);
-    margin: auto;
-  }
-  span {
-    right: 1%;
-    font-size: 1.8rem;
-  }
 }
 
 @media only screen and (max-width: 420px) {
-  p {
-    font-size: 1.3rem;
-  }
-  span {
-    right: 2%;
-    font-size: 1.7rem;
-  }
 }
 
 @media only screen and (max-width: 380px) {
   p {
-    font-size: 1.2rem;
+    padding: 0.5rem;
   }
 }
 
 @media only screen and (max-width: 360px) {
-  p {
-    font-size: 1.1rem;
-  }
-  span {
-    font-size: 1.6rem;
-  }
 }
 
 @media only screen and (max-width: 320px) {
-  p {
-    font-size: 1rem;
-  }
-  span {
-    font-size: 1.5rem;
-  }
 }
 </style>

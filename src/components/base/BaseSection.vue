@@ -34,11 +34,9 @@ section {
 }
 h2 {
   font-size: 2.75rem;
-  padding: 0;
-  margin: 0;
+  letter-spacing: 2.2rem;
   width: fit-content;
   font-family: 'Zen Kaku Gothic Antique', sans-serif;
-  letter-spacing: 2.2rem;
 }
 .start {
   margin-right: auto;
@@ -51,21 +49,32 @@ h2 {
   margin-left: auto;
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 768px) {
   section {
-    padding: 0 1rem;
-    margin-top: 3.5rem;
+    padding: 0 2rem;
+    margin-top: 6rem;
   }
   h2 {
-    font-size: 2.4rem;
-    letter-spacing: 0.8rem;
+    font-size: 3rem;
+    letter-spacing: 1.2rem;
   }
   .start {
-    transform: translateY(-2rem) translateX(0);
+    transform: translateY(-2.5rem) translateX(1rem);
+  }
+  .end {
+    transform: translateY(-2.5rem) translateX(-1rem);
+  }
+}
+@media only screen and (max-width: 680px) {
+  section {
+    margin-top: 5rem;
+  }
+  .start {
+    transform: translateY(-2.5rem) translateX(0);
     margin: auto;
   }
   .end {
-    transform: translateY(-2rem) translateX(0);
+    transform: translateY(-2.5rem) translateX(0);
     margin: auto;
   }
   .left {
@@ -73,6 +82,34 @@ h2 {
   }
   .right {
     border-right: none;
+  }
+}
+@media only screen and (max-width: 600px) {
+  section {
+    margin-top: 4rem;
+  }
+  h2 {
+    font-size: 2.5rem;
+    letter-spacing: 1rem;
+  }
+  .start {
+    transform: translateY(-2.1rem);
+  }
+  .end {
+    transform: translateY(-2.1rem);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  h2 {
+    font-size: 2.4rem;
+    letter-spacing: 0.8rem;
+  }
+  .start {
+    transform: translateY(-2rem);
+  }
+  .end {
+    transform: translateY(-2rem);
   }
 }
 
@@ -83,7 +120,6 @@ h2 {
   }
   h2 {
     font-size: 2.1rem;
-    letter-spacing: 0.8rem;
   }
   .start {
     transform: translateY(-1.75rem);
