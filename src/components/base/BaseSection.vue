@@ -33,20 +33,20 @@ section {
   border-bottom: 2px solid whitesmoke;
 }
 h2 {
-  font-size: 2.75rem;
-  letter-spacing: 2.2rem;
+  font-size: 3rem;
+  letter-spacing: 2rem;
   width: fit-content;
   font-family: 'Zen Kaku Gothic Antique', sans-serif;
 }
 .start {
-  margin-right: auto;
   margin-left: 0;
-  transform: translateY(-2rem) translateX(-2rem);
+  margin-right: auto;
+  transform: translateY(-55%) translateX(-2rem);
 }
 .end {
-  transform: translateY(-2rem) translateX(2rem);
   margin-right: 0;
   margin-left: auto;
+  transform: translateY(-55%) translateX(2rem);
 }
 
 @media only screen and (max-width: 768px) {
@@ -59,10 +59,10 @@ h2 {
     letter-spacing: 1.2rem;
   }
   .start {
-    transform: translateY(-2.5rem) translateX(1rem);
+    transform: translateY(-57%) translateX(0);
   }
   .end {
-    transform: translateY(-2.5rem) translateX(-1rem);
+    transform: translateY(-53%) translateX(0);
   }
 }
 @media only screen and (max-width: 680px) {
@@ -70,11 +70,11 @@ h2 {
     margin-top: 5rem;
   }
   .start {
-    transform: translateY(-2.5rem) translateX(0);
+    transform: translateY(-57%) translateX(0);
     margin: auto;
   }
   .end {
-    transform: translateY(-2.5rem) translateX(0);
+    transform: translateY(-53%) translateX(0);
     margin: auto;
   }
   .left {
@@ -92,24 +92,12 @@ h2 {
     font-size: 2.5rem;
     letter-spacing: 1rem;
   }
-  .start {
-    transform: translateY(-2.1rem);
-  }
-  .end {
-    transform: translateY(-2.1rem);
-  }
 }
 
 @media only screen and (max-width: 480px) {
   h2 {
     font-size: 2.4rem;
-    letter-spacing: 0.8rem;
-  }
-  .start {
-    transform: translateY(-2rem);
-  }
-  .end {
-    transform: translateY(-2rem);
+    letter-spacing: 0.9rem;
   }
 }
 
@@ -121,23 +109,11 @@ h2 {
   h2 {
     font-size: 2.1rem;
   }
-  .start {
-    transform: translateY(-1.75rem);
-  }
-  .end {
-    transform: translateY(-1.75rem);
-  }
 }
 
 @media only screen and (max-width: 380px) {
   h2 {
     font-size: 2rem;
-  }
-  .start {
-    transform: translateY(-1.6rem);
-  }
-  .end {
-    transform: translateY(-1.6rem);
   }
 }
 
@@ -146,23 +122,11 @@ h2 {
     font-size: 1.9rem;
     letter-spacing: 0.7rem;
   }
-  .start {
-    transform: translateY(-1.55rem);
-  }
-  .end {
-    transform: translateY(-1.55rem);
-  }
 }
 
 @media only screen and (max-width: 320px) {
   h2 {
     font-size: 1.5rem;
-  }
-  .start {
-    transform: translateY(-1.3rem);
-  }
-  .end {
-    transform: translateY(-1.3rem);
   }
 }
 </style>
