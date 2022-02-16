@@ -2,28 +2,28 @@
   <nav>
     <ul>
       <li class="active">
-        <a href="#">
+        <router-link to="/home">
           <div>home</div>
           <img src="house.svg" alt="" />
-        </a>
+        </router-link>
       </li>
       <li>
-        <a href="#">
+        <router-link to="/shop">
           <div>shop</div>
           <img src="shop.svg" alt="" />
-        </a>
+        </router-link>
       </li>
       <li>
-        <a href="#">
+        <router-link to="/account">
           <div>account</div>
           <img src="account.svg" alt="" />
-        </a>
+        </router-link>
       </li>
       <li>
-        <a href="#">
+        <router-link to="/cart">
           <div>cart</div>
           <img src="cart.svg" alt="" />
-        </a>
+        </router-link>
       </li>
     </ul>
   </nav>
@@ -63,14 +63,14 @@ div {
   border-bottom: 0.25rem solid transparent;
 
   text-transform: uppercase;
-  transition: all 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
   font-family: 'Zen Kaku Gothic Antique', sans-serif;
 }
 div:hover {
   color: var(--black);
   background-color: var(--a-white);
 }
-.active > a > div {
+.router-link-active {
   color: var(--black);
   background-color: var(--a-white);
 }

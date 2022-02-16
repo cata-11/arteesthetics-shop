@@ -2,7 +2,7 @@
   <main>
     <TheHeader />
     <NavigationMenu />
-    <HomePage />
+    <router-view></router-view>
     <TheFooter />
   </main>
 </template>
@@ -11,11 +11,9 @@
 import NavigationMenu from './layout/NavigationMenu.vue';
 import TheHeader from './layout/TheHeader.vue';
 import TheFooter from './layout/TheFooter.vue';
-import HomePage from '../views/HomePage.vue';
 
 export default {
   components: {
-    HomePage,
     TheHeader,
     TheFooter,
     NavigationMenu

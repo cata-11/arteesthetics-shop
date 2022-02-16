@@ -1,6 +1,9 @@
 <template>
   <section>
-    <div id="temp-canvas"></div>
+    <div id="temp-canvas">
+      <!-- <video src="shirt.mp4" autoplay loop muted></video> -->
+      <img src="shirt_vid_3.png" alt="" />
+    </div>
     <!-- <TheShirt /> -->
     <TheMotto />
   </section>
@@ -28,7 +31,18 @@ section {
 #temp-canvas {
   width: 35rem;
   height: 35rem;
-  background-color: var(--pink);
+  /* background-color: var(--pink); */
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+img {
+  width: 100%;
+  height: 100%;
 }
 
 @media only screen and (max-width: 1280px) {
