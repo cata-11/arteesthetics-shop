@@ -41,10 +41,28 @@ p {
   font-family: 'Roboto Slab', serif;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1280px) {
   p {
     padding: 2rem;
   }
+}
+@media only screen and (max-width: 1120px) {
+  p {
+    padding: 1.5rem 1.75rem;
+  }
+}
+@media only screen and (max-width: 1024px) {
+}
+@media only screen and (max-width: 970px) {
+  p {
+    padding: 2rem;
+  }
+}
+
+@media only screen and (max-width: 870px) {
+}
+
+@media only screen and (max-width: 768px) {
 }
 @media only screen and (max-width: 680px) {
 }

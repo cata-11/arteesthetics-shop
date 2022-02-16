@@ -77,22 +77,39 @@ span {
   max-height: 0;
 }
 .show {
-  max-height: 7rem;
+  max-height: 10rem;
 }
 .rotate {
   transform: rotateZ(180deg);
 }
 
-@media only screen and (max-width: 768px) {
-  #answer {
-    transform: translateX(0) translateY(-0.5rem);
-    margin: 0 auto;
+@media only screen and (max-width: 1280px) {
+  p {
+    padding: 1.25rem;
   }
+}
+@media only screen and (max-width: 1120px) {
+}
+@media only screen and (max-width: 1024px) {
+  p {
+    padding: 1rem;
+  }
+}
+@media only screen and (max-width: 970px) {
+}
+@media only screen and (max-width: 870px) {
+}
+
+@media only screen and (max-width: 768px) {
   p {
     padding: 0.75rem;
   }
 }
 @media only screen and (max-width: 680px) {
+  #answer {
+    transform: translateX(0) translateY(-0.5rem);
+    margin: 0 auto;
+  }
 }
 
 @media only screen and (max-width: 600px) {

@@ -19,7 +19,6 @@ export default {
 
 <style scoped>
 section {
-  /* border: 1px solid white; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,12 +31,43 @@ section {
   background-color: var(--pink);
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1280px) {
+  #temp-canvas {
+    width: 33rem;
+    height: 33rem;
+  }
+}
+@media only screen and (max-width: 1120px) {
   section {
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+  #temp-canvas {
+    width: 45rem;
+    height: 45rem;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  #temp-canvas {
+    width: 42rem;
+    height: 42rem;
+  }
+}
+@media only screen and (max-width: 970px) {
+  #temp-canvas {
+    width: 38rem;
+    height: 38rem;
+  }
+}
+
+@media only screen and (max-width: 870px) {
+  #temp-canvas {
+    width: 35rem;
+    height: 35rem;
+  }
+}
+@media only screen and (max-width: 768px) {
   #temp-canvas {
     width: 32rem;
     height: 32rem;

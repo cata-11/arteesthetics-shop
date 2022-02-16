@@ -82,10 +82,9 @@ export default {
 
         const imgHeight = img.height / 16;
 
-        const posX = i == 9 ? imgWidth * i - maxWidth : imgWidth * i;
-        const posY = (relativeHeight / imgHeight) * 100 - 100;
+        const posX = i == 9 ? imgWidth * i - 2 : imgWidth * i;
 
-        // if (i == 9) posX -= maxWidth;
+        const posY = (relativeHeight / imgHeight) * 100 - 100;
 
         const keyframes = `@keyframes float_${i} {                            
                               0% {
@@ -137,48 +136,75 @@ img {
   left: 0;
 }
 
-@media only screen and (max-width: 768px) {
-    .sneak-peeks-container {
-    height: 21rem;
+@media only screen and (max-width: 1280px) {
+  .sneak-peeks-container {
+    height: 34rem;
   }
+}
+@media only screen and (max-width: 1120px) {
+  .sneak-peeks-container {
+    height: 36rem;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .sneak-peeks-container {
+    height: 34rem;
+  }
+}
+@media only screen and (max-width: 970px) {
+  .sneak-peeks-container {
+    height: 32rem;
+  }
+}
+@media only screen and (max-width: 870px) {
+  .sneak-peeks-container {
+    height: 30rem;
+  }
+}
 
+@media only screen and (max-width: 768px) {
+  .sneak-peeks-container {
+    height: 28rem;
+  }
 }
 @media only screen and (max-width: 680px) {
-
+  .sneak-peeks-container {
+    height: 26rem;
+  }
 }
 @media only screen and (max-width: 600px) {
   .sneak-peeks-container {
-    height: 21rem;
+    height: 25rem;
   }
 }
 
 @media only screen and (max-width: 480px) {
   .sneak-peeks-container {
-    height: 21rem;
+    height: 22rem;
   }
 }
 
 @media only screen and (max-width: 420px) {
   .sneak-peeks-container {
-    height: 20rem;
+    height: 21rem;
   }
 }
 
 @media only screen and (max-width: 380px) {
   .sneak-peeks-container {
-    height: 19rem;
+    height: 20rem;
   }
 }
 
 @media only screen and (max-width: 360px) {
   .sneak-peeks-container {
-    height: 18rem;
+    height: 19rem;
   }
 }
 
 @media only screen and (max-width: 320px) {
   .sneak-peeks-container {
-    height: 17rem;
+    height: 18rem;
   }
 }
 </style>

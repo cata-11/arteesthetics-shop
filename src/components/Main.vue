@@ -74,6 +74,37 @@ p {
   padding: 0;
 }
 
+@media only screen and (max-width: 1280px) {
+  :root {
+    --main-width: 66rem;
+    --basic-font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width: 1120px) {
+  :root {
+    --main-width: 54rem;
+    --basic-font-size: 2.4rem;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  :root {
+    --main-width: 50rem;
+    --basic-font-size: 2.2rem;
+  }
+}
+@media only screen and (max-width: 970px) {
+  :root {
+    --main-width: 48rem;
+    --basic-font-size: 2.1rem;
+  }
+}
+@media only screen and (max-width: 870px) {
+  :root {
+    --main-width: 44rem;
+    --basic-font-size: 1.9rem;
+  }
+}
 @media only screen and (max-width: 768px) {
   :root {
     --main-width: 40rem;

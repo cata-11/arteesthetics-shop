@@ -48,7 +48,6 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Roboto Slab', serif;
 }
 span {
   padding: 0 5px;
@@ -73,9 +72,14 @@ a:hover {
   border-color: var(--pink);
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1280px) {
+  span {
+    padding: 5px;
+  }
+}
+@media only screen and (max-width: 1120px) {
   footer {
-    margin-bottom: 5.5rem;
+    margin-bottom: 7.5rem;
   }
   p {
     padding: 1rem;
@@ -86,6 +90,27 @@ a:hover {
   }
   .separator {
     opacity: 0;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  footer {
+    margin-bottom: 7rem;
+  }
+}
+@media only screen and (max-width: 970px) {
+  footer {
+    margin-bottom: 6.5rem;
+  }
+}
+@media only screen and (max-width: 870px) {
+  footer {
+    margin-bottom: 5.5rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  footer {
+    margin-bottom: 5.5rem;
   }
 }
 @media only screen and (max-width: 680px) {

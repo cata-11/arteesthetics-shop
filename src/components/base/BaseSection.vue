@@ -41,28 +41,68 @@ h2 {
 .start {
   margin-left: 0;
   margin-right: auto;
-  transform: translateY(-55%) translateX(-2rem);
+  transform: translateY(-58%) translateX(1.5rem);
 }
 .end {
   margin-right: 0;
   margin-left: auto;
-  transform: translateY(-55%) translateX(2rem);
+  transform: translateY(-53%) translateX(-1.5rem);
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1280px) {
+  section {
+    padding: 0 3rem;
+    margin-top: 6.5rem;
+  }
+  h2 {
+    font-size: 3.6rem;
+    letter-spacing: 1.8rem;
+  }
+}
+@media only screen and (max-width: 1120px) {
+  section {
+    padding: 0 3rem;
+    margin-top: 6rem;
+  }
+  h2 {
+    font-size: 3.8rem;
+    letter-spacing: 1.6rem;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
   section {
     padding: 0 2rem;
     margin-top: 6rem;
   }
   h2 {
+    font-size: 3.5rem;
+    letter-spacing: 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 970px) {
+  section {
+    padding: 0 2rem;
+    margin-top: 6rem;
+  }
+  h2 {
+    font-size: 3.5rem;
+    letter-spacing: 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 870px) {
+  h2 {
+    font-size: 3.2rem;
+    letter-spacing: 1.3rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  h2 {
     font-size: 3rem;
     letter-spacing: 1.2rem;
-  }
-  .start {
-    transform: translateY(-57%) translateX(0);
-  }
-  .end {
-    transform: translateY(-53%) translateX(0);
   }
 }
 @media only screen and (max-width: 680px) {
@@ -70,11 +110,12 @@ h2 {
     margin-top: 5rem;
   }
   .start {
-    transform: translateY(-57%) translateX(0);
+    transform: translateY(-58%) translateX(0);
     margin: auto;
   }
   .end {
     transform: translateY(-53%) translateX(0);
+
     margin: auto;
   }
   .left {

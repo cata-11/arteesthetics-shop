@@ -78,7 +78,12 @@ img {
   display: none;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1280px) {
+  nav {
+    margin: 1rem auto 1rem auto;
+  }
+}
+@media only screen and (max-width: 1120px) {
   nav {
     position: fixed;
     bottom: 0;
@@ -105,6 +110,34 @@ img {
   .active img {
     background-color: antiquewhite;
   }
+  img {
+    width: 5rem;
+    height: 5rem;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  img {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+}
+
+@media only screen and (max-width: 970px) {
+  img {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+@media only screen and (max-width: 870px) {
+  img {
+    width: 3.75rem;
+    height: 3.75rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
   img {
     width: 3.5rem;
     height: 3.5rem;
