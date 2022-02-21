@@ -17,7 +17,7 @@
         <img src="image1.png" alt="" />
         <img src="image1.png" alt="" />
         <img src="image1.png" alt="" />
-        <img src="image1.png" alt="" @load="onLoadImages" />
+        <img src="image1.png" alt="" @load="animateImages" />
       </div>
     </template>
   </base-section>
@@ -54,12 +54,12 @@ export default {
     getRandomNumber(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     },
-    onLoadImages() {
-      this.animateImages();
-    },
 
     animateImages() {
       const container = document.querySelector('.sneak-peeks-container');
+
+      if (container == null) return;
+
       const images = container.querySelectorAll('img');
       const style = document.createElement('style');
       const head = document.getElementsByTagName('head')[0];
@@ -116,9 +116,6 @@ export default {
         img.style.animation = `float_${i} ${speed}s ${delay}s linear infinite ${direction}`;
       });
     }
-  },
-  mounted() {
-    // this.animateImages();
   }
 };
 </script>

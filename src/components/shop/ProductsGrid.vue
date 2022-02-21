@@ -137,6 +137,38 @@ export default {
             stockTotal: 40,
             promotion: true
           }
+        },
+        {
+          id: '4',
+          title: 'Aesthetic Skull',
+          img: 'shirt0.png',
+          description: `Lorem ipsum dolor 
+          sit amet consectetur adipisicing 
+          elit.`,
+          price: 25,
+          sizes: [
+            {
+              size: 'XS',
+              stock: 10
+            },
+            {
+              size: 'S',
+              stock: 10
+            },
+            {
+              size: 'L',
+              stock: 10
+            },
+            {
+              size: 'M',
+              stock: 10
+            }
+          ],
+          props: {
+            stockTotal: 40,
+            promotion: true,
+            bestseller: true
+          }
         }
       ]
     };

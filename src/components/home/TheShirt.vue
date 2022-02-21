@@ -6,7 +6,7 @@
 
 <script>
 import * as THREE from 'three';
-//import * as dat from 'dat.gui';
+// import * as dat from 'dat.gui';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 export default {
@@ -19,7 +19,7 @@ export default {
 
   methods: {
     main() {
-      //const gui = new dat.GUI();
+      // const gui = new dat.GUI();
 
       const canvas = document.getElementById('canvas');
       const scene = new THREE.Scene();
@@ -90,16 +90,16 @@ export default {
       // controls.update();
       // controls.enableDamping = true;
 
-      let x = camera.position.x;
-      let z = camera.position.z;
+      //  let x = camera.position.x;
+      //   let z = camera.position.z;
 
-      const frame = (time) => {
-        time *= 0.001;
-        const speed = 0.5;
-        const rotSpeed = time * speed;
+      const frame = () => {
+        //  time *= 0.001;
+        //  const speed = 0.5;
+        //  const rotSpeed = time * speed;
 
-        camera.position.x = x * Math.cos(rotSpeed) - z * Math.sin(rotSpeed);
-        camera.position.z = z * Math.cos(rotSpeed) + x * Math.sin(rotSpeed);
+        // camera.position.x = x * Math.cos(rotSpeed) - z * Math.sin(rotSpeed);
+        // camera.position.z = z * Math.cos(rotSpeed) + x * Math.sin(rotSpeed);
         camera.lookAt(0, 0, 0);
         // controls.update();
         renderer.render(scene, camera);
@@ -135,5 +135,4 @@ export default {
   /* border: 1px solid white; */
   z-index: 2;
 }
-
 </style>

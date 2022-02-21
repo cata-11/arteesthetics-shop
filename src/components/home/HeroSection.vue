@@ -1,8 +1,8 @@
 <template>
   <section>
     <div id="temp-canvas">
-      <!-- <video src="shirt.mp4" autoplay loop muted></video> -->
-      <img src="shirt_vid_3.png" alt="" />
+      <!-- <video src="shirt_video_v8.webm" autoplay loop muted></video> -->
+      <img src="tshirt update test.png" alt="" />
     </div>
     <!-- <TheShirt /> -->
     <TheMotto />

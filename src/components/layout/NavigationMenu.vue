@@ -1,28 +1,28 @@
 <template>
   <nav>
     <ul>
-      <li class="active">
+      <li>
         <router-link to="/home">
           <div>home</div>
-          <img src="house.svg" alt="" />
+          <img src="/house.svg" alt="" />
         </router-link>
       </li>
       <li>
         <router-link to="/shop">
           <div>shop</div>
-          <img src="shop.svg" alt="" />
+          <img src="/shop.svg" alt="" />
         </router-link>
       </li>
       <li>
         <router-link to="/account">
           <div>account</div>
-          <img src="account.svg" alt="" />
+          <img src="/account.svg" alt="" />
         </router-link>
       </li>
       <li>
         <router-link to="/cart">
           <div>cart</div>
-          <img src="cart.svg" alt="" />
+          <img src="/cart.svg" alt="" />
         </router-link>
       </li>
     </ul>
