@@ -92,6 +92,9 @@ img {
   width: 100%;
   height: 100%;
 }
+img:hover {
+  filter: invert(100%) brightness(80%);
+}
 
 @media only screen and (max-width: 1280px) {
   #follow-us {

@@ -26,7 +26,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap');
 :root {
   --red: rgb(250, 90, 60);
-  --pink: rgb(165, 90, 150);
+  --pink: rgb(209, 102, 188);
   --violet: rgb(105, 90, 205);
   --black: rgb(19, 19, 19);
   --white: rgb(245, 245, 245);
@@ -44,6 +44,7 @@ body {
   letter-spacing: 0.05rem;
   background-color: var(--black);
   font-family: 'Roboto Slab', serif;
+  scroll-behavior: smooth;
 }
 main {
   margin: 0 auto;

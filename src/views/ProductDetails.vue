@@ -5,36 +5,57 @@
         <img :src="images[currentImageIdx].src" alt="" />
       </div>
       <div class="images-carousel">
-        <button
-          @click="scrollToImage(null, false)"
-          :class="{ hide: currentImageIdx == 0 }"
-        >
-          &lsaquo;
-        </button>
-        <div
-          class="images-container"
-          @touchstart="handleTouchStart"
-          @touchmove="handleTouchMove"
-        >
+        <div class="images-container">
           <div
             v-for="(img, idx) in images"
             :key="img.id"
-            @click="scrollToImage(idx, null)"
             class="image-item"
             :class="{ active: img.isActive }"
+            @click="scrollToImage(idx)"
           >
             <img :src="img.src" :alt="img.id" />
           </div>
         </div>
-        <button
-          @click="scrollToImage(null, true)"
-          :class="{ hide: currentImageIdx == images.length - 1 }"
-        >
-          &rsaquo;
-        </button>
       </div>
     </div>
-    <div id="details"></div>
+    <div id="details">
+      <div class="info">
+        <div class="details-header">
+          <h1 class="title">{{ product.title }}</h1>
+          <p class="description">{{ product.description }}</p>
+        </div>
+        <p class="price">
+          <span class="new"> ${{ product.price }}</span
+          ><span class="old"> ${{ product.price * 1.5 }}</span>
+        </p>
+        <div class="sizes">
+          <p class="choose-size-p">Choose your size:</p>
+          <div class="size-select-container">
+            <div
+              class="size"
+              :class="{ selected: selectedSize === size.size }"
+              v-for="size in product.sizes"
+              :key="size.size"
+              @click="selectSize"
+            >
+              {{ size.size }}
+            </div>
+          </div>
+          <p class="see-size">
+            Not sure about the size ? Check our <a href="">size chart</a>.
+          </p>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="add-to-cart-btn">Add to cart</button>
+        <div class="add-to-favourites-btn" @click="addToFavourites">
+          <img
+            :src="isFavourite ? '/heart_full.svg' : '/heart_empty.svg'"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -42,78 +63,164 @@
 export default {
   data() {
     return {
-      images: [
+      products: [
+        {
+          id: 0,
+          title: 'Aesthetic Skull',
+          coverImage: 'shirt0.png',
+          description: `Lorem ipsum dolor
+          sit amet consectetur adipisicing
+          elit.`,
+          price: 25,
+          sizes: [
+            {
+              size: 'XS',
+              stock: 10
+            },
+            {
+              size: 'S',
+              stock: 10
+            },
+            {
+              size: 'L',
+              stock: 10
+            },
+            {
+              size: 'M',
+              stock: 10
+            }
+          ],
+          images: [
+            {
+              id: 1,
+              src: '/shirt2.png',
+              isActive: true
+            },
+            {
+              id: 2,
+              src: '/2.png',
+              isActive: false
+            },
+            {
+              id: 3,
+              src: '/3.png',
+              isActive: false
+            },
+            {
+              id: 4,
+              src: '/4.png',
+              isActive: false
+            },
+            {
+              id: 5,
+              src: '/5.png',
+              isActive: false
+            },
+            {
+              id: 6,
+              src: '/6.png',
+              isActive: false
+            },
+            {
+              id: 7,
+              src: '/7.png',
+              isActive: false
+            }
+          ],
+          props: {
+            stockTotal: 40,
+            promotion: true,
+            bestseller: false
+          }
+        },
         {
           id: 1,
-          src: '/1.png',
-          isActive: true
-        },
-        {
-          id: 2,
-          src: '/2.png',
-          isActive: false
-        },
-        {
-          id: 3,
-          src: '/3.png',
-          isActive: false
-        },
-        {
-          id: 4,
-          src: '/4.png',
-          isActive: false
-        },
-        {
-          id: 5,
-          src: '/5.png',
-          isActive: false
-        },
-        {
-          id: 6,
-          src: '/6.png',
-          isActive: false
-        },
-        {
-          id: 7,
-          src: '/7.png',
-          isActive: false
+          title: 'Nobody knows how long this text is',
+          coverImage: 'shirt0.png',
+          description: `Lorem ipsum dolor
+          sit amet consectetur adipisicing
+          elit.`,
+          price: 30,
+          sizes: [
+            {
+              size: 'XS',
+              stock: 0
+            },
+            {
+              size: 'S',
+              stock: 0
+            },
+            {
+              size: 'L',
+              stock: 0
+            },
+            {
+              size: 'M',
+              stock: 0
+            }
+          ],
+          images: [
+            {
+              id: 1,
+              src: '/1.png',
+              isActive: true
+            },
+            {
+              id: 2,
+              src: '/2.png',
+              isActive: false
+            },
+            {
+              id: 3,
+              src: '/3.png',
+              isActive: false
+            },
+            {
+              id: 4,
+              src: '/4.png',
+              isActive: false
+            },
+            {
+              id: 5,
+              src: '/5.png',
+              isActive: false
+            },
+            {
+              id: 6,
+              src: '/6.png',
+              isActive: false
+            },
+            {
+              id: 7,
+              src: '/7.png',
+              isActive: false
+            }
+          ],
+          props: {
+            stockTotal: 0,
+            promotion: true,
+            bestseller: true
+          }
         }
       ],
-      touch: {
-        xDown: null,
-        yDown: null
-      },
-      currentImageIdx: 0
+      product: null,
+      images: [],
+      currentImageIdx: 0,
+      selectedSize: null,
+      isFavourite: false
     };
   },
   methods: {
-    sleep(time) {
-      return new Promise((resolve) => setTimeout(resolve, time));
-    },
-    scrollToImage(idx = null, next = null) {
+    scrollToImage(idx) {
       const scroller = document.querySelector('.images-container');
       const image = scroller.querySelector('.image-item');
       const imageStyle = window.getComputedStyle(image);
       const imageWidth = parseFloat(imageStyle.width);
 
-      if (idx === null) {
-        if (next === true) {
-          idx = this.currentImageIdx + 1;
-        } else if (next === false) {
-          idx = this.currentImageIdx - 1;
-        }
-      } else if (next === null) {
-        if (idx > this.currentImageIdx) {
-          next = true;
-        } else if (idx < this.currentImageIdx) {
-          next = false;
-        }
-      }
-
-      if (next == true) {
+      if (idx > this.currentImageIdx) {
         if (idx == 1) scroller.scrollBy(0, 0);
         else scroller.scrollBy(imageWidth, 0);
-      } else if (next == false) {
+      } else if (idx < this.currentImageIdx) {
         if (idx == this.images.length - 2) scroller.scrollBy(0, 0);
         else scroller.scrollBy(-imageWidth, 0);
       }
@@ -125,35 +232,18 @@ export default {
           this.images[i].isActive = false;
         }
       }
-
       this.currentImageIdx = idx;
     },
-    handleTouchStart(e) {
-      const firstTouch = e.touches[0];
-      this.touch.xDown = firstTouch.clientX;
-      this.touch.yDown = firstTouch.clientY;
+    selectSize(e) {
+      this.selectedSize = e.target.textContent;
     },
-    handleTouchMove(e) {
-      if (!this.touch.xDown) return;
-
-      let xUp = e.touches[0].clientX;
-      let yUp = e.touches[0].clientY;
-
-      let xDiff = this.touch.xDown - xUp;
-      let yDiff = this.touch.yDown - yUp;
-
-      if (Math.abs(xDiff) > Math.abs(yDiff)) {
-        if (xDiff > 0) {
-          this.scrollToNextImage(true);
-        } else {
-          this.scrollToNextImage(false);
-        }
-      }
-      this.touch.xDown = null;
+    addToFavourites() {
+      this.isFavourite = !this.isFavourite;
     }
   },
-  mounted() {
-    // console.log(this.$route.params.id);
+  created() {
+    this.product = this.products[+this.$route.params.id];
+    this.images = this.product.images;
   }
 };
 </script>
@@ -182,11 +272,11 @@ section {
 .images-carousel {
   margin-top: 1rem;
   width: 35rem;
-  height: 12rem;
+  height: 11rem;
   display: flex;
   position: relative;
 }
-button {
+.carousel-btn {
   position: absolute;
   z-index: 3;
   width: 3rem;
@@ -200,15 +290,15 @@ button {
   opacity: 0.6;
   transition: all 0.2s ease-in-out;
 }
-button:first-of-type {
+.carousel-btn.prev {
   top: 0;
   left: 0;
 }
-button:last-of-type {
+.carousel-btn.next {
   top: 0;
   right: 0;
 }
-button:hover {
+.carousel-btn:hover {
   opacity: 0.9;
 }
 .hide {
@@ -217,21 +307,23 @@ button:hover {
 .images-container {
   width: 100%;
   scroll-behavior: smooth;
-  overflow: hidden;
+  overflow-x: scroll;
   white-space: nowrap;
   display: flex;
   flex-direction: row;
   scroll-snap-type: x mandatory;
-  /* scroll-padding-left: 1rem; */
+}
+.images-container::-webkit-scrollbar {
+  display: none;
 }
 .image-item {
+  scroll-snap-align: end;
   margin: 0 1rem 0 0;
   border: 0.5rem solid var(--a-white);
   box-sizing: border-box;
-  scroll-snap-align: end;
   display: inline;
-  width: 10rem;
-  height: 10rem;
+  width: 11rem;
+  height: 11rem;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   filter: brightness(50%);
@@ -243,8 +335,8 @@ button:hover {
   margin: 0;
 }
 .image-item > img {
-  width: 9rem;
-  height: 9rem;
+  width: 10rem;
+  height: 10rem;
   object-fit: cover;
 }
 .active {
@@ -252,5 +344,157 @@ button:hover {
 }
 .active:hover {
   filter: brightness(100%);
+}
+
+#details {
+  width: 32rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#details > .info {
+  width: 100%;
+  height: 35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#details > .actions {
+  width: 100%;
+  height: 11rem;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  border-right: 10px solid var(--a-white);
+  border-bottom: 10px solid var(--a-white);
+  /* border-top: 10px solid var(--a-white); */
+  /* border-left: 10px solid var(--a-white); */
+}
+.details-header > .title {
+  font-size: 2.5rem;
+  padding: 1rem;
+  text-transform: uppercase;
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
+  letter-spacing: 0.2rem;
+  border-left: 1rem solid var(--black);
+  background-color: var(--violet);
+}
+
+.details-header > .description {
+  font-size: 1.5rem;
+  padding: 0.75rem;
+  border-left: 1rem solid var(--violet);
+}
+
+.price {
+  font-size: 2rem;
+  text-transform: uppercase;
+  border-left: 1rem solid var(--a-white);
+  color: var(--white);
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
+  letter-spacing: 0.1rem;
+  display: flex;
+  align-items: center;
+  width: 50%;
+  box-sizing: border-box;
+}
+.price > .new {
+  width: 50%;
+  text-align: center;
+  background-color: var(--pink);
+  padding: 1rem;
+}
+.price > .old {
+  width: 50%;
+  text-decoration: line-through;
+  text-align: center;
+  color: var(--black);
+  padding: 1rem;
+  background-color: var(--a-white);
+}
+
+.choose-size-p {
+  font-size: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 10px solid var(--a-white);
+  margin-bottom: 1rem;
+}
+
+.size-select-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.size {
+  cursor: pointer;
+  width: 3rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2rem;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  background-color: var(--red);
+  color: var(--a-white);
+  border: 7px solid transparent;
+  transition: all 0.2s ease-in-out;
+}
+.size:hover {
+  filter: brightness(80%);
+}
+.size.selected {
+  border-color: var(--a-white);
+}
+.size.selected:hover {
+  filter: brightness(100%);
+}
+.see-size {
+  width: fit-content;
+  margin-top: 1rem;
+}
+.see-size > a {
+  border-bottom: 1px solid var(--a-white);
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+}
+.see-size > a:hover {
+  color: var(--pink);
+  border-color: var(--pink);
+}
+
+.add-to-cart-btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1.9rem;
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
+  width: 50%;
+  box-sizing: border-box;
+  text-transform: uppercase;
+  padding: 1rem 0;
+  text-align: center;
+  color: var(--black);
+  background-color: var(--a-white);
+  transition: all 0.2s ease-in-out;
+  border-left: 1rem solid var(--pink);
+}
+.add-to-cart-btn:hover {
+  filter: brightness(80%);
+}
+.add-to-favourites-btn {
+  width: 50%;
+
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.add-to-favourites-btn > img {
+  width: 4rem;
+}
+.add-to-favourites-btn:hover {
+  filter: brightness(80%);
 }
 </style>

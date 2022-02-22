@@ -1,16 +1,26 @@
 <template>
-  <div id="card-wrapper">
+  <div
+    id="card-wrapper"
+    :class="{ 'out-of-stock': product.props.stockTotal == 0 }"
+  >
     <div id="card">
       <div class="header">
         <h1>{{ product.title }}</h1>
       </div>
       <div class="body">
         <div class="img">
-          <img :src="product.img" alt="" />
+          <img :src="product.coverImage" alt="" />
         </div>
         <div class="info">
           <p>
-            <span>in stock | promotion | bestseller</span>
+            <span v-if="product.props.stockTotal == 0">
+              {{ 'out of stock' }}
+            </span>
+            <span v-if="product.props.stockTotal != 0">
+              {{ product.props.stockTotal != 0 ? 'in stock' : '' }}
+              {{ product.props.promotion ? ' | promotion' : '' }}
+              {{ product.props.bestseller ? '| bestseller' : '' }}
+            </span>
           </p>
         </div>
       </div>
@@ -18,7 +28,12 @@
         <div>
           <p>${{ product.price }}</p>
         </div>
-        <router-link :to="'/shop/' + product.id"> View </router-link>
+        <router-link
+          :to="'/shop/' + product.id"
+          :class="{ 'out-of-stock-btn': product.props.stockTotal == 0 }"
+        >
+          View
+        </router-link>
       </div>
     </div>
   </div>
@@ -145,6 +160,14 @@ a:hover {
   border-color: var(--violet);
 }
 
+.out-of-stock {
+  filter: brightness(70%);
+  cursor: not-allowed;
+}
+.out-of-stock-btn {
+  pointer-events: none;
+  text-decoration: line-through;
+}
 @media only screen and (max-width: 1280px) {
   #card-wrapper {
     margin: 1.2rem;
