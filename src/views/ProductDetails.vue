@@ -93,7 +93,7 @@ export default {
           images: [
             {
               id: 1,
-              src: '/shirt2.png',
+              src: '/1.png',
               isActive: true
             },
             {
