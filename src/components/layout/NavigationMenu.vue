@@ -4,7 +4,7 @@
       <li>
         <router-link to="/home">
           <div>home</div>
-          <img src="/house.svg" alt="" />
+          <img src="/home.svg" alt="" />
         </router-link>
       </li>
       <li>
@@ -16,7 +16,7 @@
       <li>
         <router-link to="/account">
           <div>account</div>
-          <img src="/account.svg" alt="" />
+          <img src="/user.svg" alt="" />
         </router-link>
       </li>
       <li>
@@ -74,22 +74,22 @@ div:hover {
   color: var(--black);
   background-color: var(--a-white);
 }
+.router-link-active img {
+  filter: invert(100%);
+}
 img {
   display: none;
 }
 
-@media only screen and (max-width: 1280px) {
-  nav {
-    margin: 1rem auto 1rem auto;
-  }
-}
-@media only screen and (max-width: 1120px) {
+/* 320px */
+@media only screen and (min-width: 320px) {
   nav {
     position: fixed;
     bottom: 0;
     left: 0;
     margin: 0;
     background-color: var(--pink);
+    box-shadow: 0 -10px 20px rgba(19, 19, 19, 0.5);
   }
   div {
     display: none;
@@ -106,89 +106,8 @@ img {
   img {
     display: block;
     padding: 0.5rem 1rem;
-  }
-  .active img {
-    background-color: antiquewhite;
-  }
-  img {
-    width: 5rem;
-    height: 5rem;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  img {
-    width: 4.5rem;
-    height: 4.5rem;
-  }
-}
-
-@media only screen and (max-width: 970px) {
-  img {
-    width: 4rem;
-    height: 4rem;
-  }
-}
-
-@media only screen and (max-width: 870px) {
-  img {
-    width: 3.75rem;
-    height: 3.75rem;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  img {
-    width: 3.5rem;
-    height: 3.5rem;
-  }
-}
-@media only screen and (max-width: 680px) {
-  img {
-    width: 3rem;
-    height: 3rem;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  img {
-    width: 2.5rem;
-    height: 2.5rem;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  img {
-    width: 2rem;
-    height: 2rem;
-  }
-}
-
-@media only screen and (max-width: 420px) {
-  img {
-    width: 2rem;
-    height: 2rem;
-  }
-}
-
-@media only screen and (max-width: 380px) {
-  img {
-    width: 1.9rem;
-    height: 1.9rem;
-  }
-}
-
-@media only screen and (max-width: 360px) {
-  img {
-    width: 1.8rem;
-    height: 1.8rem;
-  }
-}
-
-@media only screen and (max-width: 320px) {
-  img {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: calc(var(--main-width) / 12);
+    height: calc(var(--main-width) / 12);
   }
 }
 </style>

@@ -1,24 +1,24 @@
 <template>
   <section>
-    <div id="temp-canvas">
-      <video src="TheShirt3.webm" autoplay loop muted></video>
-      <!-- <img src="tshirt update test.png" alt="" /> -->
+    <div class="video-container">
+      <video src="the-t-shirt-video.webm" autoplay loop muted></video>
     </div>
-    <!-- <TheShirt /> -->
-    <TheMotto />
+    <div class="motto-container">
+      <span>
+        <h1>elite</h1>
+      </span>
+      <span>
+        <h1>aesthetic</h1>
+      </span>
+      <span>
+        <h1>oversized</h1>
+      </span>
+      <span>
+        <h1>t-shirts</h1>
+      </span>
+    </div>
   </section>
 </template>
-
-<script>
-// import TheShirt from './TheShirt.vue';
-import TheMotto from './TheMotto.vue';
-export default {
-  components: {
-    // TheShirt,
-    TheMotto
-  }
-};
-</script>
 
 <style scoped>
 section {
@@ -26,108 +26,179 @@ section {
   justify-content: center;
   align-items: center;
 }
-
-/* temp canvas */
-#temp-canvas {
+.video-container {
   width: 35rem;
   height: 35rem;
-  /* background-color: var(--pink); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 video {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  object-fit: cover;
 }
 
-img {
-  width: 100%;
-  height: 100%;
+.motto-container {
+  width: 35rem;
+  height: 35rem;
+  display: flex;
+  align-items: left;
+  flex-direction: column;
+  justify-content: center;
 }
 
-@media only screen and (max-width: 1280px) {
-  #temp-canvas {
-    width: 33rem;
-    height: 33rem;
+h1 {
+  font-size: 3.5rem;
+  padding: 0;
+  margin: 0;
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
+  letter-spacing: 1rem;
+  text-transform: uppercase;
+  width: fit-content;
+  position: relative;
+  opacity: 0;
+  animation: text-reveal 0.2s ease forwards;
+  animation-delay: 1s;
+  line-height: 4.5rem;
+}
+span:nth-of-type(1) h1 {
+  animation-delay: 0.5s;
+}
+span:nth-of-type(2) h1 {
+  animation-delay: 1s;
+}
+span:nth-of-type(3) h1 {
+  animation-delay: 1s;
+}
+span:nth-of-type(4) h1 {
+  animation-delay: 1.5s;
+}
+span {
+  position: relative;
+  width: fit-content;
+  margin: 0.2rem;
+}
+span::after {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background-color: var(--white);
+}
+span:nth-of-type(1)::after {
+  animation: overlay-reveal-left 1s ease forwards;
+  animation-delay: 0s;
+  background-color: var(--red);
+}
+span:nth-of-type(1):hover span:nth-of-type(1)::after {
+  animation: overlay-reveal-left 1s ease forwards;
+}
+span:nth-of-type(2)::after {
+  animation: overlay-reveal-right 1s ease forwards;
+  animation-delay: 0.5s;
+  background-color: var(--white);
+}
+span:nth-of-type(3)::after {
+  animation: overlay-reveal-left 1s ease forwards;
+  animation-delay: 0.5s;
+  background-color: var(--violet);
+}
+span:nth-of-type(4)::after {
+  animation: overlay-reveal-right 1s ease forwards;
+  animation-delay: 1s;
+  background-color: var(--pink);
+}
+@keyframes overlay-reveal-left {
+  0% {
+    left: 0;
+    right: 100%;
+    width: 0%;
+  }
+  50% {
+    right: 0;
+    left: 0;
+    width: 100%;
+  }
+  100% {
+    right: 0;
+    left: 100%;
+    width: 0%;
   }
 }
-@media only screen and (max-width: 1120px) {
+@keyframes overlay-reveal-right {
+  0% {
+    right: 0;
+    left: 100%;
+    width: 0%;
+  }
+  50% {
+    right: 0;
+    left: 0;
+    width: 100%;
+  }
+  100% {
+    left: 0;
+    right: 100%;
+    width: 0%;
+  }
+}
+@keyframes text-reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media only screen and (min-width: 320px) {
   section {
     flex-direction: column;
-    justify-content: center;
+  }
+  .video-container {
+    width: var(--main-width);
+    height: var(--main-width);
+    margin-top: 1rem;
+  }
+  .motto-container {
+    width: var(--main-width);
+    height: fit-content;
     align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
-  #temp-canvas {
-    width: 45rem;
-    height: 45rem;
-  }
-}
-@media only screen and (max-width: 1024px) {
-  #temp-canvas {
-    width: 42rem;
-    height: 42rem;
-  }
-}
-@media only screen and (max-width: 970px) {
-  #temp-canvas {
-    width: 38rem;
-    height: 38rem;
+  h1 {
+    font-size: calc(var(--main-width) / 10);
+    letter-spacing: calc(var(--main-width) / 40);
+    line-height: calc(var(--main-width) / 9);
   }
 }
 
-@media only screen and (max-width: 870px) {
-  #temp-canvas {
-    width: 35rem;
-    height: 35rem;
-  }
-}
-@media only screen and (max-width: 768px) {
-  #temp-canvas {
-    width: 32rem;
-    height: 32rem;
-  }
-}
-@media only screen and (max-width: 680px) {
-}
-@media only screen and (max-width: 600px) {
-  #temp-canvas {
-    width: 29rem;
-    height: 29rem;
-  }
+@media only screen and (min-width: 480px) {
 }
 
-@media only screen and (max-width: 480px) {
-  #temp-canvas {
-    width: 23rem;
-    height: 23rem;
+@media only screen and (min-width: 680px) {
+  /* section {
+    flex-direction: row;
+    margin: 1rem 0;
   }
-}
-
-@media only screen and (max-width: 420px) {
-  #temp-canvas {
-    width: 20rem;
-    height: 20rem;
+  .video-container {
+    width: calc(var(--main-width) / 2);
+    height: calc(var(--main-width) / 2);
+    margin: 0;
   }
-}
-
-@media only screen and (max-width: 380px) {
-  #temp-canvas {
-    width: 18rem;
-    height: 18rem;
+  .motto-container {
+    width: calc(var(--main-width) / 2);
+    height: calc(var(--main-width) / 2);
+    margin: 0;
+    justify-content: center;
+    align-items: flex-start;
   }
-}
-
-@media only screen and (max-width: 360px) {
-  #temp-canvas {
-    width: 17rem;
-    height: 17rem;
-  }
-}
-
-@media only screen and (max-width: 320px) {
-  #temp-canvas {
-    width: 15rem;
-    height: 15rem;
-  }
+  h1 {
+    font-size: calc(var(--main-width) / 18);
+    letter-spacing: calc(var(--main-width) / 80);
+    line-height: calc(var(--main-width) / 16);
+  } */
 }
 </style>

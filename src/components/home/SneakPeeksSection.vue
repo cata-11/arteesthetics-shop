@@ -133,75 +133,9 @@ img {
   left: 0;
 }
 
-@media only screen and (max-width: 1280px) {
+@media only screen and (min-width: 320px) {
   .sneak-peeks-container {
-    height: 34rem;
-  }
-}
-@media only screen and (max-width: 1120px) {
-  .sneak-peeks-container {
-    height: 36rem;
-  }
-}
-@media only screen and (max-width: 1024px) {
-  .sneak-peeks-container {
-    height: 34rem;
-  }
-}
-@media only screen and (max-width: 970px) {
-  .sneak-peeks-container {
-    height: 32rem;
-  }
-}
-@media only screen and (max-width: 870px) {
-  .sneak-peeks-container {
-    height: 30rem;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .sneak-peeks-container {
-    height: 28rem;
-  }
-}
-@media only screen and (max-width: 680px) {
-  .sneak-peeks-container {
-    height: 26rem;
-  }
-}
-@media only screen and (max-width: 600px) {
-  .sneak-peeks-container {
-    height: 25rem;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  .sneak-peeks-container {
-    height: 22rem;
-  }
-}
-
-@media only screen and (max-width: 420px) {
-  .sneak-peeks-container {
-    height: 21rem;
-  }
-}
-
-@media only screen and (max-width: 380px) {
-  .sneak-peeks-container {
-    height: 20rem;
-  }
-}
-
-@media only screen and (max-width: 360px) {
-  .sneak-peeks-container {
-    height: 19rem;
-  }
-}
-
-@media only screen and (max-width: 320px) {
-  .sneak-peeks-container {
-    height: 18rem;
+    height: calc(var(--main-width) - 3rem);
   }
 }
 </style>

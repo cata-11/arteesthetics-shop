@@ -15,7 +15,6 @@ export default {
 
 <style scoped>
 section {
-  margin-top: 7rem;
   box-sizing: border-box;
   padding: 0 5rem;
   position: relative;
@@ -49,73 +48,18 @@ h2 {
   transform: translateY(-53%) translateX(-1.5rem);
 }
 
-@media only screen and (max-width: 1280px) {
+/* 320px */
+@media only screen and (min-width: 320px) {
   section {
-    padding: 0 3rem;
-    margin-top: 6.5rem;
-  }
-  h2 {
-    font-size: 3.6rem;
-    letter-spacing: 1.8rem;
-  }
-}
-@media only screen and (max-width: 1120px) {
-  section {
-    padding: 0 3rem;
-    margin-top: 6rem;
-  }
-  h2 {
-    font-size: 3.8rem;
-    letter-spacing: 1.6rem;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  section {
-    padding: 0 2rem;
-    margin-top: 6rem;
-  }
-  h2 {
-    font-size: 3.5rem;
-    letter-spacing: 1.5rem;
-  }
-}
-
-@media only screen and (max-width: 970px) {
-  section {
-    padding: 0 2rem;
-    margin-top: 6rem;
-  }
-  h2 {
-    font-size: 3.5rem;
-    letter-spacing: 1.5rem;
-  }
-}
-
-@media only screen and (max-width: 870px) {
-  h2 {
-    font-size: 3.2rem;
-    letter-spacing: 1.3rem;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  h2 {
-    font-size: 3rem;
-    letter-spacing: 1.2rem;
-  }
-}
-@media only screen and (max-width: 680px) {
-  section {
-    margin-top: 5rem;
+    margin-top: 3rem;
+    padding: 0 1rem;
   }
   .start {
-    transform: translateY(-58%) translateX(0);
+    transform: translateY(-56%) translateX(0);
     margin: auto;
   }
   .end {
-    transform: translateY(-53%) translateX(0);
-
+    transform: translateY(-56%) translateX(0);
     margin: auto;
   }
   .left {
@@ -124,50 +68,49 @@ h2 {
   .right {
     border-right: none;
   }
+  h2 {
+    font-size: calc(var(--main-width) / 12);
+    letter-spacing: calc(var(--main-width) / 30);
+  }
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (min-width: 440px) {
   section {
     margin-top: 4rem;
   }
-  h2 {
-    font-size: 2.5rem;
-    letter-spacing: 1rem;
-  }
 }
-
-@media only screen and (max-width: 480px) {
-  h2 {
-    font-size: 2.4rem;
-    letter-spacing: 0.9rem;
-  }
-}
-
-@media only screen and (max-width: 420px) {
+@media only screen and (min-width: 520px) {
   section {
-    padding: 0 1rem;
-    margin-top: 3.5rem;
-  }
-  h2 {
-    font-size: 2.1rem;
+    margin-top: 5rem;
   }
 }
-
-@media only screen and (max-width: 380px) {
-  h2 {
-    font-size: 2rem;
+@media only screen and (min-width: 600px) {
+  section {
+    margin-top: 6rem;
   }
 }
-
-@media only screen and (max-width: 360px) {
-  h2 {
-    font-size: 1.9rem;
-    letter-spacing: 0.7rem;
+@media only screen and (min-width: 680px) {
+  section {
+    margin-top: 6rem;
+    padding: 0 2rem;
   }
-}
-
-@media only screen and (max-width: 320px) {
   h2 {
-    font-size: 1.5rem;
+    font-size: calc(var(--main-width) / 14);
+  }
+  .left {
+    border-left: 2px solid whitesmoke;
+  }
+  .right {
+    border-right: 2px solid whitesmoke;
+  }
+  .start {
+    margin-left: 0;
+    margin-right: auto;
+    transform: translateY(-58%) translateX(1.5rem);
+  }
+  .end {
+    margin-right: 0;
+    margin-left: auto;
+    transform: translateY(-53%) translateX(-1.5rem);
   }
 }
 </style>

@@ -73,83 +73,70 @@ p {
   padding: 0;
 }
 
-@media only screen and (max-width: 1280px) {
+@media only screen and (min-width: 320px) {
   :root {
-    --main-width: 66rem;
-    --basic-font-size: 2rem;
+    --main-width: 20rem;
+    --basic-font-size: 1rem;
   }
 }
-
-@media only screen and (max-width: 1120px) {
-  :root {
-    --main-width: 54rem;
-    --basic-font-size: 2.4rem;
-  }
-}
-@media only screen and (max-width: 1024px) {
-  :root {
-    --main-width: 50rem;
-    --basic-font-size: 2.2rem;
-  }
-}
-@media only screen and (max-width: 970px) {
-  :root {
-    --main-width: 48rem;
-    --basic-font-size: 2.1rem;
-  }
-}
-@media only screen and (max-width: 870px) {
-  :root {
-    --main-width: 44rem;
-    --basic-font-size: 1.9rem;
-  }
-}
-@media only screen and (max-width: 768px) {
-  :root {
-    --main-width: 40rem;
-    --basic-font-size: 1.7rem;
-  }
-}
-@media only screen and (max-width: 680px) {
-  :root {
-    --main-width: 42.5rem;
-    --basic-font-size: 1.8rem;
-  }
-}
-@media only screen and (max-width: 600px) {
-  :root {
-    --main-width: 37.5rem;
-    --basic-font-size: 1.6rem;
-  }
-}
-@media only screen and (max-width: 480px) {
-  :root {
-    --main-width: 30rem;
-    --basic-font-size: 1.4rem;
-  }
-}
-@media only screen and (max-width: 420px) {
-  :root {
-    --main-width: 26.25rem;
-    --basic-font-size: 1.3rem;
-  }
-}
-@media only screen and (max-width: 380px) {
-  :root {
-    --main-width: 23.75rem;
-    --basic-font-size: 1.2rem;
-  }
-}
-@media only screen and (max-width: 360px) {
+@media only screen and (min-width: 360px) {
   :root {
     --main-width: 22.5rem;
     --basic-font-size: 1.1rem;
   }
 }
-@media only screen and (max-width: 320px) {
+@media only screen and (min-width: 400px) {
   :root {
-    --main-width: 20rem;
-    --basic-font-size: 1rem;
+    --main-width: 25rem;
+    --basic-font-size: 1.2rem;
   }
+}
+@media only screen and (min-width: 440px) {
+  :root {
+    --main-width: 27.5rem;
+    --basic-font-size: 1.3rem;
+  }
+}
+@media only screen and (min-width: 480px) {
+  :root {
+    --main-width: 30rem;
+    --basic-font-size: 1.4rem;
+  }
+}
+@media only screen and (min-width: 520px) {
+  :root {
+    --main-width: 32.5rem;
+    --basic-font-size: 1.5rem;
+  }
+}
+@media only screen and (min-width: 560px) {
+  :root {
+    --main-width: 35rem;
+    --basic-font-size: 1.6rem;
+  }
+}
+@media only screen and (min-width: 600px) {
+  :root {
+    --main-width: 37.5rem;
+    --basic-font-size: 1.7rem;
+  }
+}
+@media only screen and (min-width: 640px) {
+  :root {
+    --main-width: 40rem;
+    --basic-font-size: 1.8rem;
+  }
+}
+@media only screen and (min-width: 680px) {
+  /*   */
+}
+@media only screen and (min-width: 720px) {
+  :root {
+    --main-width: 42.5rem;
+    --basic-font-size: 1.9rem;
+  }
+}
+
+@media only screen and (min-width: 760px) {
 }
 </style>

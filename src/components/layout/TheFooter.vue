@@ -72,17 +72,13 @@ a:hover {
   border-color: var(--pink);
 }
 
-@media only screen and (max-width: 1280px) {
-  span {
-    padding: 5px;
-  }
-}
-@media only screen and (max-width: 1120px) {
+/* 320px */
+@media only screen and (min-width: 320px) {
   footer {
-    margin-bottom: 7.5rem;
+    margin-bottom: calc(var(--main-width) / 12 + 2.5rem);
   }
   p {
-    padding: 1rem;
+    padding: 0.75rem;
     flex-direction: column;
   }
   span {
@@ -90,53 +86,6 @@ a:hover {
   }
   .separator {
     opacity: 0;
-  }
-}
-@media only screen and (max-width: 1024px) {
-  footer {
-    margin-bottom: 7rem;
-  }
-}
-@media only screen and (max-width: 970px) {
-  footer {
-    margin-bottom: 6.5rem;
-  }
-}
-@media only screen and (max-width: 870px) {
-  footer {
-    margin-bottom: 5.5rem;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  footer {
-    margin-bottom: 5.5rem;
-  }
-}
-@media only screen and (max-width: 680px) {
-}
-@media only screen and (max-width: 600px) {
-  footer {
-    margin-bottom: 4.5rem;
-  }
-}
-@media only screen and (max-width: 480px) {
-  footer {
-    margin-bottom: 4rem;
-  }
-}
-@media only screen and (max-width: 420px) {
-}
-@media only screen and (max-width: 380px) {
-}
-@media only screen and (max-width: 360px) {
-  footer {
-    margin-bottom: 3.75rem;
-  }
-}
-@media only screen and (max-width: 320px) {
-  footer {
-    margin-bottom: 3.5rem;
   }
 }
 </style>

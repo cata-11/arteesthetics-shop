@@ -61,6 +61,7 @@ input {
   box-sizing: border-box;
   font-size: var(--basic-font-size);
   background-color: var(--a-white);
+  font-family: 'Roboto Slab', serif;
 }
 button {
   border: none;
@@ -71,6 +72,7 @@ button {
   background-color: var(--pink);
   font-size: var(--basic-font-size);
   transition: all 0.2s ease-in-out;
+  font-family: 'Roboto Slab', serif;
 }
 button:hover {
   background-color: var(--violet);
@@ -96,143 +98,66 @@ img:hover {
   filter: invert(100%) brightness(80%);
 }
 
-@media only screen and (max-width: 1280px) {
-  #follow-us {
-    margin-bottom: 5.25rem;
-  }
-}
-@media only screen and (max-width: 1120px) {
-  #follow-us {
-    margin-bottom: 5rem;
-  }
-  form {
-    width: 100%;
-    flex-direction: column;
-  }
-  button {
-    width: 100%;
-  }
-  input {
-    width: 100%;
-  }
-  #icons {
-    width: 25%;
-    justify-content: space-between;
-    flex-direction: column;
-    transform: translateX(0);
-  }
-  a {
-    width: 5.25rem;
-    height: 5.25rem;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  a {
-    width: 5rem;
-    height: 5rem;
-  }
-}
-
-@media only screen and (max-width: 970px) {
-  #follow-us {
-    margin-bottom: 4.5rem;
-  }
-  a {
-    width: 4.75rem;
-    height: 4.75rem;
-  }
-}
-
-@media only screen and (max-width: 870px) {
-  a {
-    width: 4.5rem;
-    height: 4.5rem;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  #follow-us {
-    margin-bottom: 4rem;
-  }
-  a {
-    width: 4rem;
-    height: 4rem;
-  }
-}
-@media only screen and (max-width: 680px) {
-  #follow-us {
-    margin-bottom: 2rem;
-  }
-  .follow-us-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
-    width: 75%;
-    margin: 0 auto;
-  }
-  form {
-    width: 100%;
-    flex-direction: column;
-  }
-  #icons {
-    width: 70%;
-    justify-content: space-evenly;
-    flex-direction: row;
-    margin-top: 2rem;
-  }
-}
-@media only screen and (max-width: 600px) {
-  a {
-    width: 4rem;
-    height: 4rem;
-  }
-}
-@media only screen and (max-width: 480px) {
-  input {
-    padding: 0.75rem;
-  }
-  button {
-    padding: 0.75rem;
-  }
-  a {
-    width: 3.5rem;
-    height: 3.5rem;
-  }
-}
-@media only screen and (max-width: 420px) {
-  .follow-us-container {
-    width: 80%;
-  }
-}
-@media only screen and (max-width: 380px) {
+/* 320px */
+@media only screen and (min-width: 320px) {
   #follow-us {
     margin-bottom: 1rem;
   }
   .follow-us-container {
-    width: 85%;
+    flex-direction: column;
   }
-  input {
-    padding: 0.5rem;
+  form {
+    width: 90%;
+    flex-direction: column;
   }
   button {
-    padding: 0.5rem;
+    width: 100%;
+    padding: 0.75rem;
+  }
+  input {
+    width: 100%;
+    padding: 0.75rem;
   }
   #icons {
+    width: 50%;
+    justify-content: space-evenly;
+    flex-direction: row;
+    transform: translateX(0);
     margin-top: 1rem;
   }
   a {
-    width: 3rem;
-    height: 3rem;
+    width: calc(var(--main-width) / 8);
+    height: calc(var(--main-width) / 8);
   }
 }
-@media only screen and (max-width: 360px) {
+
+@media only screen and (min-width: 400px) {
 }
-@media only screen and (max-width: 320px) {
+@media only screen and (min-width: 680px) {
+  #follow-us {
+    margin-bottom: 4rem;
+  }
+  .follow-us-container {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  form {
+    width: 70%;
+    flex-direction: column;
+    margin: 0;
+  }
+  #icons {
+    width: 30%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+  }
+
   a {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: calc(var(--main-width) / 10);
+    height: calc(var(--main-width) / 10);
   }
 }
 </style>

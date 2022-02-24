@@ -83,53 +83,24 @@ span {
   transform: rotateZ(180deg);
 }
 
-@media only screen and (max-width: 1280px) {
-  p {
-    padding: 1.25rem;
-  }
-}
-@media only screen and (max-width: 1120px) {
-}
-@media only screen and (max-width: 1024px) {
-  p {
-    padding: 1rem;
-  }
-}
-@media only screen and (max-width: 970px) {
-}
-@media only screen and (max-width: 870px) {
-}
-
-@media only screen and (max-width: 768px) {
-  p {
-    padding: 0.75rem;
-  }
-}
-@media only screen and (max-width: 680px) {
+/* 320px */
+@media only screen and (min-width: 320px) {
   #answer {
     transform: translateX(0) translateY(-0.5rem);
     margin: 0 auto;
   }
-}
-
-@media only screen and (max-width: 600px) {
-}
-
-@media only screen and (max-width: 480px) {
-}
-
-@media only screen and (max-width: 420px) {
-}
-
-@media only screen and (max-width: 380px) {
   p {
     padding: 0.5rem;
   }
 }
-
-@media only screen and (max-width: 360px) {
+@media only screen and (min-width: 480px) {
+  p {
+    padding: 0.75rem;
+  }
 }
-
-@media only screen and (max-width: 320px) {
+@media only screen and (min-width: 680px) {
+  p {
+    padding: 1rem;
+  }
 }
 </style>

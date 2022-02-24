@@ -168,7 +168,7 @@ a:hover {
   pointer-events: none;
   text-decoration: line-through;
 }
-@media only screen and (max-width: 1280px) {
+@media only screen and (min-width: 1280px) {
   #card-wrapper {
     margin: 1.2rem;
     --card-width: 19rem;
@@ -178,7 +178,7 @@ a:hover {
   }
 }
 
-@media only screen and (max-width: 1120px) {
+@media only screen and (min-width: 1120px) {
   #card-wrapper {
     margin: 1.7rem;
     --card-width: 23rem;
@@ -186,21 +186,21 @@ a:hover {
     --card-padding: 1rem;
   }
 }
-@media only screen and (max-width: 1024px) {
+@media only screen and (min-width: 1024px) {
   #card-wrapper {
     --card-width: 21rem;
     --card-font-size: 1.9rem;
     --card-padding: 0.9rem;
   }
 }
-@media only screen and (max-width: 970px) {
+@media only screen and (min-width: 970px) {
   #card-wrapper {
     --card-width: 20rem;
     --card-font-size: 1.8rem;
     --card-padding: 0.8rem;
   }
 }
-@media only screen and (max-width: 870px) {
+@media only screen and (min-width: 870px) {
   #card-wrapper {
     margin: 1.2rem;
     --card-width: 19rem;
@@ -208,7 +208,7 @@ a:hover {
     --card-padding: 0.7rem;
   }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 768px) {
   #card-wrapper {
     --card-width: 17rem;
     --card-font-size: 1.5rem;
@@ -218,7 +218,7 @@ a:hover {
     --info-height: calc(var(--card-width) + var(--spacing) / 2 + 0.5rem);
   }
 }
-@media only screen and (max-width: 680px) {
+@media only screen and (min-width: 560px) {
   #card-wrapper {
     margin: 1.3rem;
     --card-width: 18rem;
@@ -226,7 +226,7 @@ a:hover {
     --card-padding: 0.6rem;
   }
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (min-width: 520px) {
   #card-wrapper {
     margin: 1.07rem;
     --card-width: 16rem;
@@ -238,7 +238,7 @@ a:hover {
     --info-height: calc(var(--card-width) + var(--spacing) / 2 + 0.5rem);
   }
 }
-@media only screen and (max-width: 480px) {
+@media only screen and (min-width: 480px) {
   #card-wrapper {
     margin: 2rem auto;
     --card-width: 22rem;
@@ -247,14 +247,14 @@ a:hover {
     --img-width: calc(var(--card-width) - 11rem);
   }
 }
-@media only screen and (max-width: 420px) {
+@media only screen and (min-width: 440px) {
   #card-wrapper {
     --card-width: 21rem;
     --card-font-size: 1.9rem;
     --card-padding: 0.9rem;
   }
 }
-@media only screen and (max-width: 380px) {
+@media only screen and (min-width: 400px) {
   #card-wrapper {
     margin: 1.5rem auto;
     --card-width: 20rem;
@@ -262,7 +262,7 @@ a:hover {
     --card-padding: 0.8rem;
   }
 }
-@media only screen and (max-width: 360px) {
+@media only screen and (min-width: 360px) {
   #card-wrapper {
     margin: 1rem auto;
     --card-width: 19rem;
@@ -270,7 +270,7 @@ a:hover {
     --card-padding: 0.7rem;
   }
 }
-@media only screen and (max-width: 320px) {
+@media only screen and (min-width: 320px) {
   #card-wrapper {
     margin: 1rem auto;
     --card-width: 17rem;
