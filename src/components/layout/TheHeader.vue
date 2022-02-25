@@ -47,4 +47,12 @@ h1 {
     letter-spacing: calc(var(--main-width) / 53);
   }
 }
+
+@media only screen and (min-width: 1160px) {
+  h1 {
+    font-size: 4.1rem;
+    letter-spacing: 3rem;
+    margin: 1rem auto;
+  }
+}
 </style>

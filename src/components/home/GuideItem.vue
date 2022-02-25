@@ -103,4 +103,21 @@ span {
     padding: 1rem;
   }
 }
+
+@media only screen and (min-width: 1160px) {
+  p {
+    font-size: 2rem;
+  }
+  #answer {
+    transform: translateX(-0.75rem) translateY(-0.5rem);
+    margin: 0 auto;
+  }
+  span {
+    font-size: 3rem;
+    transition: all 0.2s ease-in-out;
+  }
+  span:hover {
+    color: var(--violet);
+  }
+}
 </style>

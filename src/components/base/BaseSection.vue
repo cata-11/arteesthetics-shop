@@ -113,4 +113,22 @@ h2 {
     transform: translateY(-53%) translateX(-1.5rem);
   }
 }
+
+@media only screen and (min-width: 1160px) {
+  section {
+    margin-top: 7rem;
+    padding: 0 5rem;
+  }
+  h2 {
+    font-size: 3rem;
+    letter-spacing: 2rem;
+  }
+
+  .start {
+    transform: translateY(-56%) translateX(1.5rem);
+  }
+  .end {
+    transform: translateY(-54%) translateX(-1.5rem);
+  }
+}
 </style>

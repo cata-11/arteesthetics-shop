@@ -160,4 +160,32 @@ img:hover {
     height: calc(var(--main-width) / 10);
   }
 }
+
+@media only screen and (min-width: 1160px) {
+  #follow-us {
+    margin-bottom: 4rem;
+  }
+  a {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+  form {
+    flex-direction: row;
+  }
+  input {
+    width: 60%;
+    font-size: 2rem;
+    padding: 1rem;
+  }
+  button {
+    width: 40%;
+    font-size: 2rem;
+    padding: 1rem;
+  }
+  #icons {
+    flex-direction: row;
+    transform: translateX(2.5rem);
+    justify-content: space-evenly;
+  }
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <base-section border="left top" title="start">
+  <base-section border="left top" title="start" id="about">
     <template v-slot:title>
       <base-title
         title="ABOUT"
@@ -45,6 +45,21 @@ p {
 @media only screen and (min-width: 320px) {
   p {
     padding: 1rem;
+  }
+}
+@media only screen and (min-width: 680px) {
+  p {
+    padding: 1.5rem;
+  }
+}
+
+@media only screen and (min-width: 1160px) {
+  p {
+    padding: 3rem;
+    font-size: 2rem;
+  }
+  #about {
+    margin-top: 4rem;
   }
 }
 </style>

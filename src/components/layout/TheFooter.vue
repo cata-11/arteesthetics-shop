@@ -88,4 +88,20 @@ a:hover {
     opacity: 0;
   }
 }
+
+@media only screen and (min-width: 1160px) {
+  footer {
+    margin-bottom: 0;
+  }
+  p {
+    padding: 1rem;
+    flex-direction: row;
+  }
+  span {
+    padding: 3px;
+  }
+  .separator {
+    opacity: 1;
+  }
+}
 </style>

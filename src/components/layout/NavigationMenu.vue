@@ -29,15 +29,11 @@
   </nav>
 </template>
 
-<script>
-export default {};
-</script>
-
 <style scoped>
 nav {
   width: 100%;
   z-index: 999;
-  margin: 1rem auto 2rem auto;
+  margin: 1rem auto;
 }
 ul {
   display: flex;
@@ -81,9 +77,10 @@ img {
   display: none;
 }
 
-/* 320px */
-@media only screen and (min-width: 320px) {
+@media only screen and (min-width: 320px) and (max-width: 1159px) {
   nav {
+    width: 100%;
+    z-index: 999;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -95,10 +92,13 @@ img {
     display: none;
   }
   ul {
+    display: flex;
+    width: 100%;
     justify-content: space-evenly;
     border: none;
   }
   li {
+    width: 25%;
     padding: 0.5rem;
     display: flex;
     justify-content: center;

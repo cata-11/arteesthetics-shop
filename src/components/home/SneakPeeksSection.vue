@@ -135,7 +135,13 @@ img {
 
 @media only screen and (min-width: 320px) {
   .sneak-peeks-container {
-    height: calc(var(--main-width) - 3rem);
+    height: calc(var(--main-width) - 5rem);
+  }
+}
+
+@media only screen and (min-width: 1160px) {
+  .sneak-peeks-container {
+    height: 35rem;
   }
 }
 </style>

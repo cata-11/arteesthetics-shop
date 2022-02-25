@@ -175,13 +175,10 @@ span:nth-of-type(4)::after {
   }
 }
 
-@media only screen and (min-width: 480px) {
-}
-
-@media only screen and (min-width: 680px) {
-  /* section {
+@media only screen and (min-width: 1160px) {
+  section {
     flex-direction: row;
-    margin: 1rem 0;
+    margin: 2rem 0 0 0;
   }
   .video-container {
     width: calc(var(--main-width) / 2);
@@ -196,9 +193,9 @@ span:nth-of-type(4)::after {
     align-items: flex-start;
   }
   h1 {
-    font-size: calc(var(--main-width) / 18);
-    letter-spacing: calc(var(--main-width) / 80);
-    line-height: calc(var(--main-width) / 16);
-  } */
+    font-size: 3.5rem;
+    letter-spacing: 1rem;
+    line-height: 4.5rem;
+  }
 }
 </style>
