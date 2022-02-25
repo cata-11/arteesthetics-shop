@@ -1,10 +1,12 @@
 <template>
   <section>
-    <ProductItem
-      v-for="product in products"
-      :key="product.id"
-      :product="product"
-    />
+    <div class="grid">
+      <ProductItem
+        v-for="product in products"
+        :key="product.id"
+        :product="product"
+      />
+    </div>
   </section>
 </template>
 
@@ -85,7 +87,7 @@ export default {
         },
         {
           id: 2,
-          title: 'Nobody knows how long this text is',
+          title: 'Aesthetic Skull',
           coverImage: 'shirt0.png',
           description: `Lorem ipsum dolor 
           sit amet consectetur adipisicing 
@@ -498,29 +500,29 @@ export default {
           }
         },
         {
-          id: 10,
+          id: 9,
           title: 'Nobody knows how long this text is',
           coverImage: 'shirt0.png',
-          description: `Lorem ipsum dolor 
-          sit amet consectetur adipisicing 
+          description: `Lorem ipsum dolor
+          sit amet consectetur adipisicing
           elit.`,
           price: 30,
           sizes: [
             {
               size: 'XS',
-              stock: 5
-            },
-            {
-              size: 'S',
-              stock: 3
-            },
-            {
-              size: 'L',
               stock: 0
             },
             {
+              size: 'S',
+              stock: 10
+            },
+            {
+              size: 'L',
+              stock: 5
+            },
+            {
               size: 'M',
-              stock: 2
+              stock: 5
             }
           ],
           images: [
@@ -561,8 +563,8 @@ export default {
             }
           ],
           props: {
-            stockTotal: 10,
-            promotion: false,
+            stockTotal: 20,
+            promotion: true,
             bestseller: true
           }
         }
@@ -578,6 +580,27 @@ export default {
 <style scoped>
 section {
   display: flex;
-  flex-wrap: wrap;
+}
+.grid {
+  margin: 2rem auto;
+  display: inline-grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+@media only screen and (min-width: 320px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media only screen and (min-width: 680px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (min-width: 1160px) {
+  .grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 </style>

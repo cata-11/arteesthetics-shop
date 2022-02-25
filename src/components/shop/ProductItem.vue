@@ -47,21 +47,26 @@ export default {
 
 <style scoped>
 #card-wrapper {
-  margin: 1.1rem;
+  --card-width: 20rem;
 
-  --card-width: 20.52rem;
+  --title-font-size: calc(var(--card-width) / 10);
+  --info-font-size: calc(var(--card-width) / 15.5);
+  --actions-font-size: calc(var(--card-width) / 10);
 
-  --card-font-size: 2rem;
-  --card-padding: 0.5rem;
+  --title-padding: calc(var(--card-width) / 10 - 1.2rem);
+  --info-padding: calc(var(--card-width) / 10 - 1.2rem);
+  --actions-padding: calc(var(--card-width) / 10 - 1.4rem);
+
+  --img-width: calc(var(--card-width) - 9rem);
+  --img-height: calc(var(--card-width) - 4rem);
+  --img-padding: 1.5rem;
+
+  --info-width: calc(var(--card-width) / 6);
+  --info-height: calc(var(--card-width) + var(--spacing) / 2 + 1.5rem);
 
   --spacing: 1rem;
-
-  --img-height: calc(var(--card-width) - 5rem);
-  --img-width: calc(var(--card-width) - 11rem);
-
-  --info-width: 3rem;
-  --info-height: calc(var(--card-width) + var(--spacing) / 2 + 1.5rem);
 }
+
 #card {
   margin-left: 0.5rem;
   width: var(--card-width);
@@ -74,8 +79,8 @@ export default {
   border-left: 0.5rem solid var(--violet);
 }
 h1 {
-  font-size: var(--card-font-size);
-  padding: var(--card-padding);
+  font-size: var(--title-font-size);
+  padding: var(--title-padding);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -90,7 +95,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: var(--img-padding);
   margin: var(--spacing);
 }
 img {
@@ -113,14 +118,13 @@ img {
   justify-content: center;
 }
 .info > p > span {
-  font-size: calc(var(--card-font-size) / 1.5);
-  padding-left: calc(var(--card-padding) / 3.5);
-  padding-top: var(--card-padding);
-  padding-bottom: var(--card-padding);
+  font-size: var(--info-font-size);
+  padding-left: calc(var(--info-padding) / 3.5);
+  padding-top: var(--info-padding);
+  padding-bottom: var(--info-padding);
   writing-mode: vertical-lr;
 }
 .action {
-  /* width: 21rem; */
   display: flex;
 }
 .action > div {
@@ -128,19 +132,19 @@ img {
   justify-content: center;
   align-items: center;
   background-color: var(--red);
-  /* width: var(--price-width); */
-  padding: var(--card-padding);
+  padding: var(--actions-padding);
   transform: translateX(-0.5rem);
 }
 .action > div > p {
-  font-size: var(--card-font-size);
+  font-size: var(--actions-font-size);
+  padding: 0 var(--actions-padding);
 }
 .action > a {
   margin-right: 0;
   margin-left: calc(var(--spacing) / 1.5);
   width: 22rem;
-  font-size: var(--card-font-size);
-  padding: var(--card-padding);
+  font-size: var(--actions-font-size);
+  padding: var(--actions-padding);
   border: none;
   outline: none;
   cursor: pointer;
@@ -168,115 +172,136 @@ a:hover {
   pointer-events: none;
   text-decoration: line-through;
 }
-@media only screen and (min-width: 1280px) {
-  #card-wrapper {
-    margin: 1.2rem;
-    --card-width: 19rem;
-    --card-font-size: 1.8rem;
-    --card-padding: 0.7rem;
-    --img-width: calc(var(--card-width) - 8rem);
-  }
-}
 
-@media only screen and (min-width: 1120px) {
-  #card-wrapper {
-    margin: 1.7rem;
-    --card-width: 23rem;
-    --card-font-size: 2rem;
-    --card-padding: 1rem;
-  }
-}
-@media only screen and (min-width: 1024px) {
-  #card-wrapper {
-    --card-width: 21rem;
-    --card-font-size: 1.9rem;
-    --card-padding: 0.9rem;
-  }
-}
-@media only screen and (min-width: 970px) {
-  #card-wrapper {
-    --card-width: 20rem;
-    --card-font-size: 1.8rem;
-    --card-padding: 0.8rem;
-  }
-}
-@media only screen and (min-width: 870px) {
-  #card-wrapper {
-    margin: 1.2rem;
-    --card-width: 19rem;
-    --card-font-size: 1.7rem;
-    --card-padding: 0.7rem;
-  }
-}
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 320px) {
   #card-wrapper {
     --card-width: 17rem;
-    --card-font-size: 1.5rem;
-    --card-padding: 0.5rem;
-    --img-width: calc(var(--card-width) - 6rem);
-    --img-height: calc(var(--card-width) - 6rem);
-    --info-height: calc(var(--card-width) + var(--spacing) / 2 + 0.5rem);
-  }
-}
-@media only screen and (min-width: 560px) {
-  #card-wrapper {
-    margin: 1.3rem;
-    --card-width: 18rem;
-    --card-font-size: 1.6rem;
-    --card-padding: 0.6rem;
-  }
-}
-@media only screen and (min-width: 520px) {
-  #card-wrapper {
-    margin: 1.07rem;
-    --card-width: 16rem;
-    --card-font-size: 1.4rem;
-    --card-padding: 0.4rem;
 
-    --img-width: calc(var(--card-width) - 6rem);
-    --img-height: calc(var(--card-width) - 6rem);
-    --info-height: calc(var(--card-width) + var(--spacing) / 2 + 0.5rem);
+    --title-font-size: calc(var(--card-width) / 10);
+    --info-font-size: calc(var(--card-width) / 15.5);
+    --actions-font-size: calc(var(--card-width) / 10);
+
+    --title-padding: calc(var(--card-width) / 10 - 1.2rem);
+    --info-padding: calc(var(--card-width) / 10 - 1.2rem);
+    --actions-padding: calc(var(--card-width) / 10 - 1.4rem);
+
+    --img-width: calc(var(--card-width) - 9rem);
+    --img-height: calc(var(--card-width) - 4rem);
+    --img-padding: 1.5rem;
+
+    --info-width: calc(var(--card-width) / 6);
+    --info-height: calc(var(--card-width) + var(--spacing) / 2 + 1.5rem);
+
+    --spacing: 1rem;
   }
 }
-@media only screen and (min-width: 480px) {
+
+@media only screen and (min-width: 360px) {
   #card-wrapper {
-    margin: 2rem auto;
-    --card-width: 22rem;
-    --card-font-size: 2rem;
-    --card-padding: 1rem;
-    --img-width: calc(var(--card-width) - 11rem);
-  }
-}
-@media only screen and (min-width: 440px) {
-  #card-wrapper {
-    --card-width: 21rem;
-    --card-font-size: 1.9rem;
-    --card-padding: 0.9rem;
+    --card-width: 18rem;
+    --img-padding: 1.75rem;
+
+    --info-height: calc(var(--card-width) + var(--spacing) / 2 + 2rem);
   }
 }
 @media only screen and (min-width: 400px) {
   #card-wrapper {
-    margin: 1.5rem auto;
-    --card-width: 20rem;
-    --card-font-size: 1.8rem;
-    --card-padding: 0.8rem;
-  }
-}
-@media only screen and (min-width: 360px) {
-  #card-wrapper {
-    margin: 1rem auto;
     --card-width: 19rem;
-    --card-font-size: 1.7rem;
-    --card-padding: 0.7rem;
   }
 }
-@media only screen and (min-width: 320px) {
+@media only screen and (min-width: 440px) {
   #card-wrapper {
-    margin: 1rem auto;
+    --card-width: 20rem;
+  }
+}
+@media only screen and (min-width: 480px) {
+  #card-wrapper {
+    --card-width: 21rem;
+  }
+}
+@media only screen and (min-width: 520px) {
+  #card-wrapper {
+    --card-width: 22rem;
+  }
+}
+@media only screen and (min-width: 560px) {
+  #card-wrapper {
+    --card-width: 23rem;
+  }
+}
+@media only screen and (min-width: 600px) {
+  #card-wrapper {
+    --card-width: 24rem;
+  }
+}
+@media only screen and (min-width: 640px) {
+  #card-wrapper {
+    --card-width: 25rem;
+  }
+}
+@media only screen and (min-width: 680px) {
+  #card-wrapper {
     --card-width: 17rem;
-    --card-font-size: 1.5rem;
-    --card-padding: 0.5rem;
-    --img-width: calc(var(--card-width) - 8rem);
+  }
+}
+@media only screen and (min-width: 720px) {
+  #card-wrapper {
+    --card-width: 18rem;
+  }
+}
+@media only screen and (min-width: 760px) {
+  #card-wrapper {
+    --card-width: 19rem;
+  }
+}
+@media only screen and (min-width: 800px) {
+  #card-wrapper {
+    --card-width: 20rem;
+  }
+}
+@media only screen and (min-width: 840px) {
+  #card-wrapper {
+    --card-width: 21rem;
+  }
+}
+@media only screen and (min-width: 880px) {
+  #card-wrapper {
+    --card-width: 22rem;
+  }
+}
+@media only screen and (min-width: 920px) {
+  #card-wrapper {
+    --card-width: 23rem;
+  }
+}
+@media only screen and (min-width: 960px) {
+  #card-wrapper {
+    --card-width: 24rem;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  #card-wrapper {
+    --card-width: 25rem;
+  }
+}
+@media only screen and (min-width: 1040px) {
+  #card-wrapper {
+    --card-width: 26rem;
+  }
+}
+@media only screen and (min-width: 1080px) {
+  #card-wrapper {
+    --card-width: 27rem;
+  }
+}
+@media only screen and (min-width: 1120px) {
+  #card-wrapper {
+    --card-width: 28rem;
+  }
+}
+@media only screen and (min-width: 1160px) {
+  #card-wrapper {
+    --card-width: 21rem;
   }
 }
 </style>

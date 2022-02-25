@@ -203,10 +203,4 @@ p {
     --basic-font-size: 2rem;
   }
 }
-@media only screen and (min-width: 1200px) {
-}
-@media only screen and (min-width: 1240px) {
-}
-@media only screen and (min-width: 1280px) {
-}
 </style>
