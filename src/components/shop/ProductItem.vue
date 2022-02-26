@@ -301,7 +301,7 @@ a:hover {
 }
 @media only screen and (min-width: 1160px) {
   #card-wrapper {
-    --card-width: 21rem;
+    --card-width: 21.401rem;
   }
 }
 </style>

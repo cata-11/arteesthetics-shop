@@ -596,11 +596,13 @@ section {
 @media only screen and (min-width: 680px) {
   .grid {
     grid-template-columns: 1fr 1fr;
+    gap: 3rem;
   }
 }
 @media only screen and (min-width: 1160px) {
   .grid {
     grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
   }
 }
 </style>

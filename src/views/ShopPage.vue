@@ -1,19 +1,16 @@
 <template>
-  <SearchBox />
-  <TheFilter />
+  <TheFilters />
   <ProductsGrid />
 </template>
 
 <script>
-import SearchBox from '../components/shop/SearchBox.vue';
 import ProductsGrid from '../components/shop/ProductsGrid.vue';
-import TheFilter from '../components/shop/TheFilter.vue';
+import TheFilters from '../components/shop/TheFilters.vue';
 
 export default {
   components: {
-    SearchBox,
     ProductsGrid,
-    TheFilter
+    TheFilters
   }
 };
 </script>

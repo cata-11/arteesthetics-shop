@@ -41,6 +41,12 @@ h1 {
   font-family: 'Zen Kaku Gothic Antique', sans-serif;
 }
 
+@media only screen and (min-width: 320px) {
+  h1 {
+    margin-bottom: 0;
+  }
+}
+
 @media only screen and (min-width: 680px) {
   h1 {
     font-size: calc(var(--main-width) / 10);

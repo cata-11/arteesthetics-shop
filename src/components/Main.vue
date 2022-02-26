@@ -52,6 +52,12 @@ main {
   box-sizing: border-box;
   width: var(--main-width);
 }
+button {
+  border: none;
+  outline: none;
+  font-family: 'Roboto Slab', serif;
+  cursor: pointer;
+}
 ul {
   margin: 0;
   padding: 0;
