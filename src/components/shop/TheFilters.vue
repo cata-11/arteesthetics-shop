@@ -173,22 +173,22 @@ form > button:hover img {
 @media only screen and (min-width: 320px) and (max-width: 1159px) {
   .show {
     max-height: 26rem;
-    transition: all 0.3s linear;
+    transition: all 0.1s linear;
   }
   .show > button {
     max-height: 9rem;
-    transition: all 0.5s linear;
+    transition: all 0.2s linear;
   }
   .hide {
     max-height: 0;
     overflow: hidden;
-    transition: all 0.3s linear;
+    transition: all 0.1s linear;
   }
   .hide > button {
     max-height: 0;
     overflow: hidden;
     opacity: 0;
-    transition: all 0.5s linear;
+    transition: all 0.2s linear;
   }
 }
 

@@ -41,9 +41,7 @@
               {{ size.size }}
             </div>
           </div>
-          <p class="see-size">
-            Not sure about the size ? Check our <a href="">size chart</a>.
-          </p>
+          <p class="see-size">Check our <a href="">size chart</a>.</p>
         </div>
       </div>
       <div class="actions">
@@ -253,7 +251,7 @@ section {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  height: 70rem;
+  margin: 2rem 0;
 }
 #gallery {
   width: 35rem;
@@ -359,19 +357,7 @@ section {
   flex-direction: column;
   justify-content: space-between;
 }
-#details > .actions {
-  width: 100%;
-  height: 11rem;
-  margin-top: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
-  border-right: 10px solid var(--a-white);
-  border-bottom: 10px solid var(--a-white);
-  /* border-top: 10px solid var(--a-white); */
-  /* border-left: 10px solid var(--a-white); */
-}
+
 .details-header > .title {
   font-size: 2.5rem;
   padding: 1rem;
@@ -397,7 +383,7 @@ section {
   letter-spacing: 0.1rem;
   display: flex;
   align-items: center;
-  width: 50%;
+  width: 58.5%;
   box-sizing: border-box;
 }
 .price > .new {
@@ -450,8 +436,8 @@ section {
   filter: brightness(100%);
 }
 .see-size {
-  width: fit-content;
-  margin-top: 1rem;
+  text-align: start;
+  margin-top: 0.75rem;
 }
 .see-size > a {
   border-bottom: 1px solid var(--a-white);
@@ -463,13 +449,25 @@ section {
   border-color: var(--pink);
 }
 
+#details > .actions {
+  width: 100%;
+  height: 11rem;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  border-right: 10px solid var(--a-white);
+  border-bottom: 10px solid var(--a-white);
+}
+
 .add-to-cart-btn {
   border: none;
   outline: none;
   cursor: pointer;
   font-size: 1.9rem;
   font-family: 'Zen Kaku Gothic Antique', sans-serif;
-  width: 50%;
+  width: 60%;
   box-sizing: border-box;
   text-transform: uppercase;
   padding: 1rem 0;
@@ -483,8 +481,7 @@ section {
   filter: brightness(80%);
 }
 .add-to-favourites-btn {
-  width: 50%;
-
+  width: 40%;
   height: 4rem;
   display: flex;
   justify-content: center;
@@ -496,5 +493,129 @@ section {
 }
 .add-to-favourites-btn:hover {
   filter: brightness(80%);
+}
+
+@media only screen and (min-width: 320px) and (max-width: 1159px) {
+  section {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: fit-content;
+    margin-top: 0;
+    --margin: calc(var(--main-width) / 20);
+    --img-width: calc((var(--main-width) - 5rem) / 3);
+  }
+  #gallery {
+    width: calc(var(--main-width) - 3rem);
+    height: fit-content;
+    margin: 1rem auto;
+  }
+  .main-image {
+    width: calc(var(--main-width) - 3rem);
+    height: calc(var(--main-width) - 3rem);
+  }
+  .images-carousel {
+    width: calc(var(--main-width) - 3rem);
+    height: fit-content;
+    width: 100%;
+  }
+  #details {
+    width: var(--main-width);
+  }
+  .images-container {
+    width: 100%;
+  }
+  .image-item {
+    width: var(--img-width);
+    height: var(--img-width);
+    border: 0.25rem solid var(--a-white);
+  }
+  .image-item > img {
+    width: calc(var(--img-width) - 0.5rem);
+    height: calc(var(--img-width) - 0.5rem);
+    object-fit: cover;
+  }
+  #details > .info {
+    width: 90%;
+    height: fit-content;
+    margin: 0 auto;
+    justify-content: center;
+  }
+  .details-header > .title {
+    font-size: calc(var(--main-width) / 12);
+    padding: calc(var(--main-width) / 40);
+    letter-spacing: 0.1rem;
+    border: none;
+    text-align: center;
+    margin: calc(var(--margin) / 2) 0;
+  }
+  .details-header > .description {
+    font-size: calc(var(--main-width) / 17);
+    padding: 0.5rem;
+    border: none;
+  }
+  .price {
+    font-size: calc(var(--main-width) / 12);
+    border: none;
+    width: 70%;
+    margin: calc(var(--margin) * 2) auto;
+  }
+  .price > .new {
+    padding: calc(var(--main-width) / 38);
+  }
+  .price > .old {
+    padding: calc(var(--main-width) / 80);
+  }
+  .choose-size-p {
+    padding: calc(var(--margin) / 2) 0;
+    font-size: calc(var(--main-width) / 18);
+    border-bottom: calc(var(--main-width) / 35) solid var(--a-white);
+    margin-bottom: var(--margin);
+  }
+  .size {
+    width: 11%;
+    font-size: calc(var(--main-width) / 14);
+    padding: calc(var(--main-width) / 40);
+    border: calc(var(--main-width) / 60) solid transparent;
+  }
+  .see-size {
+    text-align: end;
+    font-size: calc(var(--main-width) / 25);
+
+    margin-top: calc(var(--margin) / 2);
+  }
+  #details > .actions {
+    width: 90%;
+    margin: calc(var(--margin) * 2) auto 1rem auto;
+    padding: var(--margin) 0;
+    border: none;
+    height: fit-content;
+    flex-direction: row;
+    border-top: calc(var(--main-width) / 35) solid var(--pink);
+  }
+  .add-to-cart-btn {
+    width: 70%;
+    font-size: calc(var(--main-width) / 12);
+    padding: calc(var(--margin) / 2);
+    border: none;
+  }
+  .add-to-favourites-btn {
+    width: 30%;
+    height: auto;
+  }
+  .add-to-favourites-btn > img {
+    width: calc(var(--main-width) / 7.5);
+    height: auto;
+  }
+}
+
+@media only screen and (min-width: 680px) and (max-width: 1159px) {
+  .image-item {
+    border: 0.5rem solid var(--a-white);
+  }
+  .image-item > img {
+    width: calc(var(--img-width) - 1rem);
+    height: calc(var(--img-width) - 1rem);
+  }
 }
 </style>

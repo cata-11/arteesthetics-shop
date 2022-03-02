@@ -4,6 +4,8 @@ import HomePage from '../views/HomePage.vue';
 import ShopPage from '../views/ShopPage.vue';
 import ProductDetails from '../views/ProductDetails.vue';
 import AccountPage from '../views/AccountPage.vue';
+import UserPage from '../views/UserPage.vue';
+import AdminPage from '../views/AdminPage.vue';
 import CartPage from '../views/CartPage.vue';
 
 const routes = [
@@ -27,6 +29,14 @@ const routes = [
   {
     path: '/account',
     component: AccountPage
+  },
+  {
+    path: '/account/user',
+    component: UserPage
+  },
+  {
+    path: '/account/admin',
+    component: AdminPage
   },
   {
     path: '/cart',

@@ -19,7 +19,7 @@ export default {
         {
           id: 0,
           title: 'Nobody knows how long this text is',
-          coverImage: 'shirt0.png',
+          coverImage: '/shirt0.png',
           description: `Lorem ipsum dolor 
           sit amet consectetur adipisicing 
           elit.`,
@@ -88,7 +88,7 @@ export default {
         {
           id: 2,
           title: 'Aesthetic Skull',
-          coverImage: 'shirt0.png',
+          coverImage: '/shirt0.png',
           description: `Lorem ipsum dolor 
           sit amet consectetur adipisicing 
           elit.`,
@@ -157,7 +157,7 @@ export default {
         {
           id: 4,
           title: 'Nobody knows how long this text is',
-          coverImage: 'shirt0.png',
+          coverImage: '/shirt0.png',
           description: `Lorem ipsum dolor 
           sit amet consectetur adipisicing 
           elit.`,
@@ -226,7 +226,7 @@ export default {
         {
           id: 5,
           title: 'Nobody knows how long this text is',
-          coverImage: 'shirt0.png',
+          coverImage: '/shirt0.png',
           description: `Lorem ipsum dolor 
           sit amet consectetur adipisicing 
           elit.`,
@@ -295,7 +295,7 @@ export default {
         {
           id: 7,
           title: 'Nobody knows how long this text is',
-          coverImage: 'shirt0.png',
+          coverImage: '/shirt0.png',
           description: `Lorem ipsum dolor 
           sit amet consectetur adipisicing 
           elit.`,
@@ -364,7 +364,7 @@ export default {
         {
           id: 8,
           title: 'Nobody knows how long this text is',
-          coverImage: 'shirt0.png',
+          coverImage: '/shirt0.png',
           description: `Lorem ipsum dolor 
           sit amet consectetur adipisicing 
           elit.`,
@@ -433,7 +433,7 @@ export default {
         {
           id: 9,
           title: 'Nobody knows how long this text is',
-          coverImage: 'shirt0.png',
+          coverImage: '/shirt0.png',
           description: `Lorem ipsum dolor 
           sit amet consectetur adipisicing 
           elit.`,
@@ -502,7 +502,7 @@ export default {
         {
           id: 9,
           title: 'Nobody knows how long this text is',
-          coverImage: 'shirt0.png',
+          coverImage: '/shirt0.png',
           description: `Lorem ipsum dolor
           sit amet consectetur adipisicing
           elit.`,

@@ -52,6 +52,7 @@ main {
   box-sizing: border-box;
   width: var(--main-width);
 }
+button,
 button {
   border: none;
   outline: none;
@@ -70,6 +71,7 @@ li {
 a {
   text-decoration: none;
   color: var(--white);
+  -webkit-tap-highlight-color: transparent;
 }
 h1,
 h2,
