@@ -3,28 +3,32 @@
     <h2>Welcome !</h2>
     <form action="">
       <div>
-        <label for="username">Username</label>
-        <input type="text" id="username" placeholder="Username" />
-        <p class="email-check">Invalid name</p>
+        <div>
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Username" />
+          <p class="email-check">Invalid name</p>
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input type="text" id="email" placeholder="Enter your email" />
+          <p class="email-check">Invalid email</p>
+        </div>
       </div>
       <div>
-        <label for="email">Email</label>
-        <input type="text" id="email" placeholder="Enter your email" />
-        <p class="email-check">Invalid email</p>
-      </div>
-      <div>
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Password" />
-        <p class="pass-check">Wrong password</p>
-      </div>
-      <div>
-        <label for="confirm-password">Confirm password</label>
-        <input
-          type="password"
-          id="confirm-password"
-          placeholder="Confirm password"
-        />
-        <p class="pass-check">Wrong password</p>
+        <div>
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Password" />
+          <p class="pass-check">Wrong password</p>
+        </div>
+        <div>
+          <label for="confirm-password">Confirm password</label>
+          <input
+            type="password"
+            id="confirm-password"
+            placeholder="Confirm password"
+          />
+          <p class="pass-check">Wrong password</p>
+        </div>
       </div>
       <div>
         <button>SIGN UP</button>
@@ -75,6 +79,13 @@ form {
 }
 form > div {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  /* margin-bottom: calc(var(--margin) / 2); */
+}
+form > div > div {
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -85,6 +96,7 @@ label {
   margin-bottom: calc(var(--margin) / 6);
 }
 input {
+  width: 90%;
   padding: 0.5rem;
   font-size: var(--basic-font-size);
   border: none;
@@ -110,7 +122,7 @@ button {
   transition: all 0.2s ease-in-out;
   padding: 0.5rem 1rem;
   margin-top: calc(var(--margin) / 2);
-  margin-bottom: var(--margin);
+  margin-bottom: calc(var(--margin) + (var(--margin) / 2));
 }
 button:hover {
   color: var(--black);
@@ -127,5 +139,14 @@ span:hover {
 }
 p {
   font-size: calc(var(--basic-font-size) / 1.25);
+}
+
+@media only screen and (min-width: 320px) and (max-width: 1159px) {
+  form > div {
+    flex-direction: column;
+  }
+  input {
+    width: unset;
+  }
 }
 </style>

@@ -64,7 +64,6 @@ p {
   height: fit-content;
   margin-top: auto;
   margin-bottom: auto;
-
   position: absolute;
   transition: all 0.3s linear;
 }

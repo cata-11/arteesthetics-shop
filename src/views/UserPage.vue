@@ -7,7 +7,6 @@
         <img src="/exit.svg" alt="" />
       </div>
     </div>
-
     <div class="nav">
       <ul>
         <li
@@ -24,7 +23,6 @@
         </li>
       </ul>
     </div>
-
     <Transition name="fade" mode="out-in">
       <div class="title" v-if="wishlistActive">
         <h2>Wishlist</h2>
@@ -184,7 +182,7 @@ li.active {
 }
 .translate-enter-from,
 .translate-leave-to {
-  /* opacity: 0; */
+  opacity: 0;
   transform: translateY(5%);
 }
 
@@ -208,7 +206,6 @@ li.active {
     width: 95%;
     margin: 0 auto;
   }
-
   .header {
     border: none;
   }

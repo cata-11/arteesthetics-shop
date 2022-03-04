@@ -52,7 +52,10 @@ main {
   box-sizing: border-box;
   width: var(--main-width);
 }
-button,
+input {
+  border: none;
+  outline: none;
+}
 button {
   border: none;
   outline: none;
