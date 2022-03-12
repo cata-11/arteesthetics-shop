@@ -4,7 +4,7 @@
       <p>Total</p>
       <p>$300</p>
     </div>
-    <button>Checkout</button>
+    <base-button class="btn">Checkout</base-button>
   </div>
 </template>
 
@@ -31,22 +31,10 @@
   box-sizing: border-box;
 }
 
-.total-container button {
+.btn {
   margin-left: auto;
   margin-right: 0;
   width: fit-content;
-  box-sizing: border-box;
-  font-size: calc(var(--basic-font-size));
-  border: 7px solid var(--violet);
-  background-color: transparent;
-  color: var(--white);
-  text-transform: capitalize;
-  transition: all 0.2s ease-in-out;
-  padding: 0.5rem 1rem;
-}
-.total-container button:hover {
-  color: var(--black);
-  background-color: var(--a-white);
 }
 
 @media only screen and (min-width: 680px) and (max-width: 1159px) {
@@ -59,7 +47,7 @@
   .total-container {
     width: calc(var(--main-width) - 15%);
   }
-  .total-container button {
+  .btn {
     margin: 0 auto;
   }
 }

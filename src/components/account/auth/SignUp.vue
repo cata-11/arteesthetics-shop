@@ -31,7 +31,7 @@
         </div>
       </div>
       <div>
-        <button>SIGN UP</button>
+        <base-button class="btn">SIGN UP</base-button>
       </div>
     </form>
     <div>
@@ -111,23 +111,14 @@ input {
   color: var(--red);
   opacity: 0;
 }
-button {
-  font-size: var(--basic-font-size);
-  border: 7px solid var(--violet);
-  background-color: transparent;
-  color: var(--white);
+.btn {
   font-weight: bold;
   text-transform: uppercase;
-  letter-spacing: 0.1rem;
-  transition: all 0.2s ease-in-out;
-  padding: 0.5rem 1rem;
+
   margin-top: calc(var(--margin) / 2);
   margin-bottom: calc(var(--margin) + (var(--margin) / 2));
 }
-button:hover {
-  color: var(--black);
-  background-color: var(--a-white);
-}
+
 span {
   border-bottom: 1px solid white;
   cursor: pointer;

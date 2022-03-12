@@ -582,7 +582,7 @@ section {
   display: flex;
 }
 .grid {
-  margin: 2rem auto;
+  margin: 0 auto;
   display: inline-grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;

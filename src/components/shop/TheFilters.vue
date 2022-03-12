@@ -1,11 +1,9 @@
 <template>
   <section>
-    <form>
+    <div class="search-box">
       <input type="text" placeholder="Search..." name="search" />
-      <button>
-        <img src="/search.svg" alt="" />
-      </button>
-    </form>
+      <img src="/search.svg" alt="" />
+    </div>
     <button class="toggle-filters" @click="toggleFilters">FILTERS</button>
     <div class="filter-options" :class="[hide ? 'hide' : 'show']">
       <button class="active">all</button>
@@ -33,7 +31,7 @@ export default {
 
 <style scoped>
 section {
-  margin-top: 2rem;
+  margin: 2rem 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -42,45 +40,34 @@ section {
   padding-bottom: 1rem;
   padding-top: 1rem;
 }
-form {
+.search-box {
   display: flex;
-  align-items: center;
   align-self: stretch;
-  justify-content: center;
+  position: relative;
+  margin-left: 1rem;
 }
 input {
-  width: 85%;
-  align-self: stretch;
-  font-size: 2rem;
-  padding: 0.5rem;
-  border: none;
-  outline: none;
-  background-color: var(--a-white);
-  color: var(--black);
-}
-input::placeholder {
-  color: var(--black);
-  opacity: 0.6;
-}
-form > button {
-  width: 15%;
-  border: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-self: stretch;
-  align-items: center;
-  justify-content: flex-end;
-  transition: all 0.3s ease-in-out;
+  padding: calc(var(--basic-font-size) / 4);
+  padding-right: calc(var(--main-width) / 22);
   background-color: var(--a-white);
 }
-button > img {
-  width: 3rem;
-  opacity: 0.6;
+.search-box > img {
+  opacity: 0.3;
+  width: 2.5rem;
+  height: 2.5rem;
+  cursor: pointer;
+  position: absolute;
+  margin-top: auto;
+  margin-bottom: auto;
+  top: 0;
+  bottom: 0;
+  right: 0;
   transition: all 0.2s ease-in-out;
+  padding: calc(var(--basic-font-size) / 5);
 }
-form > button:hover img {
-  filter: brightness(1%);
+
+.search-box > img :hover img {
+  opacity: 1;
 }
 
 .toggle-filters,
@@ -102,9 +89,10 @@ form > button:hover img {
   border-color: var(--white);
 }
 
-@media only screen and (min-width: 320px) {
+@media only screen and (min-width: 320px) and (max-width: 1159px) {
   section {
-    margin-top: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     padding: 0;
     border: none;
     flex-direction: column;
@@ -122,57 +110,24 @@ form > button:hover img {
     background-color: var(--pink);
     display: block;
     width: 85%;
+    padding: calc(var(--main-width) / 140) 0;
   }
   .filter-options > button.active {
     background-color: var(--a-white);
     color: var(--black);
     border: 5px solid var(--black);
+    padding: calc(var(--main-width) / 140) 0;
   }
   form > button {
-    width: 20%;
+    width: fit-content;
   }
-}
-
-@media only screen and (min-width: 600px) {
   input,
   .filter-options > button,
   .toggle-filters {
-    font-size: 2.5rem;
+    font-size: calc(var(--basic-font-size) + 0.5rem);
   }
-}
-@media only screen and (min-width: 760px) {
-  input,
-  .filter-options > button,
-  .toggle-filters {
-    font-size: 3rem;
-  }
-  button > img {
-    width: 3.5rem;
-  }
-}
-@media only screen and (min-width: 920px) {
-  input,
-  .filter-options > button,
-  .toggle-filters {
-    font-size: 4rem;
-  }
-  button > img {
-    width: 4rem;
-  }
-}
-@media only screen and (min-width: 1000px) {
-  input,
-  .filter-options > button,
-  .toggle-filters {
-    font-size: 5rem;
-  }
-  button > img {
-    width: 5rem;
-  }
-}
-@media only screen and (min-width: 320px) and (max-width: 1159px) {
   .show {
-    max-height: 26rem;
+    max-height: 35rem;
     transition: all 0.1s linear;
   }
   .show > button {
@@ -189,6 +144,20 @@ form > button:hover img {
     overflow: hidden;
     opacity: 0;
     transition: all 0.2s linear;
+  }
+  .search-box {
+    margin: 0 auto;
+    width: 85%;
+    margin-bottom: 1rem;
+  }
+  .search-box input {
+    width: 100%;
+
+    padding-right: calc(var(--main-width) / 10);
+  }
+  .search-box > img {
+    width: calc(var(--main-width) / 12);
+    height: calc(var(--main-width) / 12);
   }
 }
 

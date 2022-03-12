@@ -179,7 +179,7 @@ export default {
 
 <style scoped>
 #user-details {
-  margin: 4rem auto;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-content: center;
@@ -251,11 +251,10 @@ input {
 
 @media only screen and (min-width: 320px) and (max-width: 1159px) {
   #user-details {
-    margin: 3rem auto;
     flex-direction: column;
   }
   #user-shipping-address {
-    margin-top: 3rem;
+    margin-top: 2rem;
   }
   .body img {
     opacity: 1;
