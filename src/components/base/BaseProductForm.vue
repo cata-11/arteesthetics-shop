@@ -4,15 +4,29 @@
       <div class="product-edit-container">
         <div class="cover-image-edit">
           <div class="cover-img-container">
-            <img src="/shirt0.png" alt="" />
+            <img
+              v-if="coverImagePreview"
+              :src="coverImagePreview"
+              alt="cover-image.png"
+            />
           </div>
           <div class="file-input-container">
-            <input type="file" class="cover-img-input" />
+            <input
+              type="file"
+              accept="image/png"
+              class="cover-img-input"
+              @change="getCoverImage"
+              :class="{ 'empty-file-input': error.coverImage }"
+            />
           </div>
           <div class="props-edit-container">
             <label class="promotion"
               >Promotion
-              <input type="checkbox" id="promotion" />
+              <input
+                type="checkbox"
+                id="promotion"
+                v-model="product.props.promotion"
+              />
               <span class="checkmark"></span>
             </label>
           </div>
@@ -21,62 +35,125 @@
         <div class="main-info-edit">
           <div>
             <label for="title">Title</label>
-            <input type="text" id="title" v-model="product.title" />
-            <p>Wrong</p>
+            <input
+              type="text"
+              id="title"
+              placeholder="Title"
+              :class="{ 'empty-text-input': error.title }"
+              v-model.trim="product.title"
+              @input="validateTitle"
+            />
+            <p class="error" :class="{ 'error-show': error.title }">
+              invalid title
+            </p>
           </div>
 
           <div>
             <label for="description">Description</label>
             <textarea
-              name="description"
-              id="description"
-              v-model="product.description"
+              required
               wrap="soft"
+              id="description"
+              placeholder="Description"
+              :class="{ 'empty-text-input': error.description }"
+              v-model.trim="product.description"
+              @input="validateDescription"
             ></textarea>
-            <p>Wrong</p>
+            <p class="error" :class="{ 'error-show': error.description }">
+              invalid description
+            </p>
           </div>
 
           <div>
             <label for="price">Price</label>
-            <input type="text" id="price" v-model="product.price" />
-            <p>Wrong</p>
+            <input
+              type="number"
+              id="price"
+              min="1"
+              placeholder="Price"
+              :class="{ 'empty-text-input': error.price }"
+              v-model.number="product.price"
+              @input="validatePrice"
+            />
+            <p class="error" :class="{ 'error-show': error.price }">
+              invalid price
+            </p>
           </div>
         </div>
 
         <div class="size-stock-edit">
           <div>
-            <label for="size-xs">XS</label>
+            <label for="size-xs">{{ product.sizes[0].size }}</label>
             <input
               type="number"
               id="size-xs"
-              v-model="product.sizes[0].stock"
+              placeholder="XS"
+              v-model.number="product.sizes[0].stock"
+              @input="validateSize(0)"
+              :class="{ 'empty-text-input': error.size[0] }"
             />
-            <p>wrong</p>
+            <p class="error" :class="{ 'error-show': error.size[0] }">
+              invalid size
+            </p>
           </div>
 
           <div>
-            <label for="size-s">S</label>
-            <input type="number" id="size-s" v-model="product.sizes[1].stock" />
-            <p>wrong</p>
+            <label for="size-s">{{ product.sizes[1].size }}</label>
+            <input
+              type="number"
+              id="size-s"
+              placeholder="S"
+              v-model.number="product.sizes[1].stock"
+              @input="validateSize(1)"
+              :class="{ 'empty-text-input': error.size[1] }"
+            />
+            <p class="error" :class="{ 'error-show': error.size[1] }">
+              invalid size
+            </p>
           </div>
           <div>
-            <label for="size-m">M</label>
-            <input type="number" id="size-m" v-model="product.sizes[2].stock" />
-            <p>wrong</p>
+            <label for="size-m">{{ product.sizes[2].size }}</label>
+            <input
+              type="number"
+              id="size-m"
+              placeholder="M"
+              v-model.number="product.sizes[2].stock"
+              @input="validateSize(2)"
+              :class="{ 'empty-text-input': error.size[2] }"
+            />
+            <p class="error" :class="{ 'error-show': error.size[2] }">
+              invalid size
+            </p>
           </div>
           <div>
-            <label for="size-l">L</label>
-            <input type="number" id="size-l" v-model="product.sizes[3].stock" />
-            <p>wrong</p>
+            <label for="size-l">{{ product.sizes[3].size }}</label>
+            <input
+              type="number"
+              id="size-l"
+              placeholder="L"
+              v-model.number="product.sizes[3].stock"
+              @input="validateSize(3)"
+              :class="{ 'empty-text-input': error.size[3] }"
+            />
+            <p class="error" :class="{ 'error-show': error.size[3] }">
+              invalid size
+            </p>
           </div>
         </div>
 
         <div class="images-gallery-edit">
-          <input type="file" multiple class="multiple-images-input" />
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            class="multiple-images-input"
+            @change="getImages"
+            :class="{ 'empty-file-input': error.images }"
+          />
           <div class="images-gallery">
-            <!-- <div>
-              <img src="" alt="" />
-            </div> -->
+            <div v-for="(img, idx) in imagesPreview" :key="idx">
+              <img :src="img" :alt="idx + 1" />
+            </div>
           </div>
         </div>
       </div>
@@ -84,19 +161,26 @@
         <button
           v-if="mode === 'update'"
           class="save-button"
-          @click.prevent="productUpdated"
+          @click.prevent="updateProduct"
         >
           Save changes
         </button>
         <button
           v-if="mode === 'add'"
           class="save-button"
-          @click.prevent="productAdded"
+          @click.prevent="addProduct"
         >
           Add
         </button>
       </div>
     </form>
+    <Teleport to="body">
+      <base-dialog
+        v-if="showDialog"
+        :msg="dialogMsg"
+        @closeDialog="closeDialog"
+      ></base-dialog>
+    </Teleport>
   </div>
 </template>
 
@@ -121,59 +205,255 @@ export default {
   },
   data() {
     return {
-      product: null
+      product: null,
+      coverImagePreview: null,
+      imagesPreview: [],
+
+      error: {
+        coverImage: false,
+        title: false,
+        description: false,
+        price: false,
+        size: [false, false, false, false],
+        images: false
+      },
+
+      showDialog: false,
+      dialogMsg: ''
     };
   },
   methods: {
-    productUpdated() {
-      this.$emit('product-updated', this.idx);
+    // validate
+    validateCoverImage(e) {
+      this.error.coverImage = false;
+      this.coverImagePreview = null;
+      const path = e.target.value;
+
+      if (e.srcElement.files.length === 0) {
+        this.error.coverImage = true;
+        return false;
+      }
+      if (!/.png/.exec(path)) {
+        this.error.coverImage = true;
+        return false;
+      }
+      return true;
     },
-    productAdded() {
-      this.$emit('product-added');
-    }
-  },
-  beforeMount() {
-    if (this.mode === 'update') {
-      console.log(this.mode);
-      this.product = { ...this.productData };
-    } else if (this.mode === 'add') {
-      console.log(this.mode);
+    validateTitle() {
+      this.error.title = false;
+      if (this.product.title === null || this.product.title === '') {
+        this.error.title = true;
+        return false;
+      }
+      return true;
+    },
+    validateDescription() {
+      this.error.description = false;
+      if (
+        this.product.description === null ||
+        this.product.description === ''
+      ) {
+        this.error.description = true;
+        return false;
+      }
+      return true;
+    },
+    validatePrice() {
+      this.error.price = false;
+
+      const price = this.product.price;
+      if (price != null) {
+        const strPrice = this.product.price.toString();
+        if (/^0/.test(strPrice)) {
+          this.product.price = strPrice.replace(/^0/, '');
+        }
+      }
+
+      if (price === null || price === '' || price < 1 || isNaN(price)) {
+        this.error.price = true;
+        return false;
+      }
+      return true;
+    },
+    validateSize(idx) {
+      this.error.size[idx] = false;
+      const stock = this.product.sizes[idx].stock;
+
+      if (stock === null || stock === '' || stock < 0 || isNaN(stock)) {
+        this.error.size[idx] = true;
+        return false;
+      }
+      return true;
+    },
+    validateImages(e) {
+      this.error.images = false;
+      this.imagesPreview = [];
+
+      const images = [...e.srcElement.files];
+
+      if (images.length === 0) {
+        this.error.images = true;
+        return false;
+      }
+
+      for (const img of images) {
+        let name = img.name;
+        if (!/.png/.exec(name)) {
+          this.error.images = true;
+          return false;
+        }
+      }
+      return true;
+    },
+    getCoverImage(e) {
+      if (!this.validateCoverImage(e)) {
+        this.product.coverImage = null;
+        return;
+      }
+      this.product.coverImage = e.target.files[0];
+      this.coverImagePreview = URL.createObjectURL(e.target.files[0]);
+    },
+    getImages(e) {
+      if (!this.validateImages(e)) {
+        this.product.images = [];
+        return;
+      }
+      this.product.images = [];
+      for (let i = 0; i < e.target.files.length; ++i) {
+        this.product.images.push(e.target.files[i]);
+        this.imagesPreview.push(URL.createObjectURL(e.target.files[i]));
+      }
+    },
+    handleImagesValidation() {
+      //without events
+      this.error.coverImage = false;
+      this.error.images = false;
+
+      if (this.product.coverImage === null) {
+        this.error.coverImage = true;
+      }
+      if (this.product.images.length === 0) {
+        this.error.images = true;
+      }
+
+      if (this.error.coverImage || this.error.images) {
+        return false;
+      }
+      return true;
+    },
+    isFormValid() {
+      let images_err = !this.handleImagesValidation();
+      let title_err = !this.validateTitle();
+      let desc_err = !this.validateDescription();
+      let price_err = !this.validatePrice();
+      let sizes_err = false;
+
+      for (const i in this.product.sizes)
+        if (!this.validateSize(i)) sizes_err = true;
+
+      if (images_err || title_err || desc_err || price_err || sizes_err) {
+        this.showDialog = true;
+        this.dialogMsg =
+          'Some data is incorrect or incomplete.\n Please enter valid data.';
+        return false;
+      }
+
+      return true;
+    },
+
+    // add
+    calculateTotalStock() {
+      let total = 0;
+      this.product.sizes.forEach((size) => {
+        total += size.stock;
+      });
+      return total;
+    },
+    addProduct() {
+      if (!this.isFormValid()) {
+        return;
+      }
+      this.product.props.totalStock = this.calculateTotalStock();
+
+      this.$emit('product-added', this.product);
+    },
+    prepareToAdd() {
       this.product = {
-        title: '',
-        coverImage: '',
-        description: '',
-        price: '',
+        title: null,
+        coverImage: null,
+        description: null,
+        price: null,
         sizes: [
           {
             size: 'XS',
-            stock: ''
+            stock: null
           },
           {
             size: 'S',
-            stock: ''
-          },
-          {
-            size: 'L',
-            stock: ''
+            stock: null
           },
           {
             size: 'M',
-            stock: ''
+            stock: null
+          },
+          {
+            size: 'L',
+            stock: null
           }
         ],
         images: [],
         props: {
-          stockTotal: 0,
+          totalStock: 0,
           promotion: false,
           bestseller: false
         }
       };
+    },
+
+    //update
+    prepareToUpdate() {
+      this.product = { ...this.productData };
+      this.coverImagePreview = this.product.coverImage;
+      this.imagesPreview = [...this.product.images];
+    },
+
+    updateProduct() {
+      if (!this.isFormValid()) {
+        return;
+      }
+      this.$emit('product-updated', this.product);
+    },
+
+    // others
+    closeDialog() {
+      this.showDialog = false;
+    }
+  },
+  beforeMount() {
+    if (this.mode === 'update') {
+      this.prepareToUpdate();
+    } else if (this.mode === 'add') {
+      this.prepareToAdd();
     }
   }
 };
 </script>
 
 <style scoped>
+.empty-file-input {
+  background-color: var(--red) !important;
+}
+.empty-text-input {
+  border: 2px solid var(--red) !important;
+  color: var(--red);
+}
+.error {
+  opacity: 0;
+}
+.error-show {
+  opacity: 1 !important;
+  color: var(--red);
+}
 .add-product-container {
   margin-top: 1rem;
 }
@@ -208,7 +488,7 @@ p {
 .main-info-edit {
   /* border: 1px solid red; */
   width: 30%;
-  height: 28rem;
+  height: 29rem;
   box-sizing: border-box;
   /* border-left: 5px solid var(--violet); */
   /* padding-left: 1rem; */
@@ -219,7 +499,7 @@ p {
 .size-stock-edit {
   /* border: 1px solid red; */
   width: 11%;
-  height: 28rem;
+  height: 29rem;
   box-sizing: border-box;
   border-left: 1px solid var(--violet);
   padding-left: 1rem;
@@ -405,12 +685,12 @@ p {
   gap: 1rem;
   padding: 1rem;
   overflow-y: overlay;
-  height: 22rem;
-  border: 4px solid var(--violet);
+  height: 22.8rem;
+  border: 3px solid var(--violet);
   box-sizing: border-box;
 }
 .images-gallery > div {
-  width: 5.17rem;
+  width: 5.4rem;
   height: 5rem;
   border: 3px solid var(--a-white);
   padding: 0.5rem;
@@ -450,12 +730,13 @@ input {
 textarea {
   word-wrap: break-word;
   width: 100%;
-  height: 9.65rem;
+  height: 9.8rem;
   border: none;
   outline: none;
   box-sizing: border-box;
   font-size: 1.5rem;
   padding: 0.25rem;
+  margin: 0.25rem 0;
   resize: none;
   background-color: var(--a-white);
 }

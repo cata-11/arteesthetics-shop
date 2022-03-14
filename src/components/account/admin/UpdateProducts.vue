@@ -18,8 +18,6 @@
               >edit</base-button
             >
             <base-button class="remove-btn">remove</base-button>
-            <!-- <button class="edit-btn" @click="enterEditMode(idx)">edit</button> -->
-            <!-- <button class="remove-btn">remove</button> -->
           </div>
         </div>
       </div>
@@ -29,7 +27,7 @@
           :productData="product"
           :idx="idx"
           mode="update"
-          @productUpdated="updateDb"
+          @productUpdated="updateDb($event, idx)"
         ></base-product-form>
       </Transition>
     </li>
@@ -37,153 +35,26 @@
 </template>
 
 <script>
-import BaseProductForm from '../base/BaseProductForm.vue';
+import firebase from 'firebase/compat/app';
+import BaseProductForm from '../../base/BaseProductForm.vue';
 export default {
   data() {
     return {
       editModeList: [],
-      products: [
-        {
-          id: 0,
-          title: 'Nobody knows how long this text is',
-          coverImage: '/shirt0.png',
-          description:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-          price: 25,
-          sizes: [
-            {
-              size: 'XS',
-              stock: 10
-            },
-            {
-              size: 'S',
-              stock: 10
-            },
-            {
-              size: 'L',
-              stock: 10
-            },
-            {
-              size: 'M',
-              stock: 10
-            }
-          ],
-          images: [
-            {
-              id: 1,
-              src: '/1.png',
-              isActive: true
-            },
-            {
-              id: 2,
-              src: '/2.png',
-              isActive: false
-            },
-            {
-              id: 3,
-              src: '/3.png',
-              isActive: false
-            },
-            {
-              id: 4,
-              src: '/4.png',
-              isActive: false
-            },
-            {
-              id: 5,
-              src: '/5.png',
-              isActive: false
-            },
-            {
-              id: 6,
-              src: '/6.png',
-              isActive: false
-            },
-            {
-              id: 7,
-              src: '/7.png',
-              isActive: false
-            }
-          ],
-          props: {
-            stockTotal: 40,
-            promotion: true,
-            bestseller: false
-          }
-        },
-        {
-          id: 2,
-          title: 'Aesthetic Skull',
-          coverImage: '/shirt0.png',
-          description: `Lorem ipsum dolor 
-          sit amet consectetur adipisicing 
-          elit.`,
-          price: 30,
-          sizes: [
-            {
-              size: 'XS',
-              stock: 0
-            },
-            {
-              size: 'S',
-              stock: 0
-            },
-            {
-              size: 'L',
-              stock: 0
-            },
-            {
-              size: 'M',
-              stock: 0
-            }
-          ],
-          images: [
-            {
-              id: 3,
-              src: '/1.png',
-              isActive: true
-            },
-            {
-              id: 2,
-              src: '/2.png',
-              isActive: false
-            },
-            {
-              id: 3,
-              src: '/3.png',
-              isActive: false
-            },
-            {
-              id: 4,
-              src: '/4.png',
-              isActive: false
-            },
-            {
-              id: 5,
-              src: '/5.png',
-              isActive: false
-            },
-            {
-              id: 6,
-              src: '/6.png',
-              isActive: false
-            },
-            {
-              id: 7,
-              src: '/7.png',
-              isActive: false
-            }
-          ],
-          props: {
-            stockTotal: 0,
-            promotion: true,
-            bestseller: true
-          }
-        }
-      ]
+      products: [],
+      changedProduct: null,
+      initialProduct: null
     };
   },
+  created() {
+    this.loadProducts();
+  },
   methods: {
+    async loadProducts() {
+      await this.$store.dispatch('products/getProducts').then(() => {
+        this.products = this.$store.getters['products/products'];
+      });
+    },
     setEditModeList() {
       this.products.forEach(() => {
         this.editModeList.push(false);
@@ -195,9 +66,159 @@ export default {
     saveChanges(idx) {
       this.editModeList[idx] = false;
     },
-    updateDb(idx) {
+    copyProduct(payload) {
+      const product = { ...payload };
+      product.images = [...payload.images];
+      product.props = { ...payload.props };
+      product.sizes = [];
+
+      product.sizes = payload.sizes.map((s) => s);
+
+      return product;
+    },
+    findProduct(id) {
+      return this.products.find((product) => product.id === id);
+    },
+    async changeTitleValue(productId) {
+      await firebase
+        .database()
+        .ref('products/' + productId)
+        .child('title')
+        .set(this.changedProduct['title']);
+    },
+    async changeDescriptionValue(productId) {
+      await firebase
+        .database()
+        .ref('products/' + productId)
+        .child('description')
+        .set(this.changedProduct['description']);
+    },
+    async changePriceValue(productId) {
+      await firebase
+        .database()
+        .ref('products/' + productId)
+        .child('price')
+        .set(this.changedProduct['price']);
+    },
+    async changeSizesValue(productId) {
+      await firebase
+        .database()
+        .ref('products/' + productId)
+        .child('sizes')
+        .set(this.changedProduct['sizes']);
+    },
+    async changeCoverImage(productId) {
+      await firebase
+        .storage()
+        .ref('images/' + productId + '/coverImage')
+        .put(this.changedProduct['coverImage']);
+    },
+    async deleteImages(productId) {
+      try {
+        await firebase
+          .storage()
+          .ref('images/' + productId + '/images/')
+          .listAll()
+          .then((images) => {
+            images.items.forEach((img) => {
+              img.delete();
+            });
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async changeImages(productId) {
+      const urls = [];
+      for (let i = 0; i < this.changedProduct['images'].length; ++i) {
+        const res = await this.changeImage(
+          productId,
+          this.changedProduct['images'][i],
+          i + 1
+        );
+        const url = await this.getImageUrl(res);
+        urls.push(url);
+      }
+
+      return urls;
+    },
+    async getImageUrl(ref) {
+      const res = await ref.getDownloadURL();
+      return res;
+    },
+    async changeImagesUrl(productId, urls) {
+      firebase.database().ref('products').child(productId).update({
+        images: urls
+      });
+    },
+    async changeImage(productId, img, name) {
+      const res = await firebase
+        .storage()
+        .ref('images/' + productId + `/images/${name}`)
+        .put(img);
+      return res.ref;
+    },
+    async changeValues(productId) {
+      if (this.initialProduct['title'] !== this.changedProduct['title']) {
+        console.log('change title');
+
+        await this.changeTitleValue(productId);
+      }
+      if (
+        this.initialProduct['description'] !==
+        this.changedProduct['description']
+      ) {
+        console.log('change desc');
+
+        await this.changeDescriptionValue(productId);
+      }
+      if (this.initialProduct['price'] !== this.changedProduct['price']) {
+        console.log('change price');
+
+        await this.changePriceValue(productId);
+      }
+
+      if (
+        this.initialProduct['coverImage'] !== this.changedProduct['coverImage']
+      ) {
+        console.log('change cover image');
+
+        await this.changeCoverImage(productId);
+      }
+      if (
+        JSON.stringify(this.initialProduct['images']) !==
+        JSON.stringify(this.changedProduct['images'])
+      ) {
+        console.log('change images');
+        await this.deleteImages(productId);
+        const urls = await this.changeImages(productId);
+        await this.changeImagesUrl(productId, urls);
+      }
+      for (let i in this.initialProduct['sizes']) {
+        if (
+          this.initialProduct['sizes'][i].stock !==
+          this.changedProduct['sizes'][i].stock
+        ) {
+          console.log('change sizes');
+
+          await this.changeSizesValue(productId);
+        }
+      }
+      console.log(this.initialProduct['sizes']);
+      console.log(this.changedProduct['sizes']);
+    },
+    updateDb(payload, idx) {
       this.saveChanges(idx);
-      console.log(idx);
+
+      this.changedProduct = this.copyProduct(payload);
+      this.initialProduct = this.findProduct(this.changedProduct.id);
+
+      const productId = this.initialProduct.id;
+      try {
+        this.changeValues(productId);
+      } catch (err) {
+        console.log(err);
+      }
     }
   },
   mounted() {
@@ -301,6 +322,13 @@ h3 {
   .remove-btn {
     border: calc(var(--main-width) / 128) solid var(--violet);
     padding: calc(var(--main-width) / 140) calc(var(--main-width) / 70);
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+  .edit-btn,
+  .remove-btn {
+    font-size: calc(var(--basic-font-size) - 0.25rem);
   }
 }
 

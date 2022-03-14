@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section id="account">
     <div class="header">
       <h1>{{ data.type }} account</h1>
       <button>Log out</button>
@@ -40,10 +40,10 @@
 </template>
 
 <script>
-import UserDetails from '../user/UserDetails.vue';
-import UserWishlist from '../user/UserWishlist.vue';
-import AddProduct from '../admin/AddProduct.vue';
-import UpdateProducts from '../admin/UpdateProducts.vue';
+import UserDetails from '../account/user/UserDetails.vue';
+import UserWishlist from '../account/user/UserWishlist.vue';
+import AddProduct from '../account/admin/AddProduct.vue';
+import UpdateProducts from '../account/admin/UpdateProducts.vue';
 export default {
   props: {
     data: {
@@ -83,7 +83,7 @@ export default {
 </script>
 
 <style scoped>
-section {
+#account {
   margin-bottom: 4rem;
 }
 .header {
@@ -217,7 +217,7 @@ li.active {
   .header > button {
     display: none;
   }
-  section {
+  #account {
     width: 95%;
     margin-left: auto;
     margin-right: auto;
@@ -227,7 +227,7 @@ li.active {
     border: none;
   }
   .title {
-    margin: 2rem 0;
+    margin: calc(var(--basic-font-size) + 1rem) 0;
   }
 }
 </style>

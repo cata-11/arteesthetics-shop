@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import BaseAccount from '../components/account/base/BaseAccount.vue';
+import BaseAccount from '../components/base/BaseAccount.vue';
 export default {
   data() {
     return {

@@ -217,7 +217,7 @@ label {
 }
 input {
   padding: calc(var(--basic-font-size) / 4);
-  padding-right: calc(var(--main-width) / 13);
+  padding-right: calc(var(--main-width) / 20);
   background-color: var(--a-white);
   cursor: default;
 }

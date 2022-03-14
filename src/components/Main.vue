@@ -52,9 +52,11 @@ main {
   box-sizing: border-box;
   width: var(--main-width);
 }
-input {
+input,
+textarea {
   border: none;
   outline: none;
+  font-family: 'Roboto Slab', serif;
 }
 button {
   border: none;
