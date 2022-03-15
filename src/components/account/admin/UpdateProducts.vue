@@ -38,6 +38,7 @@
 import firebase from 'firebase/compat/app';
 import BaseProductForm from '../../base/BaseProductForm.vue';
 export default {
+  emits: ['forceReRender'],
   data() {
     return {
       editModeList: [],
@@ -46,15 +47,18 @@ export default {
       initialProduct: null
     };
   },
-  created() {
-    this.loadProducts();
-  },
   methods: {
     async loadProducts() {
-      await this.$store.dispatch('products/getProducts').then(() => {
-        this.products = this.$store.getters['products/products'];
-      });
+      try {
+        await this.$store.dispatch('products/getProducts').then(() => {
+          this.products = this.$store.getters['products/products'];
+        });
+      } catch (err) {
+        console.log(err);
+      }
     },
+
+    // edit mode
     setEditModeList() {
       this.products.forEach(() => {
         this.editModeList.push(false);
@@ -62,78 +66,85 @@ export default {
     },
     enterEditMode(idx) {
       this.editModeList[idx] = true;
+      this.initialProduct = this.getProduct(this.products[idx].id);
     },
-    saveChanges(idx) {
+    exitEditMode(idx) {
       this.editModeList[idx] = false;
     },
-    copyProduct(payload) {
-      const product = { ...payload };
-      product.images = [...payload.images];
-      product.props = { ...payload.props };
-      product.sizes = [];
 
-      product.sizes = payload.sizes.map((s) => s);
+    // product clone
+    getProduct(id) {
+      const initProduct = this.products.find((product) => product.id === id);
+      let product = {};
+
+      product.id = initProduct.id;
+      product.title = initProduct.title;
+      product.description = initProduct.description;
+      product.price = initProduct.price;
+      product.coverImage = initProduct.coverImage;
+      product.images = [...initProduct.images];
+      product.props = { ...initProduct.props };
+      product.sizes = initProduct.sizes.map((s) => ({ ...s }));
 
       return product;
     },
-    findProduct(id) {
-      return this.products.find((product) => product.id === id);
+    copyProduct(payload) {
+      let product = {};
+
+      product.id = payload.id;
+      product.title = payload.title;
+      product.description = payload.description;
+      product.price = payload.price;
+      product.coverImage = payload.coverImage;
+      product.images = [...payload.images];
+      product.props = { ...payload.props };
+      product.sizes = payload.sizes.map((s) => ({ ...s }));
+
+      return product;
     },
-    async changeTitleValue(productId) {
+
+    // update basic values
+    async updateValue(id, key) {
       await firebase
         .database()
-        .ref('products/' + productId)
-        .child('title')
-        .set(this.changedProduct['title']);
+        .ref('products/' + id)
+        .child(key)
+        .set(this.changedProduct[key]);
     },
-    async changeDescriptionValue(productId) {
-      await firebase
-        .database()
-        .ref('products/' + productId)
-        .child('description')
-        .set(this.changedProduct['description']);
-    },
-    async changePriceValue(productId) {
-      await firebase
-        .database()
-        .ref('products/' + productId)
-        .child('price')
-        .set(this.changedProduct['price']);
-    },
-    async changeSizesValue(productId) {
-      await firebase
-        .database()
-        .ref('products/' + productId)
-        .child('sizes')
-        .set(this.changedProduct['sizes']);
-    },
-    async changeCoverImage(productId) {
+
+    // update cover image
+    async updateCoverImage(id) {
       await firebase
         .storage()
-        .ref('images/' + productId + '/coverImage')
+        .ref('images/' + id + '/coverImage')
         .put(this.changedProduct['coverImage']);
     },
-    async deleteImages(productId) {
-      try {
-        await firebase
-          .storage()
-          .ref('images/' + productId + '/images/')
-          .listAll()
-          .then((images) => {
-            images.items.forEach((img) => {
-              img.delete();
-            });
-          });
-      } catch (err) {
-        console.log(err);
-      }
+
+    // update other images
+    async updateImages(id) {
+      await this.deleteImages(id);
+      const urls = await this.changeImages(id);
+      await this.changeImagesUrl(id, urls);
     },
-    async changeImages(productId) {
+
+    // update other images related
+    async deleteImages(id) {
+      await firebase
+        .storage()
+        .ref('images/' + id + '/images/')
+        .listAll()
+        .then((images) => {
+          images.items.forEach((img) => {
+            img.delete();
+          });
+        });
+    },
+    async changeImages(id) {
       const urls = [];
-      for (let i = 0; i < this.changedProduct['images'].length; ++i) {
+      for (let i = 0; i < this.changedProduct.images.length; ++i) {
         const res = await this.changeImage(
-          productId,
-          this.changedProduct['images'][i],
+          id,
+          this.changedProduct.images[i],
           i + 1
         );
         const url = await this.getImageUrl(res);
@@ -146,80 +157,62 @@ export default {
       const res = await ref.getDownloadURL();
       return res;
     },
-    async changeImagesUrl(productId, urls) {
-      firebase.database().ref('products').child(productId).update({
+    async changeImagesUrl(id, urls) {
+      firebase.database().ref('products').child(id).update({
         images: urls
       });
     },
-    async changeImage(productId, img, name) {
+    async changeImage(id, img, name) {
       const res = await firebase
         .storage()
-        .ref('images/' + productId + `/images/${name}`)
+        .ref('images/' + id + `/images/${name}`)
         .put(img);
       return res.ref;
     },
-    async changeValues(productId) {
-      if (this.initialProduct['title'] !== this.changedProduct['title']) {
-        console.log('change title');
 
-        await this.changeTitleValue(productId);
+    // update control
+    async updateValues(productId) {
+      if (this.initialProduct.title !== this.changedProduct.title) {
+        await this.updateValue(productId, 'title');
+      }
+      if (this.initialProduct.description !== this.changedProduct.description) {
+        await this.updateValue(productId, 'description');
+      }
+      if (this.initialProduct.price !== this.changedProduct.price) {
+        await this.updateValue(productId, 'price');
       }
       if (
-        this.initialProduct['description'] !==
-        this.changedProduct['description']
+        JSON.stringify(this.initialProduct.sizes) !=
+        JSON.stringify(this.changedProduct.sizes)
       ) {
-        console.log('change desc');
-
-        await this.changeDescriptionValue(productId);
+        await this.updateValue(productId, 'sizes');
       }
-      if (this.initialProduct['price'] !== this.changedProduct['price']) {
-        console.log('change price');
-
-        await this.changePriceValue(productId);
-      }
-
-      if (
-        this.initialProduct['coverImage'] !== this.changedProduct['coverImage']
-      ) {
-        console.log('change cover image');
-
-        await this.changeCoverImage(productId);
+      if (this.initialProduct.coverImage !== this.changedProduct.coverImage) {
+        await this.updateCoverImage(productId);
       }
       if (
-        JSON.stringify(this.initialProduct['images']) !==
-        JSON.stringify(this.changedProduct['images'])
+        JSON.stringify(this.initialProduct.images) !==
+        JSON.stringify(this.changedProduct.images)
       ) {
-        console.log('change images');
-        await this.deleteImages(productId);
-        const urls = await this.changeImages(productId);
-        await this.changeImagesUrl(productId, urls);
+        await this.updateImages(productId);
       }
-      for (let i in this.initialProduct['sizes']) {
-        if (
-          this.initialProduct['sizes'][i].stock !==
-          this.changedProduct['sizes'][i].stock
-        ) {
-          console.log('change sizes');
-
-          await this.changeSizesValue(productId);
-        }
-      }
-      console.log(this.initialProduct['sizes']);
-      console.log(this.changedProduct['sizes']);
     },
-    updateDb(payload, idx) {
-      this.saveChanges(idx);
 
+    // root
+    async updateDb(payload, idx) {
+      this.exitEditMode(idx);
       this.changedProduct = this.copyProduct(payload);
-      this.initialProduct = this.findProduct(this.changedProduct.id);
 
-      const productId = this.initialProduct.id;
       try {
-        this.changeValues(productId);
+        await this.updateValues(this.changedProduct.id);
+        this.$emit('forceReRender');
       } catch (err) {
         console.log(err);
       }
     }
+  },
+  created() {
+    this.loadProducts();
   },
   mounted() {
     this.setEditModeList();

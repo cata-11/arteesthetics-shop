@@ -14,8 +14,12 @@ export default {
   },
   methods: {
     async addProduct(product) {
-      const res = await firebase.database().ref('products').push(product);
-      return res.key;
+      try {
+        const res = await firebase.database().ref('products').push(product);
+        return res.key;
+      } catch (err) {
+        console.log(err);
+      }
     },
 
     //add cover image
@@ -74,9 +78,8 @@ export default {
         await this.addCoverImageUrl(key, coverImgUrl);
         await this.addImages(key, product.images);
       } catch (err) {
-        console.log('Something went wrong !\n', err);
+        console.log(err);
       }
-      console.log(product);
     }
   }
 };

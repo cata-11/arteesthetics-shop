@@ -87,6 +87,7 @@
             <input
               type="number"
               id="size-xs"
+              min="0"
               placeholder="XS"
               v-model.number="product.sizes[0].stock"
               @input="validateSize(0)"
@@ -102,6 +103,7 @@
             <input
               type="number"
               id="size-s"
+              min="0"
               placeholder="S"
               v-model.number="product.sizes[1].stock"
               @input="validateSize(1)"
@@ -116,6 +118,7 @@
             <input
               type="number"
               id="size-m"
+              min="0"
               placeholder="M"
               v-model.number="product.sizes[2].stock"
               @input="validateSize(2)"
@@ -130,6 +133,7 @@
             <input
               type="number"
               id="size-l"
+              min="0"
               placeholder="L"
               v-model.number="product.sizes[3].stock"
               @input="validateSize(3)"
