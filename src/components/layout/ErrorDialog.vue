@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  props: ['msg'],
+  props: ['msg', 'type'],
   emits: ['close-dialog'],
   methods: {
     closeDialog(e) {

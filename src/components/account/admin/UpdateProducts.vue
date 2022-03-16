@@ -1,5 +1,5 @@
 <template>
-  <ul class="products-list">
+  <TransitionGroup tag="ul" class="products-list" name="list">
     <li
       class="item-container"
       v-for="(product, idx) in products"
@@ -17,7 +17,9 @@
             <base-button class="edit-btn" @click="enterEditMode(idx)"
               >edit</base-button
             >
-            <base-button class="remove-btn">remove</base-button>
+            <base-button class="remove-btn" @click="removeFromDb(product.id)"
+              >remove</base-button
+            >
           </div>
         </div>
       </div>
@@ -31,31 +33,44 @@
         ></base-product-form>
       </Transition>
     </li>
-  </ul>
+    <error-dialog
+      v-if="!!errorMsg"
+      :msg="errorMsg"
+      @closeDialog="errorMsg = ''"
+    ></error-dialog>
+  </TransitionGroup>
 </template>
 
 <script>
 import firebase from 'firebase/compat/app';
-import BaseProductForm from '../../base/BaseProductForm.vue';
+import BaseProductForm from './ProductForm.vue';
 export default {
-  emits: ['forceReRender'],
   data() {
     return {
       editModeList: [],
       products: [],
       changedProduct: null,
-      initialProduct: null
+      initialProduct: null,
+      isLoading: false,
+      errorMsg: ''
     };
   },
+
   methods: {
+    // load from database
     async loadProducts() {
-      try {
-        await this.$store.dispatch('products/getProducts').then(() => {
+      this.isLoading = true;
+
+      await this.$store
+        .dispatch('products/getProducts')
+        .then(() => {
           this.products = this.$store.getters['products/products'];
+        })
+        .catch(() => {
+          this.errorMsg = 'Seems like database is offline. Try again later...';
         });
-      } catch (err) {
-        console.log(err);
-      }
+
+      this.isLoading = false;
     },
 
     // edit mode
@@ -114,10 +129,14 @@ export default {
 
     // update cover image
     async updateCoverImage(id) {
-      await firebase
+      const res = await firebase
         .storage()
         .ref('images/' + id + '/coverImage')
         .put(this.changedProduct['coverImage']);
+      const url = await this.getImageUrl(res.ref);
+      this.changedProduct.coverImage = url;
+
+      await this.updateValue(id, 'coverImage');
     },
 
     // update other images
@@ -129,15 +148,14 @@ export default {
 
     // update other images related
     async deleteImages(id) {
-      await firebase
+      const images = await firebase
         .storage()
         .ref('images/' + id + '/images/')
-        .listAll()
-        .then((images) => {
-          images.items.forEach((img) => {
-            img.delete();
-          });
-        });
+        .listAll();
+
+      for (const img of images.items) {
+        await img.delete();
+      }
     },
     async changeImages(id) {
       const urls = [];
@@ -171,43 +189,110 @@ export default {
     },
 
     // update control
-    async updateValues(productId) {
+    async updateValues(id) {
+      let isUpdated = false;
+
       if (this.initialProduct.title !== this.changedProduct.title) {
-        await this.updateValue(productId, 'title');
+        isUpdated = true;
+        await this.updateValue(id, 'title');
       }
       if (this.initialProduct.description !== this.changedProduct.description) {
-        await this.updateValue(productId, 'description');
+        isUpdated = true;
+        await this.updateValue(id, 'description');
       }
       if (this.initialProduct.price !== this.changedProduct.price) {
-        await this.updateValue(productId, 'price');
+        isUpdated = true;
+        await this.updateValue(id, 'price');
+      }
+      if (
+        JSON.stringify(this.initialProduct.props) !=
+        JSON.stringify(this.changedProduct.props)
+      ) {
+        isUpdated = true;
+        await this.updateValue(id, 'props');
       }
       if (
         JSON.stringify(this.initialProduct.sizes) !=
         JSON.stringify(this.changedProduct.sizes)
       ) {
-        await this.updateValue(productId, 'sizes');
+        isUpdated = true;
+        await this.updateValue(id, 'sizes');
       }
       if (this.initialProduct.coverImage !== this.changedProduct.coverImage) {
-        await this.updateCoverImage(productId);
+        isUpdated = true;
+        await this.updateCoverImage(id);
       }
       if (
         JSON.stringify(this.initialProduct.images) !==
         JSON.stringify(this.changedProduct.images)
       ) {
-        await this.updateImages(productId);
+        isUpdated = true;
+        await this.updateImages(id);
       }
+      return isUpdated;
     },
 
-    // root
+    // reload updated product
+    async reloadProduct(idx, id) {
+      const data = await firebase
+        .database()
+        .ref('products/' + id)
+        .get();
+
+      const prodData = data.val();
+
+      const product = {
+        id: id,
+        title: prodData.title,
+        coverImage: prodData.coverImage,
+        description: prodData.description,
+        price: prodData.price,
+        sizes: prodData.sizes,
+        images: prodData.images,
+        props: prodData.props
+      };
+      this.products[idx] = product;
+    },
+
+    // root update
     async updateDb(payload, idx) {
-      this.exitEditMode(idx);
+      this.isLoading = true;
+
       this.changedProduct = this.copyProduct(payload);
 
       try {
-        await this.updateValues(this.changedProduct.id);
-        this.$emit('forceReRender');
+        const isUpdated = await this.updateValues(this.changedProduct.id);
+        if (isUpdated) {
+          await this.reloadProduct(idx, this.changedProduct.id);
+        }
+        this.exitEditMode(idx);
       } catch (err) {
-        console.log(err);
+        this.errorMsg = 'Seems like database is offline. Try again later...';
+      }
+
+      this.isLoading = false;
+    },
+
+    // remove from database
+    async removeFromDb(id) {
+      if (!confirm('You sure ?')) {
+        return;
+      }
+      this.products = this.products.filter((p) => p.id !== id);
+      try {
+        await firebase
+          .database()
+          .ref('products/' + id)
+          .remove();
+
+        await firebase
+          .storage()
+          .ref('images/' + id + '/coverImage')
+          .delete();
+
+        await this.deleteImages(id);
+      } catch (err) {
+        this.errorMsg = 'Something went wrong. Try again later...';
       }
     }
   },
@@ -336,5 +421,17 @@ h3 {
   opacity: 0;
   max-height: 0;
   overflow: hidden;
+}
+
+.list-leave-active {
+  transition: all 0.2s ease-in-out;
+}
+.list-leave-from {
+  opacity: 1;
+  transform: translateX(0%);
+}
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(-25%);
 }
 </style>

@@ -180,9 +180,9 @@
     </form>
     <Teleport to="body">
       <base-dialog
-        v-if="showDialog"
-        :msg="dialogMsg"
-        @closeDialog="closeDialog"
+        v-if="!!errorMsg"
+        :msg="errorMsg"
+        @closeDialog="errorMsg = ''"
       ></base-dialog>
     </Teleport>
   </div>
@@ -221,11 +221,10 @@ export default {
         size: [false, false, false, false],
         images: false
       },
-
-      showDialog: false,
-      dialogMsg: ''
+      errorMsg: ''
     };
   },
+
   methods: {
     // validate
     validateCoverImage(e) {
@@ -356,8 +355,7 @@ export default {
         if (!this.validateSize(i)) sizes_err = true;
 
       if (images_err || title_err || desc_err || price_err || sizes_err) {
-        this.showDialog = true;
-        this.dialogMsg =
+        this.errorMsg =
           'Some data is incorrect or incomplete.\n Please enter valid data.';
         return false;
       }
@@ -407,7 +405,6 @@ export default {
         ],
         images: [],
         props: {
-          totalStock: 0,
           promotion: false,
           bestseller: false
         }
@@ -426,11 +423,6 @@ export default {
         return;
       }
       this.$emit('product-updated', this.product);
-    },
-
-    // others
-    closeDialog() {
-      this.showDialog = false;
     }
   },
   beforeMount() {

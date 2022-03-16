@@ -34,7 +34,7 @@
       </div>
     </Transition>
     <Transition name="translate" mode="out-in">
-      <component :is="activeComponent" @forceReRender="tick++" :key="tick" />
+      <component :is="activeComponent" />
     </Transition>
   </section>
 </template>
@@ -53,8 +53,7 @@ export default {
   },
   data() {
     return {
-      activeComponent: this.data.components[0].name,
-      tick: 0
+      activeComponent: this.data.components[0].name
     };
   },
   methods: {

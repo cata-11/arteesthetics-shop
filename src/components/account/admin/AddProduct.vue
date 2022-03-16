@@ -1,25 +1,31 @@
 <template>
-  <base-product-form mode="add" @productAdded="addToDb"></base-product-form>
+  <section>
+    <base-product-form mode="add" @productAdded="addToDb"></base-product-form>
+    <error-dialog
+      v-if="!!errorMsg"
+      :msg="errorMsg"
+      @closeDialog="errorMsg = ''"
+    ></error-dialog>
+  </section>
 </template>
 
 <script>
-import BaseProductForm from '../../base/BaseProductForm.vue';
+import BaseProductForm from './ProductForm.vue';
 import firebase from 'firebase/compat/app';
 export default {
   data() {
-    return {};
+    return {
+      errorMsg: ''
+    };
   },
   components: {
     BaseProductForm
   },
   methods: {
-    async addProduct(product) {
-      try {
-        const res = await firebase.database().ref('products').push(product);
-        return res.key;
-      } catch (err) {
-        console.log(err);
-      }
+    //add basic data
+    async addProductData(product) {
+      const res = await firebase.database().ref('products').push(product);
+      return res.key;
     },
 
     //add cover image
@@ -35,7 +41,7 @@ export default {
       return res;
     },
     async addCoverImageUrl(key, url) {
-      firebase.database().ref('products').child(key).update({
+      await firebase.database().ref('products').child(key).update({
         coverImage: url
       });
     },
@@ -50,7 +56,7 @@ export default {
         images.push(url);
       }
 
-      this.addImagesUrl(key, images);
+      await this.addImagesUrl(key, images);
     },
     async addImage(key, img, name) {
       const res = await firebase
@@ -64,7 +70,7 @@ export default {
       return res;
     },
     async addImagesUrl(key, images) {
-      firebase.database().ref('products').child(key).update({
+      await firebase.database().ref('products').child(key).update({
         images: images
       });
     },
@@ -72,13 +78,13 @@ export default {
     // root
     async addToDb(product) {
       try {
-        const key = await this.addProduct(product);
+        const key = await this.addProductData(product);
         const coverImgRef = await this.addCoverImage(key, product.coverImage);
         const coverImgUrl = await this.getCoverImageUrl(coverImgRef);
         await this.addCoverImageUrl(key, coverImgUrl);
         await this.addImages(key, product.images);
       } catch (err) {
-        console.log(err);
+        this.errorMsg = 'Seems like database is offline. Try again later...';
       }
     }
   }

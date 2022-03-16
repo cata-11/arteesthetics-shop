@@ -5,18 +5,26 @@
     <router-view></router-view>
     <TheFooter />
   </main>
+  <LoadingSpinner />
+  <ErrorDialog />
 </template>
 
 <script>
 import NavigationMenu from './layout/NavigationMenu.vue';
+
 import TheHeader from './layout/TheHeader.vue';
 import TheFooter from './layout/TheFooter.vue';
+
+import LoadingSpinner from './layout/LoadingSpinner.vue';
+import ErrorDialog from './layout/ErrorDialog.vue';
 
 export default {
   components: {
     TheHeader,
     TheFooter,
-    NavigationMenu
+    NavigationMenu,
+    LoadingSpinner,
+    ErrorDialog
   }
 };
 </script>

@@ -26,7 +26,7 @@ export default {
         context.commit('getProducts', products);
       })
       .catch((err) => {
-        console.log(err);
+        throw err;
       });
   }
 };
