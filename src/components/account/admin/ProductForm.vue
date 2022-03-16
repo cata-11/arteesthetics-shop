@@ -178,13 +178,6 @@
         </button>
       </div>
     </form>
-    <Teleport to="body">
-      <base-dialog
-        v-if="!!errorMsg"
-        :msg="errorMsg"
-        @closeDialog="errorMsg = ''"
-      ></base-dialog>
-    </Teleport>
   </div>
 </template>
 
@@ -220,8 +213,7 @@ export default {
         price: false,
         size: [false, false, false, false],
         images: false
-      },
-      errorMsg: ''
+      }
     };
   },
 
@@ -355,8 +347,9 @@ export default {
         if (!this.validateSize(i)) sizes_err = true;
 
       if (images_err || title_err || desc_err || price_err || sizes_err) {
-        this.errorMsg =
-          'Some data is incorrect or incomplete.\n Please enter valid data.';
+        this.$store.dispatch('error/showError', {
+          msg: 'Some data is incorrect or incomplete.\n Please enter valid data.'
+        });
         return false;
       }
 

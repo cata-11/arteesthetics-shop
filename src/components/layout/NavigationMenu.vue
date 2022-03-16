@@ -32,7 +32,7 @@
 <style scoped>
 nav {
   width: 100%;
-  z-index: 999;
+  z-index: 100;
   margin: 1rem auto;
 }
 ul {

@@ -5,8 +5,8 @@
     <router-view></router-view>
     <TheFooter />
   </main>
-  <LoadingSpinner />
-  <ErrorDialog />
+  <!-- <LoadingSpinner /> -->
+  <ErrorDialog v-if="!!error" />
 </template>
 
 <script>
@@ -15,16 +15,22 @@ import NavigationMenu from './layout/NavigationMenu.vue';
 import TheHeader from './layout/TheHeader.vue';
 import TheFooter from './layout/TheFooter.vue';
 
-import LoadingSpinner from './layout/LoadingSpinner.vue';
+// import LoadingSpinner from './layout/LoadingSpinner.vue';
 import ErrorDialog from './layout/ErrorDialog.vue';
 
+import { mapGetters } from 'vuex';
 export default {
   components: {
     TheHeader,
     TheFooter,
     NavigationMenu,
-    LoadingSpinner,
+    // LoadingSpinner,
     ErrorDialog
+  },
+  computed: {
+    ...mapGetters({
+      error: 'error/message'
+    })
   }
 };
 </script>

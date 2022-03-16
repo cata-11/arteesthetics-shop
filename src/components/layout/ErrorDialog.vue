@@ -2,23 +2,27 @@
   <section @click="closeDialog">
     <div>
       <h1>Error</h1>
-      <p>{{ msg }}</p>
+      <p>{{ message }}</p>
       <base-button class="btn" @click="closeDialog">ok</base-button>
     </div>
   </section>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
-  props: ['msg', 'type'],
-  emits: ['close-dialog'],
   methods: {
     closeDialog(e) {
       if (e.path[0].tagName !== 'BUTTON' && e.path[0].tagName !== 'SECTION') {
         return;
       }
-      this.$emit('close-dialog');
+      this.$store.dispatch('error/hideError');
     }
+  },
+  computed: {
+    ...mapGetters({
+      message: 'error/message'
+    })
   }
 };
 </script>
@@ -29,7 +33,7 @@ section {
   height: 100%;
   background-color: rgba(19, 19, 19, 0.9);
   position: fixed;
-  z-index: 9999;
+  z-index: 300;
   top: 0;
   left: 0;
   display: flex;

@@ -1,25 +1,15 @@
 <template>
   <section>
-    <base-product-form mode="add" @productAdded="addToDb"></base-product-form>
-    <error-dialog
-      v-if="!!errorMsg"
-      :msg="errorMsg"
-      @closeDialog="errorMsg = ''"
-    ></error-dialog>
+    <product-form mode="add" @productAdded="addToDb"></product-form>
   </section>
 </template>
 
 <script>
-import BaseProductForm from './ProductForm.vue';
+import ProductForm from './ProductForm.vue';
 import firebase from 'firebase/compat/app';
 export default {
-  data() {
-    return {
-      errorMsg: ''
-    };
-  },
   components: {
-    BaseProductForm
+    ProductForm
   },
   methods: {
     //add basic data
@@ -84,7 +74,9 @@ export default {
         await this.addCoverImageUrl(key, coverImgUrl);
         await this.addImages(key, product.images);
       } catch (err) {
-        this.errorMsg = 'Seems like database is offline. Try again later...';
+        this.$store.dispatch('error/showError', {
+          msg: 'Seems like database is offline. Try again later...'
+        });
       }
     }
   }
