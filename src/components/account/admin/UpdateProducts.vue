@@ -33,11 +33,6 @@
         ></base-product-form>
       </Transition>
     </li>
-    <error-dialog
-      v-if="!!errorMsg"
-      :msg="errorMsg"
-      @closeDialog="errorMsg = ''"
-    ></error-dialog>
   </TransitionGroup>
 </template>
 
@@ -51,8 +46,7 @@ export default {
       products: [],
       changedProduct: null,
       initialProduct: null,
-      isLoading: false,
-      errorMsg: ''
+      isLoading: false
     };
   },
 
@@ -67,7 +61,9 @@ export default {
           this.products = this.$store.getters['products/products'];
         })
         .catch(() => {
-          this.errorMsg = 'Seems like database is offline. Try again later...';
+          this.$store.dispatch('error/showError', {
+            msg: 'Seems like database is offline. Try again later...'
+          });
         });
 
       this.isLoading = false;
@@ -267,7 +263,9 @@ export default {
         }
         this.exitEditMode(idx);
       } catch (err) {
-        this.errorMsg = 'Seems like database is offline. Try again later...';
+        this.$store.dispatch('error/showError', {
+          msg: 'Seems like database is offline. Try again later...'
+        });
       }
 
       this.isLoading = false;
@@ -292,7 +290,9 @@ export default {
 
         await this.deleteImages(id);
       } catch (err) {
-        this.errorMsg = 'Something went wrong. Try again later...';
+        this.$store.dispatch('error/showError', {
+          msg: 'Seems like database is offline. Try again later...'
+        });
       }
     }
   },
