@@ -17,12 +17,15 @@
             <base-button class="edit-btn" @click="enterEditMode(idx)"
               >edit</base-button
             >
-            <base-button class="remove-btn" @click="removeFromDb(product.id)"
+            <base-button
+              class="remove-btn"
+              @click="removeFromDb(product.id, idx)"
               >remove</base-button
             >
           </div>
         </div>
       </div>
+
       <Transition name="roll" mode="out-in">
         <base-product-form
           v-if="editModeList[idx]"
@@ -30,6 +33,7 @@
           :idx="idx"
           mode="update"
           @productUpdated="updateDb($event, idx)"
+          class="pop-on-top"
         ></base-product-form>
       </Transition>
     </li>
@@ -53,7 +57,7 @@ export default {
   methods: {
     // load from database
     async loadProducts() {
-      this.isLoading = true;
+      this.$store.dispatch('loader/toggleLoader');
 
       await this.$store
         .dispatch('products/getProducts')
@@ -61,12 +65,12 @@ export default {
           this.products = this.$store.getters['products/products'];
         })
         .catch(() => {
-          this.$store.dispatch('error/showError', {
+          this.$store.dispatch('dialog/showDialog', {
+            type: 'Error',
             msg: 'Seems like database is offline. Try again later...'
           });
         });
-
-      this.isLoading = false;
+      this.$store.dispatch('loader/toggleLoader');
     },
 
     // edit mode
@@ -76,8 +80,35 @@ export default {
       });
     },
     enterEditMode(idx) {
+      if (this.editModeList[idx] === true) {
+        this.$store.dispatch('dialog/showDialog', {
+          type: 'Alert',
+          msg: 'You are already in edit mode !'
+        });
+        return;
+      }
+
+      if (this.isEditMode()) {
+        this.$store.dispatch('dialog/showDialog', {
+          type: 'Alert',
+          msg: 'There may be unsaved changes !'
+        });
+        return;
+      }
+
       this.editModeList[idx] = true;
       this.initialProduct = this.getProduct(this.products[idx].id);
+    },
+    isEditMode(idx = null) {
+      for (let i = 0; i < this.editModeList.length; ++i) {
+        if (this.editModeList[i] === true) {
+          if (idx != null && i === idx) {
+            return false;
+          }
+          return true;
+        }
+      }
+      return false;
     },
     exitEditMode(idx) {
       this.editModeList[idx] = false;
@@ -252,7 +283,7 @@ export default {
 
     // root update
     async updateDb(payload, idx) {
-      this.isLoading = true;
+      this.$store.dispatch('loader/toggleLoader');
 
       this.changedProduct = this.copyProduct(payload);
 
@@ -263,20 +294,33 @@ export default {
         }
         this.exitEditMode(idx);
       } catch (err) {
-        this.$store.dispatch('error/showError', {
+        this.$store.dispatch('dialog/showDialog', {
+          type: 'error',
           msg: 'Seems like database is offline. Try again later...'
         });
       }
 
-      this.isLoading = false;
+      this.$store.dispatch('loader/toggleLoader');
     },
 
     // remove from database
-    async removeFromDb(id) {
+    async removeFromDb(id, idx) {
+      if (this.isEditMode(idx)) {
+        this.$store.dispatch('dialog/showDialog', {
+          type: 'Alert',
+          msg: 'There may be unsaved changes !'
+        });
+        return;
+      }
+
       if (!confirm('You sure ?')) {
         return;
       }
+
+      this.editModeList[idx] = false;
+
       this.products = this.products.filter((p) => p.id !== id);
+
       try {
         await firebase
           .database()
@@ -290,7 +334,8 @@ export default {
 
         await this.deleteImages(id);
       } catch (err) {
-        this.$store.dispatch('error/showError', {
+        this.$store.dispatch('dialog/showDialog', {
+          type: 'Error',
           msg: 'Seems like database is offline. Try again later...'
         });
       }
@@ -424,7 +469,7 @@ h3 {
 }
 
 .list-leave-active {
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 .list-leave-from {
   opacity: 1;
@@ -433,5 +478,9 @@ h3 {
 .list-leave-to {
   opacity: 0;
   transform: translateX(-25%);
+}
+
+.list-move {
+  transition: all 0.3s ease-in-out;
 }
 </style>

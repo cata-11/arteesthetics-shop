@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-if="!isLoading">
     <div id="gallery">
       <div class="main-image">
         <img :src="images[currentImageIdx].src" alt="" />
@@ -8,12 +8,12 @@
         <div class="images-container">
           <div
             v-for="(img, idx) in images"
-            :key="img.id"
+            :key="img"
             class="image-item"
             :class="{ active: img.isActive }"
             @click="scrollToImage(idx)"
           >
-            <img :src="img.src" :alt="img.id" />
+            <img :src="img.src" :alt="idx" />
           </div>
         </div>
       </div>
@@ -58,149 +58,11 @@
 </template>
 
 <script>
+import firebase from 'firebase/compat/app';
+import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
-      products: [
-        {
-          id: 0,
-          title: 'Aesthetic Skull',
-          coverImage: 'shirt0.png',
-          description: `Lorem ipsum dolor
-          sit amet consectetur adipisicing
-          elit.`,
-          price: 25,
-          sizes: [
-            {
-              size: 'XS',
-              stock: 10
-            },
-            {
-              size: 'S',
-              stock: 10
-            },
-            {
-              size: 'L',
-              stock: 10
-            },
-            {
-              size: 'M',
-              stock: 10
-            }
-          ],
-          images: [
-            {
-              id: 1,
-              src: '/1.png',
-              isActive: true
-            },
-            {
-              id: 2,
-              src: '/2.png',
-              isActive: false
-            },
-            {
-              id: 3,
-              src: '/3.png',
-              isActive: false
-            },
-            {
-              id: 4,
-              src: '/4.png',
-              isActive: false
-            },
-            {
-              id: 5,
-              src: '/5.png',
-              isActive: false
-            },
-            {
-              id: 6,
-              src: '/6.png',
-              isActive: false
-            },
-            {
-              id: 7,
-              src: '/7.png',
-              isActive: false
-            }
-          ],
-          props: {
-            stockTotal: 40,
-            promotion: true,
-            bestseller: false
-          }
-        },
-        {
-          id: 1,
-          title: 'Nobody knows how long this text is',
-          coverImage: 'shirt0.png',
-          description: `Lorem ipsum dolor
-          sit amet consectetur adipisicing
-          elit.`,
-          price: 30,
-          sizes: [
-            {
-              size: 'XS',
-              stock: 0
-            },
-            {
-              size: 'S',
-              stock: 0
-            },
-            {
-              size: 'L',
-              stock: 0
-            },
-            {
-              size: 'M',
-              stock: 0
-            }
-          ],
-          images: [
-            {
-              id: 1,
-              src: '/1.png',
-              isActive: true
-            },
-            {
-              id: 2,
-              src: '/2.png',
-              isActive: false
-            },
-            {
-              id: 3,
-              src: '/3.png',
-              isActive: false
-            },
-            {
-              id: 4,
-              src: '/4.png',
-              isActive: false
-            },
-            {
-              id: 5,
-              src: '/5.png',
-              isActive: false
-            },
-            {
-              id: 6,
-              src: '/6.png',
-              isActive: false
-            },
-            {
-              id: 7,
-              src: '/7.png',
-              isActive: false
-            }
-          ],
-          props: {
-            stockTotal: 0,
-            promotion: true,
-            bestseller: true
-          }
-        }
-      ],
       product: null,
       images: [],
       currentImageIdx: 0,
@@ -237,11 +99,54 @@ export default {
     },
     addToFavourites() {
       this.isFavourite = !this.isFavourite;
+    },
+    async loadProduct() {
+      this.$store.dispatch('loader/toggleLoader');
+
+      const data = await firebase
+        .database()
+        .ref('products/' + this.$route.params.id)
+        .get();
+
+      const prodData = data.val();
+
+      const prod = {
+        id: this.$route.params.id,
+        title: prodData.title,
+        coverImage: prodData.coverImage,
+        description: prodData.description,
+        price: prodData.price,
+        sizes: prodData.sizes,
+        images: prodData.images,
+        props: prodData.props
+      };
+
+      prod.images.forEach((img) => {
+        this.images.push({
+          src: img,
+          isActive: false
+        });
+      });
+
+      this.images.unshift({
+        src: prod.coverImage,
+        isActive: true
+      });
+
+      this.product = { ...prod };
+
+      this.$store.dispatch('loader/toggleLoader');
     }
   },
+
+  computed: {
+    ...mapGetters({
+      isLoading: 'loader/isLoading'
+    })
+  },
+
   created() {
-    this.product = this.products[+this.$route.params.id];
-    this.images = this.product.images;
+    this.loadProduct();
   }
 };
 </script>

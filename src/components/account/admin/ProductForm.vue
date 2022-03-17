@@ -1,5 +1,5 @@
 <template>
-  <div class="add-product-container">
+  <div class="product-form-container">
     <form class="edit-form-container">
       <div class="product-edit-container">
         <div class="cover-image-edit">
@@ -347,7 +347,8 @@ export default {
         if (!this.validateSize(i)) sizes_err = true;
 
       if (images_err || title_err || desc_err || price_err || sizes_err) {
-        this.$store.dispatch('error/showError', {
+        this.$store.dispatch('dialog/showDialog', {
+          type: 'Error',
           msg: 'Some data is incorrect or incomplete.\n Please enter valid data.'
         });
         return false;
@@ -357,19 +358,10 @@ export default {
     },
 
     // add
-    calculateTotalStock() {
-      let total = 0;
-      this.product.sizes.forEach((size) => {
-        total += size.stock;
-      });
-      return total;
-    },
     addProduct() {
       if (!this.isFormValid()) {
         return;
       }
-      this.product.props.totalStock = this.calculateTotalStock();
-
       this.$emit('product-added', this.product);
     },
     prepareToAdd() {
@@ -443,7 +435,7 @@ export default {
   opacity: 1 !important;
   color: var(--red);
 }
-.add-product-container {
+.product-form-container {
   margin-top: 1rem;
 }
 .edit-form-container {

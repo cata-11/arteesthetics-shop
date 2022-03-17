@@ -1,11 +1,13 @@
 import { createStore } from 'vuex';
 
 import productsModule from './products/index.js';
-import errorModule from './error/index.js';
+import dialogModule from './dialog/index.js';
+import loaderModule from './loader/index.js';
 
 export default createStore({
   modules: {
     products: productsModule,
-    error: errorModule
+    dialog: dialogModule,
+    loader: loaderModule
   }
 });

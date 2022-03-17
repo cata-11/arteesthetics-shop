@@ -1,7 +1,7 @@
 <template>
   <section @click="closeDialog">
-    <div>
-      <h1>Error</h1>
+    <div class="container">
+      <h1>{{ type }}</h1>
       <p>{{ message }}</p>
       <base-button class="btn" @click="closeDialog">ok</base-button>
     </div>
@@ -16,12 +16,13 @@ export default {
       if (e.path[0].tagName !== 'BUTTON' && e.path[0].tagName !== 'SECTION') {
         return;
       }
-      this.$store.dispatch('error/hideError');
+      this.$store.dispatch('dialog/hideDialog');
     }
   },
   computed: {
     ...mapGetters({
-      message: 'error/message'
+      type: 'dialog/type',
+      message: 'dialog/message'
     })
   }
 };
@@ -40,7 +41,7 @@ section {
   justify-content: center;
   align-items: center;
 }
-div {
+.container {
   background-color: var(--a-white);
   padding: 1rem;
   border-top: 0.25rem solid var(--red);

@@ -5,7 +5,6 @@ import router from './router';
 import store from './store';
 
 import BaseButton from './components/base/BaseButton.vue';
-import ErrorDialog from './components/layout/ErrorDialog.vue';
 
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
@@ -29,6 +28,5 @@ const app = createApp(App);
 app.use(router);
 app.use(store);
 app.component('base-button', BaseButton);
-app.component('error-dialog', ErrorDialog);
 
 app.mount('#app');

@@ -1,6 +1,6 @@
 <template>
   <section>
-    <product-form mode="add" @productAdded="addToDb"></product-form>
+    <product-form mode="add" @productAdded="addToDb" :key="key"></product-form>
   </section>
 </template>
 
@@ -8,6 +8,12 @@
 import ProductForm from './ProductForm.vue';
 import firebase from 'firebase/compat/app';
 export default {
+  data() {
+    return {
+      key: 0
+    };
+  },
+
   components: {
     ProductForm
   },
@@ -68,16 +74,28 @@ export default {
     // root
     async addToDb(product) {
       try {
+        this.$store.dispatch('loader/toggleLoader');
         const key = await this.addProductData(product);
         const coverImgRef = await this.addCoverImage(key, product.coverImage);
         const coverImgUrl = await this.getCoverImageUrl(coverImgRef);
         await this.addCoverImageUrl(key, coverImgUrl);
         await this.addImages(key, product.images);
+        this.$store.dispatch('loader/toggleLoader');
+        this.$store.dispatch('dialog/showDialog', {
+          type: 'confirmation',
+          msg: 'New product succesfully added !'
+        });
+        this.clearForm();
       } catch (err) {
-        this.$store.dispatch('error/showError', {
+        this.$store.dispatch('dialog/showDialog', {
+          type: 'error',
           msg: 'Seems like database is offline. Try again later...'
         });
       }
+    },
+
+    clearForm() {
+      this.key++;
     }
   }
 };
