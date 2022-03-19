@@ -26,7 +26,9 @@
         </div>
         <p class="price">
           <span class="new"> ${{ product.price }}</span
-          ><span class="old"> ${{ product.price * 1.5 }}</span>
+          ><span v-if="product.props.promotion" class="old">
+            ${{ product.price * 1.5 }}</span
+          >
         </p>
         <div class="sizes">
           <p class="choose-size-p">Choose your size:</p>
@@ -467,6 +469,7 @@ section {
   }
   .price > .new {
     padding: calc(var(--main-width) / 38);
+    margin: 0 auto;
   }
   .price > .old {
     padding: calc(var(--main-width) / 80);

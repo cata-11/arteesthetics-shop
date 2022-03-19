@@ -1,8 +1,5 @@
 <template>
-  <div
-    id="card-wrapper"
-    :class="{ 'out-of-stock': product.props.stockTotal == 0 }"
-  >
+  <div id="card-wrapper" :class="{ 'out-of-stock': !product.props.inStock }">
     <div id="card">
       <div class="header">
         <h1>{{ product.title }}</h1>
@@ -13,11 +10,11 @@
         </div>
         <div class="info">
           <p>
-            <span v-if="product.props.stockTotal == 0">
+            <span v-if="!product.props.inStock">
               {{ 'out of stock' }}
             </span>
-            <span v-if="product.props.stockTotal != 0">
-              {{ product.props.stockTotal != 0 ? 'in stock' : '' }}
+            <span v-if="product.props.inStock">
+              {{ product.props.inStock ? 'in stock' : '' }}
               {{ product.props.promotion ? ' | promotion' : '' }}
               {{ product.props.bestseller ? '| bestseller' : '' }}
             </span>
@@ -30,7 +27,7 @@
         </div>
         <router-link
           :to="'/shop/' + product.id"
-          :class="{ 'out-of-stock-btn': product.props.stockTotal == 0 }"
+          :class="{ 'out-of-stock-btn': !product.props.inStock }"
         >
           View
         </router-link>

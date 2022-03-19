@@ -9,7 +9,7 @@ export default {
         const products = [];
         const product = data.val();
         for (const key in product) {
-          products.push({
+          const temp = {
             id: key,
             title: product[key].title,
             coverImage: product[key].coverImage,
@@ -18,8 +18,13 @@ export default {
             sizes: product[key].sizes,
             images: product[key].images,
             props: product[key].props
-          });
+          };
+          let sum = 0;
+          temp.sizes.forEach((size) => (sum += +size.stock));
+          temp.props.inStock = sum !== 0 ? true : false;
+          products.push(temp);
         }
+
         return products;
       })
       .then((products) => {

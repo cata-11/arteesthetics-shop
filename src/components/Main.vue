@@ -19,6 +19,9 @@ import LoadingSpinner from './layout/LoadingSpinner.vue';
 import DialogWindow from './layout/DialogWindow.vue';
 
 import { mapGetters } from 'vuex';
+
+import firebase from 'firebase/compat/app';
+
 export default {
   components: {
     TheHeader,
@@ -35,6 +38,24 @@ export default {
     ...mapGetters({
       isLoading: 'loader/isLoading'
     })
+  },
+  methods: {
+    checkAuthState() {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          if (user.email === 'admin@test.com') {
+            this.$store.dispatch('auth/authUser', { isAdmin: true });
+          } else {
+            this.$store.dispatch('auth/authUser', { isAdmin: false });
+          }
+        } else {
+          this.$store.dispatch('auth/logoutUser');
+        }
+      });
+    }
+  },
+  created() {
+    this.checkAuthState();
   }
 };
 </script>
@@ -81,6 +102,10 @@ button {
   outline: none;
   font-family: 'Roboto Slab', serif;
   cursor: pointer;
+}
+img,
+video {
+  -webkit-user-drag: none;
 }
 ul {
   margin: 0;

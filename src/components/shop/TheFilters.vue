@@ -1,29 +1,87 @@
 <template>
   <section>
     <div class="search-box">
-      <input type="text" placeholder="Search..." name="search" />
+      <input
+        type="text"
+        placeholder="Search..."
+        name="search"
+        v-model="search"
+        @input="searchProducts(['title', 'description'])"
+      />
       <img src="/search.svg" alt="" />
     </div>
     <button class="toggle-filters" @click="toggleFilters">FILTERS</button>
     <div class="filter-options" :class="[hide ? 'hide' : 'show']">
-      <button class="active">all</button>
-      <button>in stock</button>
-      <button>promotion</button>
-      <button>bestseller</button>
+      <button @click="applyFilter('all')" :class="{ active: active === 'all' }">
+        all
+      </button>
+      <button
+        @click="applyFilter(['props.inStock'])"
+        :class="{ active: active === 'inStock' }"
+      >
+        in stock
+      </button>
+      <button
+        @click="applyFilter(['props.promotion'])"
+        :class="{ active: active === 'promotion' }"
+      >
+        promotion
+      </button>
+      <button
+        @click="applyFilter(['props.bestseller'])"
+        :class="{ active: active === 'bestseller' }"
+      >
+        bestseller
+      </button>
     </div>
   </section>
 </template>
 
 <script>
+import Fuse from 'fuse.js';
 export default {
+  props: ['products'],
+  emits: ['search-products', 'search-aborted', 'search-empty'],
   data() {
     return {
-      hide: true
+      hide: true,
+      search: '',
+      active: 'all'
     };
   },
+  computed: {},
   methods: {
     toggleFilters() {
       this.hide = !this.hide;
+    },
+    initFuse(keys) {
+      return new Fuse(this.products, { keys: [...keys] });
+    },
+    searchProducts() {
+      this.active = '';
+      const fuse = this.initFuse(['title', 'description']);
+      const result = fuse.search(this.search).map((r) => r.item);
+      if (result.length === 0 && this.search === '') {
+        this.$emit('search-aborted');
+        this.active = 'all';
+      } else {
+        this.$emit('search-products', result);
+      }
+    },
+    applyFilter(key) {
+      if (key === 'all') {
+        this.$emit('search-aborted');
+        this.active = 'all';
+        return;
+      }
+
+      this.search = '';
+      this.active = key[0].split('.')[1];
+
+      const fuse = this.initFuse(key);
+
+      const result = fuse.search('true').map((r) => r.item);
+      this.$emit('search-products', result);
     }
   }
 };

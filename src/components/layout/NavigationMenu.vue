@@ -14,7 +14,7 @@
         </router-link>
       </li>
       <li>
-        <router-link to="/account">
+        <router-link to="/auth">
           <div>account</div>
           <img src="/user.svg" alt="" />
         </router-link>

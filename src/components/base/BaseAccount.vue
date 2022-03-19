@@ -2,7 +2,7 @@
   <section id="account">
     <div class="header">
       <h1>{{ data.type }} account</h1>
-      <button>Log out</button>
+      <button @click="logOut">Log out</button>
       <div>
         <img src="/exit.svg" alt="" />
       </div>
@@ -44,6 +44,8 @@ import UserDetails from '../account/user/UserDetails.vue';
 import UserWishlist from '../account/user/UserWishlist.vue';
 import AddProduct from '../account/admin/AddProduct.vue';
 import UpdateProducts from '../account/admin/UpdateProducts.vue';
+
+import firebase from 'firebase/compat/app';
 export default {
   props: {
     data: {
@@ -59,6 +61,17 @@ export default {
   methods: {
     changeComponent(component) {
       this.activeComponent = component;
+    },
+    async logOut() {
+      try {
+        await firebase.auth().signOut();
+        this.$router.go(0);
+      } catch (err) {
+        this.$store.dispatch('dialog/showDialog', {
+          type: 'error',
+          msg: 'Something went wrong\nPlease try again later'
+        });
+      }
     }
   },
   components: {

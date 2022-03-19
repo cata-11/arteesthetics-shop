@@ -1,46 +1,22 @@
 <template>
   <section class="grid-container">
-    <div class="grid">
+    <div class="grid" v-if="products.length !== 0">
       <ProductItem
         v-for="product in products"
         :key="product.id"
         :product="product"
       />
     </div>
+    <div v-else>no find</div>
   </section>
 </template>
 
 <script>
 import ProductItem from './ProductItem.vue';
 export default {
-  data() {
-    return {
-      products: []
-    };
-  },
-  methods: {
-    async loadProducts() {
-      this.$store.dispatch('loader/toggleLoader');
-
-      await this.$store
-        .dispatch('products/getProducts')
-        .then(() => {
-          this.products = this.$store.getters['products/products'];
-        })
-        .catch(() => {
-          this.$store.dispatch('dialog/showDialog', {
-            type: 'Error',
-            msg: 'Seems like database is offline. Try again later...'
-          });
-        });
-      this.$store.dispatch('loader/toggleLoader');
-    }
-  },
+  props: ['products'],
   components: {
     ProductItem
-  },
-  created() {
-    this.loadProducts();
   }
 };
 </script>
