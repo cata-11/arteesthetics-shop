@@ -69,6 +69,8 @@ button {
   padding: 1rem;
   color: var(--a-white);
   text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.2rem;
   background-color: var(--pink);
   font-size: var(--basic-font-size);
   transition: all 0.2s ease-in-out;

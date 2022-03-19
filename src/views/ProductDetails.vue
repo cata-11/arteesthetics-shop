@@ -49,10 +49,23 @@
       <div class="actions">
         <button class="add-to-cart-btn">Add to cart</button>
         <div class="add-to-favourites-btn" @click="addToFavourites">
-          <img
-            :src="isFavourite ? '/heart_full.svg' : '/heart_empty.svg'"
-            alt=""
-          />
+          <div>
+            <svg
+              id="Capa_1"
+              data-name="Capa 1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 460.77 460.77"
+            >
+              <path
+                d="M230.3,431.31c-29.58-24.71-59.05-49.12-88.28-73.82-27.54-23.28-54.38-47.34-79.13-73.61-19.06-20.24-37-41.46-48.37-67.12-17-38.31-20.58-77.64-2.65-116.42C31,59,64.33,35.49,109.68,30.39c40.12-4.5,74.4,8.93,103.44,36.51,3,2.81,5.85,5.7,8.68,8.64s5.54,6,8.65,9.35c1.19-1.27,2.32-2.44,3.4-3.65C249.21,64.13,266.19,49,287.6,39.89c67.61-28.76,145.07,3.78,167,74.77C466.26,152.33,460.85,189,443,223.79c-12.78,24.92-31,45.83-50.36,65.78-32.9,33.89-68.94,64.32-105.15,94.55C268.68,399.82,249.71,415.31,230.3,431.31Zm0-35.13c13.63-11.22,26.81-22,39.89-32.87,34.18-28.48,68.29-57.06,99.59-88.76C388,256.19,405.06,237,417.43,214.06,431.55,188,437.27,160.14,431,130.93,417.21,67.05,347.78,39,291.75,67.83c-17.08,8.79-30.44,22.07-42.94,36.31-6.11,7-12.08,14-18.32,21.28l-3.19-3.6c-9.28-10.4-18.18-21.17-27.91-31.12C181.08,72,159.38,59.89,132.72,57c-36.74-4-74,14.23-92.3,46.44-16.82,29.62-16,60.55-5.34,91.74C43.42,219.61,59,239.59,76,258.51c25,27.82,53,52.52,81.41,76.71C181.43,355.65,205.77,375.67,230.33,396.18Z"
+                fill="#faebd7"
+              />
+              <path
+                d="M230.33,396.18c-24.56-20.51-48.9-40.53-72.9-61C129,311,101,286.33,76,258.51c-17-18.92-32.6-38.9-40.94-63.32C24.44,164,23.6,133.07,40.42,103.45,58.72,71.24,96,53.05,132.72,57,159.38,59.89,181.08,72,199.39,90.7c9.73,10,18.63,20.72,27.91,31.12l3.19,3.6c6.24-7.26,12.21-14.32,18.32-21.28,12.5-14.24,25.86-27.52,42.94-36.31,56-28.81,125.46-.78,139.22,63.1,6.3,29.21.58,57-13.54,83.13C405.06,237,388,256.19,369.81,274.55c-31.3,31.7-65.41,60.28-99.59,88.76C257.14,374.2,244,385,230.33,396.18Z"
+                :class="[isFavourite ? 'empty' : 'full']"
+              />
+            </svg>
+          </div>
         </div>
       </div>
     </div>
@@ -159,6 +172,12 @@ section {
   justify-content: space-between;
   align-items: flex-start;
   margin: 2rem 0;
+}
+.full {
+  fill: var(--red);
+}
+.empty {
+  fill: var(--black);
 }
 #gallery {
   width: 35rem;
@@ -385,7 +404,7 @@ section {
   border-left: 1rem solid var(--pink);
 }
 .add-to-cart-btn:hover {
-  filter: brightness(80%);
+  filter: brightness(90%);
 }
 .add-to-favourites-btn {
   width: 40%;
@@ -395,11 +414,14 @@ section {
   align-items: center;
   cursor: pointer;
 }
-.add-to-favourites-btn > img {
-  width: 4rem;
+.add-to-favourites-btn div {
+  width: 4.25rem;
 }
-.add-to-favourites-btn:hover {
-  filter: brightness(80%);
+.heart {
+  fill: var(--red) !important;
+}
+.add-to-favourites-btn div:hover {
+  filter: brightness(90%);
 }
 
 @media only screen and (min-width: 320px) and (max-width: 1159px) {
@@ -511,9 +533,12 @@ section {
     width: 30%;
     height: auto;
   }
-  .add-to-favourites-btn > img {
+  .add-to-favourites-btn > div {
     width: calc(var(--main-width) / 7.5);
     height: auto;
+  }
+  .add-to-favourites-btn div:hover {
+    filter: none;
   }
 }
 

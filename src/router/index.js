@@ -58,9 +58,9 @@ const routes = [
     path: '/cart',
     component: CartPage
   },
-  { 
-    path: '/:pathMatch(.*)*', 
-    component: NotFound 
+  {
+    path: '/:pathMatch(.*)*',
+    component: NotFound
   }
 ];
 

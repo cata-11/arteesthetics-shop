@@ -10,13 +10,13 @@
 </template>
 
 <script>
-import NavigationMenu from './layout/NavigationMenu.vue';
+import NavigationMenu from './components/layout/NavigationMenu.vue';
 
-import TheHeader from './layout/TheHeader.vue';
-import TheFooter from './layout/TheFooter.vue';
+import TheHeader from './components/layout/TheHeader.vue';
+import TheFooter from './components/layout/TheFooter.vue';
 
-import LoadingSpinner from './layout/LoadingSpinner.vue';
-import DialogWindow from './layout/DialogWindow.vue';
+import LoadingSpinner from './components/layout/LoadingSpinner.vue';
+import DialogWindow from './components/layout/DialogWindow.vue';
 
 import { mapGetters } from 'vuex';
 

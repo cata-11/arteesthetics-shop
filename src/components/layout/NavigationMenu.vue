@@ -66,7 +66,8 @@ div:hover {
   color: var(--black);
   background-color: var(--a-white);
 }
-.router-link-active {
+.router-link-active,
+.router-link-exact-active {
   color: var(--black);
   background-color: var(--a-white);
 }
