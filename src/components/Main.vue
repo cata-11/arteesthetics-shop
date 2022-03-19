@@ -44,12 +44,15 @@ export default {
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {
           if (user.email === 'admin@test.com') {
-            this.$store.dispatch('auth/authUser', { isAdmin: true });
+            this.$store.dispatch('auth/login', { isAdmin: true, id: user.uid });
           } else {
-            this.$store.dispatch('auth/authUser', { isAdmin: false });
+            this.$store.dispatch('auth/login', {
+              isAdmin: false,
+              id: user.uid
+            });
           }
         } else {
-          this.$store.dispatch('auth/logoutUser');
+          this.$store.dispatch('auth/logout');
         }
       });
     }

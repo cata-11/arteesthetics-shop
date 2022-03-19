@@ -1,7 +1,7 @@
 <template>
   <section id="account">
     <div class="header">
-      <h1>{{ data.type }} account</h1>
+      <h1>{{ data.type }} account (id: {{ id.slice(0, 10) }})</h1>
       <button @click="logOut">Log out</button>
       <div>
         <img src="/exit.svg" alt="" />
@@ -55,6 +55,7 @@ export default {
   },
   data() {
     return {
+      id: this.$store.getters['auth/id'],
       activeComponent: this.data.components[0].name
     };
   },

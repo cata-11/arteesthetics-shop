@@ -7,7 +7,8 @@ export default {
   state() {
     return {
       isAuth: false,
-      isAdmin: false
+      isAdmin: false,
+      id: null
     };
   },
   mutations,

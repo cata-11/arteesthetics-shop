@@ -7,6 +7,7 @@ import AuthPage from '../views/AuthPage.vue';
 import UserPage from '../views/UserPage.vue';
 import AdminPage from '../views/AdminPage.vue';
 import CartPage from '../views/CartPage.vue';
+import NotFound from '../views/NotFound.vue';
 
 import store from '../store/index.js';
 
@@ -56,6 +57,10 @@ const routes = [
   {
     path: '/cart',
     component: CartPage
+  },
+  { 
+    path: '/:pathMatch(.*)*', 
+    component: NotFound 
   }
 ];
 

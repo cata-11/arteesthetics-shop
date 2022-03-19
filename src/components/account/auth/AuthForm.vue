@@ -188,10 +188,16 @@ export default {
           .signInWithEmailAndPassword(this.email, this.password);
 
         if (res.user.email === 'admin@test.com') {
-          this.$store.dispatch('auth/authUser', { isAdmin: true });
+          this.$store.dispatch('auth/login', {
+            isAdmin: true,
+            id: res.user.uid
+          });
           this.$router.push('admin');
         } else {
-          this.$store.dispatch('auth/authUser', { isAdmin: false });
+          this.$store.dispatch('auth/login', {
+            isAdmin: false,
+            id: res.user.uid
+          });
           this.$router.push('/user');
         }
       } catch (error) {

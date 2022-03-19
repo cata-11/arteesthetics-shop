@@ -1,8 +1,8 @@
 export default {
-  authUser(context, payload) {
-    context.commit('auth', payload.isAdmin);
+  login(context, payload) {
+    context.commit('login', payload);
   },
-  logoutUser(context) {
+  logout(context) {
     context.commit('logout');
   }
 };
