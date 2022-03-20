@@ -145,14 +145,29 @@ export default {
       this.error.password = '';
       this.error.repeatPassword = '';
     },
+    async addUserToDb(id) {
+      await firebase
+        .database()
+        .ref('users/' + id)
+        .set({
+          emailAddress: this.email,
+          firstName: '',
+          lastName: '',
+          phoneNumber: '',
+          deliveryAddress: '',
+          city: '',
+          postalCode: ''
+        });
+    },
     async signUp() {
       if (!this.isFormValid()) {
         return;
       }
       try {
-        await firebase
+        const res = await firebase
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password);
+        await this.addUserToDb(res.user.uid);
         await firebase.auth().signOut();
         this.$store.dispatch('dialog/showDialog', {
           type: 'confirmation',

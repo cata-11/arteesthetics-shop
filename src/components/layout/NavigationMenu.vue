@@ -8,13 +8,21 @@
         </router-link>
       </li>
       <li>
-        <router-link to="/shop">
+        <router-link
+          to="/shop"
+          :class="{ 'active-helper': routeName === 'Product' }"
+        >
           <div>shop</div>
           <img src="/shop.svg" alt="" />
         </router-link>
       </li>
       <li>
-        <router-link to="/auth">
+        <router-link
+          to="/auth"
+          :class="{
+            'active-helper': routeName === 'User' || routeName === 'Admin'
+          }"
+        >
           <div>account</div>
           <img src="/user.svg" alt="" />
         </router-link>
@@ -28,6 +36,16 @@
     </ul>
   </nav>
 </template>
+
+<script>
+export default {
+  computed: {
+    routeName() {
+      return this.$route.name;
+    }
+  }
+};
+</script>
 
 <style scoped>
 nav {
@@ -73,6 +91,10 @@ div:hover {
 }
 .router-link-active img {
   filter: invert(100%);
+}
+.active-helper {
+  color: var(--black);
+  background-color: var(--a-white);
 }
 img {
   display: none;

@@ -16,16 +16,18 @@ const routes = [
     path: '/',
     redirect: '/home'
   },
-
   {
+    name: 'Home',
     path: '/home',
     component: HomePage
   },
   {
+    name: 'Shop',
     path: '/shop',
     component: ShopPage
   },
   {
+    name: 'Product',
     path: '/shop/:id',
     component: ProductDetails,
     props: true
@@ -55,10 +57,12 @@ const routes = [
     }
   },
   {
+    name: 'Cart',
     path: '/cart',
     component: CartPage
   },
   {
+    name: '404',
     path: '/:pathMatch(.*)*',
     component: NotFound
   }
@@ -74,13 +78,13 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAdminAuth && !store.getters['auth/isAdmin']) {
-    next({ name: 'Auth' });
+    next('/auth');
   } else if (to.meta.requiresUserAuth && !store.getters['auth/isAuth']) {
-    next({ name: 'Auth' });
+    next('/auth');
   } else if (to.meta.auth && store.getters['auth/isAdmin']) {
-    next({ name: 'Admin' });
+    next('/admin');
   } else if (to.meta.auth && store.getters['auth/isAuth']) {
-    next({ name: 'User' });
+    next('/user');
   } else next();
 });
 

@@ -1,7 +1,7 @@
 <template>
-  <section id="account">
+  <section id="account" v-if="isAuth">
     <div class="header">
-      <h1>{{ data.type }} account (id: {{ id.slice(0, 10) }})</h1>
+      <h1>{{ data.type }} account</h1>
       <button @click="logOut">Log out</button>
       <div>
         <img src="/exit.svg" alt="" />
@@ -46,6 +46,7 @@ import AddProduct from '../account/admin/AddProduct.vue';
 import UpdateProducts from '../account/admin/UpdateProducts.vue';
 
 import firebase from 'firebase/compat/app';
+import { mapGetters } from 'vuex';
 export default {
   props: {
     data: {
@@ -55,7 +56,6 @@ export default {
   },
   data() {
     return {
-      id: this.$store.getters['auth/id'],
       activeComponent: this.data.components[0].name
     };
   },
@@ -66,7 +66,7 @@ export default {
     async logOut() {
       try {
         await firebase.auth().signOut();
-        this.$router.go(0);
+        this.$router.replace('/auth');
       } catch (err) {
         this.$store.dispatch('dialog/showDialog', {
           type: 'error',
@@ -91,7 +91,10 @@ export default {
       return this.activeComponent === this.data.components[1].name
         ? true
         : false;
-    }
+    },
+    ...mapGetters({
+      isAuth: 'auth/isAuth'
+    })
   }
 };
 </script>

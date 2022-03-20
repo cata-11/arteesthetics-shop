@@ -7,6 +7,6 @@ export default {
   logout(state) {
     state.isAdmin = false;
     state.isAuth = false;
-    state.id = null;
+    state.id = '';
   }
 };

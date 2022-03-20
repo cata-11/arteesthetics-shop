@@ -43,16 +43,11 @@
           <label for="email-address">Email</label>
           <div class="input-container">
             <input
-              :readonly="input.emailAddress"
+              readonly
               type="email"
               placeholder="Email address"
               id="email-address"
               v-model="user.emailAddress"
-              :class="{ 'edit-mode': !input.emailAddress }"
-            />
-            <img
-              :src="input.emailAddress ? '/edit.svg' : '/check.svg'"
-              @click="toggleEditMode($event, 'emailAddress')"
             />
           </div>
         </div>
@@ -84,16 +79,16 @@
           <label for="shipping-address">Address</label>
           <div class="input-container">
             <input
-              :readonly="input.shippingAddress"
+              :readonly="input.deliveryAddress"
               type="text"
-              placeholder="Shipping address"
+              placeholder="Delivery address"
               id="shipping-address"
-              v-model="user.shipping.address"
-              :class="{ 'edit-mode': !input.shippingAddress }"
+              v-model="user.deliveryAddress"
+              :class="{ 'edit-mode': !input.deliveryAddress }"
             />
             <img
-              :src="input.shippingAddress ? '/edit.svg' : '/check.svg'"
-              @click="toggleEditMode($event, 'shippingAddress')"
+              :src="input.deliveryAddress ? '/edit.svg' : '/check.svg'"
+              @click="toggleEditMode($event, 'deliveryAddress')"
             />
           </div>
         </div>
@@ -101,16 +96,16 @@
           <label for="shipping-city">City</label>
           <div class="input-container">
             <input
-              :readonly="input.shippingCity"
+              :readonly="input.city"
               type="text"
               placeholder="City"
               id="shipping-city"
-              v-model="user.shipping.city"
-              :class="{ 'edit-mode': !input.shippingCity }"
+              v-model="user.city"
+              :class="{ 'edit-mode': !input.city }"
             />
             <img
-              :src="input.shippingCity ? '/edit.svg' : '/check.svg'"
-              @click="toggleEditMode($event, 'shippingCity')"
+              :src="input.city ? '/edit.svg' : '/check.svg'"
+              @click="toggleEditMode($event, 'city')"
             />
           </div>
         </div>
@@ -122,7 +117,7 @@
               type="text"
               id="postal-code"
               placeholder="Postal code"
-              v-model="user.shipping.postalCode"
+              v-model="user.postalCode"
               :class="{ 'edit-mode': !input.postalCode }"
             />
             <img
@@ -137,42 +132,85 @@
 </template>
 
 <script>
+import firebase from 'firebase/compat/app';
+import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
       user: {
-        firstName: 'Catalin',
-        lastName: 'Munteanu',
-        emailAddress: 'catalin.11.munteanu@gmail.com',
-        phoneNumber: '069635734',
-        shipping: {
-          address: 'str. Decebal 62/3 ap. 12',
-          city: 'or. Glodeni',
-          postalCode: '4900'
-        }
+        firstName: '',
+        lastName: '',
+        emailAddress: '',
+        phoneNumber: '',
+        deliveryAddress: '',
+        city: '',
+        postalCode: ''
       },
       input: {
         firstName: true,
         lastName: true,
         emailAddress: true,
         phoneNumber: true,
-        shippingAddress: true,
-        shippingCity: true,
+        deliveryAddress: true,
+        city: true,
         postalCode: true
       },
       isEditMode: false
     };
   },
-  computed: {},
+  computed: {
+    ...mapGetters({
+      uid: 'auth/id'
+    })
+  },
   methods: {
-    toggleEditMode(event, key) {
+    async toggleEditMode(event, key) {
       const currentInput = event.target.previousSibling;
       currentInput.focus();
       if (this.input[key] === false) {
         this.input[key] = true;
-        //UPDATE DATABASE
+        await this.updateDb(key);
       } else this.input[key] = false;
+    },
+    async updateDb(key) {
+      if (
+        this.user[key] === undefined ||
+        this.user[key] === null ||
+        this.uid === null ||
+        this.uid === undefined
+      ) {
+        return;
+      }
+      try {
+        await firebase
+          .database()
+          .ref('users/' + this.uid + '/' + key)
+          .set(this.user[key]);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async getUserData() {
+      const id = this.$store.getters['auth/id'];
+      const data = await firebase
+        .database()
+        .ref('users/' + id)
+        .get();
+      const userData = data.val();
+
+      this.user.firstName = userData.firstName;
+      this.user.lastName = userData.lastName;
+      this.user.emailAddress = userData.emailAddress;
+      this.user.phoneNumber = userData.phoneNumber;
+      this.user.deliveryAddress = userData.deliveryAddress;
+      this.user.city = userData.city;
+      this.user.postalCode = userData.postalCode;
     }
+  },
+  async mounted() {
+    this.$store.dispatch('loader/toggleLoader');
+    await this.getUserData();
+    this.$store.dispatch('loader/toggleLoader');
   }
 };
 </script>
