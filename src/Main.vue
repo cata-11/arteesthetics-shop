@@ -22,6 +22,8 @@ import { mapGetters } from 'vuex';
 
 import firebase from 'firebase/compat/app';
 
+import { onAuthStateInit } from '../src/main.js';
+
 export default {
   components: {
     TheHeader,
@@ -57,17 +59,23 @@ export default {
               id: user.uid,
               favProducts: favProducts
             });
+            await this.$store.dispatch('cart/getCartFromDb', {
+              id: user.uid
+            });
           }
         } else {
           this.$store.dispatch('auth/logout');
+          this.$store.dispatch('cart/getCartFromLocalStorage');
         }
       });
     }
   },
   async mounted() {
-    this.$store.dispatch('loader/toggleLoader');
-    await this.checkAuthState();
-    this.$store.dispatch('loader/toggleLoader');
+    // this.$store.dispatch('loader/toggleLoader');
+    // await this.checkAuthState();
+    // this.$store.dispatch('loader/toggleLoader');
+    await onAuthStateInit();
+    console.log('updated');
   }
 };
 </script>

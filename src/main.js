@@ -23,6 +23,57 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
+const authChangeHandle = new Promise((resolve, reject) => {
+  // firebase.auth().onAuthStateChanged(
+  //   (user) => {
+  //     store.commit(user !== null ? 'LOGIN' : 'LOGOUT', user);
+  //     resolve(user);
+  //   },
+  //   (err) => {
+  //     reject(err);
+  //   }
+  // );
+
+  firebase.auth().onAuthStateChanged(
+    async (user) => {
+      if (user) {
+        const data = await firebase
+          .database()
+          .ref('users/' + user.uid + '/favProducts')
+          .get();
+        const favProducts = data.val() !== null ? data.val() : [];
+
+        if (user.email === 'admin@test.com') {
+          store.dispatch('auth/login', {
+            isAdmin: true,
+            id: user.uid,
+            favProducts: favProducts
+          });
+        } else {
+          store.dispatch('auth/login', {
+            isAdmin: false,
+            id: user.uid,
+            favProducts: favProducts
+          });
+        }
+        await store.dispatch('cart/getCartFromDb', {
+          id: user.uid
+        });
+      } else {
+        store.dispatch('auth/logout');
+        store.dispatch('cart/getCartFromLocalStorage');
+      }
+      resolve(user);
+      console.log('res');
+    },
+    (err) => {
+      reject(err);
+    }
+  );
+});
+
+export const onAuthStateInit = () => authChangeHandle;
+
 const app = createApp(App);
 
 app.use(router);

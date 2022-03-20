@@ -1,5 +1,5 @@
 <template>
-  <section v-if="!isLoading">
+  <section v-if="!$store.getters['loader/isLoading']">
     <div id="gallery">
       <div class="main-image">
         <img :src="images[currentImageIdx].src" alt="" />
@@ -31,7 +31,10 @@
           >
         </p>
         <div class="sizes">
-          <p class="choose-size-p">Choose your size:</p>
+          <p class="choose-size-p">
+            Choose your size:
+            <span v-if="sizeError" class="error"> NOT SELECTED</span>
+          </p>
           <div class="size-select-container">
             <div
               class="size"
@@ -47,7 +50,7 @@
         </div>
       </div>
       <div class="actions">
-        <button class="add-to-cart-btn">Add to cart</button>
+        <button class="add-to-cart-btn" @click="addToCart">Add to cart</button>
         <div class="add-to-favourites-btn" @click="addToFavourites">
           <div>
             <svg
@@ -75,16 +78,33 @@
 <script>
 import firebase from 'firebase/compat/app';
 import { mapGetters } from 'vuex';
+
+import { onAuthStateInit } from '../main.js';
+
 export default {
   data() {
     return {
       product: null,
       images: [],
       currentImageIdx: 0,
-      selectedSize: null
+      selectedSize: null,
+      sizeError: false
     };
   },
   methods: {
+    addToCart() {
+      this.sizeError = false;
+      if (this.selectedSize === null) {
+        this.sizeError = true;
+        return;
+      }
+
+      const item = {
+        prodId: this.$route.params.id,
+        size: this.selectedSize
+      };
+      this.$store.dispatch('cart/addToCart', item);
+    },
     scrollToImage(idx) {
       const scroller = document.querySelector('.images-container');
       const image = scroller.querySelector('.image-item');
@@ -133,8 +153,6 @@ export default {
       });
     },
     async loadProduct() {
-      this.$store.dispatch('loader/toggleLoader');
-
       const data = await firebase
         .database()
         .ref('products/' + this.$route.params.id)
@@ -166,8 +184,6 @@ export default {
       });
 
       this.product = { ...prod };
-
-      this.$store.dispatch('loader/toggleLoader');
     }
   },
 
@@ -184,8 +200,11 @@ export default {
     }
   },
 
-  created() {
-    this.loadProduct();
+  async created() {
+    this.$store.dispatch('loader/toggleLoader');
+    await onAuthStateInit();
+    await this.loadProduct();
+    this.$store.dispatch('loader/toggleLoader');
   }
 };
 </script>
@@ -202,6 +221,9 @@ section {
 }
 .empty {
   fill: var(--black);
+}
+.error {
+  color: var(--red);
 }
 #gallery {
   width: 35rem;

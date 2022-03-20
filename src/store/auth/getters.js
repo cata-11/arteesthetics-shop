@@ -10,5 +10,8 @@ export default {
   },
   favProducts(state) {
     return state.favProducts;
+  },
+  cart(state) {
+    return state.cart;
   }
 };

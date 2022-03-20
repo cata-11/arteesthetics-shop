@@ -11,6 +11,8 @@ import NotFound from '../views/NotFound.vue';
 
 import store from '../store/index.js';
 
+import { onAuthStateInit } from '../main.js';
+
 const routes = [
   {
     path: '/',
@@ -76,7 +78,8 @@ const router = createRouter({
   }
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
+  await onAuthStateInit();
   if (to.meta.requiresAdminAuth && !store.getters['auth/isAdmin']) {
     next('/auth');
   } else if (to.meta.requiresUserAuth && !store.getters['auth/isAuth']) {

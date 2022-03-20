@@ -208,7 +208,7 @@ export default {
             isAdmin: true,
             id: res.user.uid
           });
-          this.$router.push('admin');
+          this.$router.push('/admin');
         } else {
           this.$store.dispatch('auth/login', {
             isAdmin: false,

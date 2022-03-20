@@ -6,12 +6,12 @@
       </div>
       <div class="text">
         <h2>{{ item.title }}</h2>
-        <p>XS</p>
+        <p>{{ item.size }}</p>
       </div>
     </div>
     <div class="dynamic-info">
       <div class="price">
-        <p>$50</p>
+        <p>${{ item.price }}</p>
       </div>
       <span>X</span>
       <div class="quantity">
@@ -19,7 +19,7 @@
       </div>
       <span>=</span>
       <div class="subtotal">
-        <p>$90</p>
+        <p>${{ item.price * item.quantity }}</p>
       </div>
     </div>
     <button class="remove"></button>
