@@ -8,7 +8,8 @@ export default {
     return {
       isAuth: false,
       isAdmin: false,
-      id: null
+      id: null,
+      favProducts: []
     };
   },
   mutations,

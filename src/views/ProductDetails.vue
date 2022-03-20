@@ -62,7 +62,7 @@
               />
               <path
                 d="M230.33,396.18c-24.56-20.51-48.9-40.53-72.9-61C129,311,101,286.33,76,258.51c-17-18.92-32.6-38.9-40.94-63.32C24.44,164,23.6,133.07,40.42,103.45,58.72,71.24,96,53.05,132.72,57,159.38,59.89,181.08,72,199.39,90.7c9.73,10,18.63,20.72,27.91,31.12l3.19,3.6c6.24-7.26,12.21-14.32,18.32-21.28,12.5-14.24,25.86-27.52,42.94-36.31,56-28.81,125.46-.78,139.22,63.1,6.3,29.21.58,57-13.54,83.13C405.06,237,388,256.19,369.81,274.55c-31.3,31.7-65.41,60.28-99.59,88.76C257.14,374.2,244,385,230.33,396.18Z"
-                :class="[isFavourite ? 'empty' : 'full']"
+                :class="[!isFavourite ? 'empty' : 'full']"
               />
             </svg>
           </div>
@@ -81,8 +81,7 @@ export default {
       product: null,
       images: [],
       currentImageIdx: 0,
-      selectedSize: null,
-      isFavourite: false
+      selectedSize: null
     };
   },
   methods: {
@@ -112,8 +111,26 @@ export default {
     selectSize(e) {
       this.selectedSize = e.target.textContent;
     },
-    addToFavourites() {
-      this.isFavourite = !this.isFavourite;
+    async addToFavourites() {
+      if (!this.$store.getters['auth/isAuth']) {
+        this.$router.push('/auth');
+        return;
+      }
+
+      let allFavProds = this.$store.getters['auth/favProducts'];
+
+      const uid = this.$store.getters['auth/id'];
+      const prodId = this.$route.params.id;
+
+      if (this.isFavourite) {
+        allFavProds = allFavProds.filter((p) => p !== prodId);
+      } else if (!this.isFavourite) {
+        allFavProds.push(prodId);
+      }
+      this.$store.dispatch('auth/updateFav', {
+        uid: uid,
+        favProducts: allFavProds
+      });
     },
     async loadProduct() {
       this.$store.dispatch('loader/toggleLoader');
@@ -156,8 +173,15 @@ export default {
 
   computed: {
     ...mapGetters({
-      isLoading: 'loader/isLoading'
-    })
+      isLoading: 'loader/isLoading',
+      favProducts: 'auth/favProducts',
+      isAuth: 'auth/isAuth'
+    }),
+    isFavourite() {
+      return this.favProducts.indexOf(this.$route.params.id) === -1
+        ? false
+        : true;
+    }
   },
 
   created() {

@@ -156,7 +156,8 @@ export default {
           phoneNumber: '',
           deliveryAddress: '',
           city: '',
-          postalCode: ''
+          postalCode: '',
+          favProducts: []
         });
     },
     async signUp() {

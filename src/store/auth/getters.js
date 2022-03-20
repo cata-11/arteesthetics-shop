@@ -7,5 +7,8 @@ export default {
   },
   id(state) {
     return state.id;
+  },
+  favProducts(state) {
+    return state.favProducts;
   }
 };

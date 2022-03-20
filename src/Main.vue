@@ -40,15 +40,22 @@ export default {
     })
   },
   methods: {
-    checkAuthState() {
-      firebase.auth().onAuthStateChanged((user) => {
+    async checkAuthState() {
+      firebase.auth().onAuthStateChanged(async (user) => {
         if (user) {
+          const data = await firebase
+            .database()
+            .ref('users/' + user.uid + '/favProducts')
+            .get();
+          const favProducts = data.val() !== null ? data.val() : [];
+
           if (user.email === 'admin@test.com') {
             this.$store.dispatch('auth/login', { isAdmin: true, id: user.uid });
           } else {
             this.$store.dispatch('auth/login', {
               isAdmin: false,
-              id: user.uid
+              id: user.uid,
+              favProducts: favProducts
             });
           }
         } else {
@@ -57,8 +64,10 @@ export default {
       });
     }
   },
-  created() {
-    this.checkAuthState();
+  async mounted() {
+    this.$store.dispatch('loader/toggleLoader');
+    await this.checkAuthState();
+    this.$store.dispatch('loader/toggleLoader');
   }
 };
 </script>
