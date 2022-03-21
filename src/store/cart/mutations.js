@@ -8,7 +8,7 @@ export default {
       return;
     }
     for (const item of state.items) {
-      if (item.size === payload.size) {
+      if (item.size === payload.size && item.id === payload.id) {
         item.qty++;
         updated = true;
       }
@@ -18,20 +18,21 @@ export default {
     }
   },
 
-  // loadItems(state, items) {
-  //   state.items = items;
-  // },
-  // changeQty(state) {
-  //   localStorage.setItem("cart", JSON.stringify(state.items));
-  // },
-  // removeFromCart(state) {
-  //   localStorage.setItem("cart", JSON.stringify(state.items));
-  // },
-
-  setCart(state, payload) {
-    state.items = payload;
+  removeFromCart(state, payload) {
+    const result = state.items.filter(
+      (item) =>
+        item.size !== payload.size &&
+        item.id !== payload.id &&
+        item.qty !== payload.qt
+    );
+    state.items = result;
   },
-  getCartFromLocalStorage(state) {
-    state.items = JSON.parse(localStorage.getItem('cart'));
+
+  setItems(state, payload) {
+    if (payload === null || payload === undefined) {
+      state.items = [];
+    } else {
+      state.items = payload;
+    }
   }
 };

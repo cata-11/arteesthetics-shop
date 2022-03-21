@@ -24,16 +24,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const authChangeHandle = new Promise((resolve, reject) => {
-  // firebase.auth().onAuthStateChanged(
-  //   (user) => {
-  //     store.commit(user !== null ? 'LOGIN' : 'LOGOUT', user);
-  //     resolve(user);
-  //   },
-  //   (err) => {
-  //     reject(err);
-  //   }
-  // );
-
   firebase.auth().onAuthStateChanged(
     async (user) => {
       if (user) {
@@ -56,15 +46,15 @@ const authChangeHandle = new Promise((resolve, reject) => {
             favProducts: favProducts
           });
         }
-        await store.dispatch('cart/getCartFromDb', {
-          id: user.uid
-        });
       } else {
         store.dispatch('auth/logout');
-        store.dispatch('cart/getCartFromLocalStorage');
+      }
+      try {
+        await store.dispatch('cart/getItems');
+      } catch (err) {
+        throw 'error';
       }
       resolve(user);
-      console.log('res');
     },
     (err) => {
       reject(err);

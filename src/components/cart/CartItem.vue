@@ -2,7 +2,7 @@
   <li class="cart-item">
     <div class="static-info">
       <div class="img-container">
-        <img src="/shirt0.png" alt="" />
+        <img :src="item.coverImage" alt="" />
       </div>
       <div class="text">
         <h2>{{ item.title }}</h2>
@@ -19,16 +19,33 @@
       </div>
       <span>=</span>
       <div class="subtotal">
-        <p>${{ item.price * item.quantity }}</p>
+        <p>${{ item.price * item.qty }}</p>
       </div>
     </div>
-    <button class="remove"></button>
+    <button class="remove" @click="removeFromCart"></button>
   </li>
 </template>
 
 <script>
 export default {
-  props: ['item']
+  emits: ['item-removed'],
+  props: ['item', 'idx'],
+  methods: {
+    removeFromCart() {
+      if (!confirm('Delete item from your cart ?')) {
+        return;
+      }
+
+      const cartItem = {
+        id: this.item.id,
+        size: this.item.size,
+        qty: this.item.qty
+      };
+      this.$store.dispatch('cart/removeFromCart', cartItem);
+
+      this.$emit('item-removed', this.idx);
+    }
+  }
 };
 </script>
 

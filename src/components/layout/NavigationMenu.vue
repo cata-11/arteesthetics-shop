@@ -96,6 +96,9 @@ div:hover {
   color: var(--black);
   background-color: var(--a-white);
 }
+.active-helper img {
+  filter: invert(100%);
+}
 img {
   display: none;
 }

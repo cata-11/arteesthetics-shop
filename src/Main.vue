@@ -20,8 +20,6 @@ import DialogWindow from './components/layout/DialogWindow.vue';
 
 import { mapGetters } from 'vuex';
 
-import firebase from 'firebase/compat/app';
-
 import { onAuthStateInit } from '../src/main.js';
 
 export default {
@@ -41,41 +39,10 @@ export default {
       isLoading: 'loader/isLoading'
     })
   },
-  methods: {
-    async checkAuthState() {
-      firebase.auth().onAuthStateChanged(async (user) => {
-        if (user) {
-          const data = await firebase
-            .database()
-            .ref('users/' + user.uid + '/favProducts')
-            .get();
-          const favProducts = data.val() !== null ? data.val() : [];
-
-          if (user.email === 'admin@test.com') {
-            this.$store.dispatch('auth/login', { isAdmin: true, id: user.uid });
-          } else {
-            this.$store.dispatch('auth/login', {
-              isAdmin: false,
-              id: user.uid,
-              favProducts: favProducts
-            });
-            await this.$store.dispatch('cart/getCartFromDb', {
-              id: user.uid
-            });
-          }
-        } else {
-          this.$store.dispatch('auth/logout');
-          this.$store.dispatch('cart/getCartFromLocalStorage');
-        }
-      });
-    }
-  },
   async mounted() {
-    // this.$store.dispatch('loader/toggleLoader');
-    // await this.checkAuthState();
-    // this.$store.dispatch('loader/toggleLoader');
+    this.$store.dispatch('loader/toggleLoader');
     await onAuthStateInit();
-    console.log('updated');
+    this.$store.dispatch('loader/toggleLoader');
   }
 };
 </script>
