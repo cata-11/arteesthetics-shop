@@ -43,15 +43,22 @@ export default {
   },
 
   methods: {
-    removeItem(idx) {
-      const x = this.items.splice(idx, 1);
-      console.log(x, idx, this.items);
+    removeItem(item) {
+      const itemToRemove = this.items.find(
+        (i) => i.id === item.id && i.size === item.size
+      );
+      const idx = this.items.indexOf(itemToRemove);
+
+      this.items.splice(idx, 1);
+
       this.isEmpty = false;
       if (this.items.length === 0) {
         setTimeout(() => {
           this.isEmpty = true;
         }, 300);
       }
+
+      this.$store.dispatch('cart/removeFromCart', itemToRemove);
     },
     async loadItems() {
       this.isEmpty = false;

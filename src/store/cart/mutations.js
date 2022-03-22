@@ -19,13 +19,7 @@ export default {
   },
 
   removeFromCart(state, payload) {
-    const result = state.items.filter(
-      (item) =>
-        item.size !== payload.size &&
-        item.id !== payload.id &&
-        item.qty !== payload.qt
-    );
-    state.items = result;
+    state.items.splice(payload, 1);
   },
 
   setItems(state, payload) {

@@ -35,15 +35,11 @@ export default {
       if (!confirm('Delete item from your cart ?')) {
         return;
       }
-
       const cartItem = {
         id: this.item.id,
-        size: this.item.size,
-        qty: this.item.qty
+        size: this.item.size
       };
-      this.$store.dispatch('cart/removeFromCart', cartItem);
-
-      this.$emit('item-removed', this.idx);
+      this.$emit('item-removed', cartItem);
     }
   }
 };
