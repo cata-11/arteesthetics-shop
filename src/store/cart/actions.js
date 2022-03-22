@@ -14,10 +14,19 @@ export default {
     const itemToRemove = context.getters.items.find(
       (i) => i.id === payload.id && i.size === payload.size
     );
-
     const idx = context.getters.items.indexOf(itemToRemove);
 
     context.commit('removeFromCart', idx);
+    context.dispatch('updateLocalStorage');
+    context.dispatch('updateDataBase');
+  },
+  updateQuantity(context, payload) {
+    const itemToUpdate = context.getters.items.find(
+      (i) => i.id === payload.item.id && i.size === payload.item.size
+    );
+    const idx = context.getters.items.indexOf(itemToUpdate);
+
+    context.commit('updateQuantity', { idx: idx, qty: payload.qty });
     context.dispatch('updateLocalStorage');
     context.dispatch('updateDataBase');
   },
@@ -69,9 +78,6 @@ export default {
     const databaseItems = await context.dispatch('getItemsFromDatabase');
 
     let items = [];
-
-    console.log(localItems);
-    console.log(databaseItems);
 
     if (localItems === null && databaseItems === null) {
       items = [];

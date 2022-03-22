@@ -17,11 +17,12 @@ export default {
       state.items.push(payload);
     }
   },
-
   removeFromCart(state, payload) {
     state.items.splice(payload, 1);
   },
-
+  updateQuantity(state, payload) {
+    state.items[payload.idx].qty = payload.qty;
+  },
   setItems(state, payload) {
     if (payload === null || payload === undefined) {
       state.items = [];

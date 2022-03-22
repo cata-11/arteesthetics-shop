@@ -2,11 +2,28 @@
   <div class="total-container">
     <div class="total-price">
       <p>Total</p>
-      <p>$300</p>
+      <p>${{ totalPrice }}</p>
     </div>
     <base-button class="btn">Checkout</base-button>
   </div>
 </template>
+
+<script>
+export default {
+  props: ['items'],
+  computed: {
+    totalPrice() {
+      return this.items.length === 0
+        ? 0
+        : this.items === null
+        ? 0
+        : this.items === undefined
+        ? 0
+        : this.items.reduce((a, b) => a + b.qty * b.price, 0);
+    }
+  }
+};
+</script>
 
 <style scoped>
 .total-container {

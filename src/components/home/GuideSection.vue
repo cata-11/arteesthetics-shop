@@ -31,32 +31,37 @@ export default {
         {
           id: 0,
           question:
-            'Is shipping free Is shipping free Is shipping free ?????????????? or not ?',
-          answer: 'Yes, shipping around country is free and bla bla',
+            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet.',
+          answer:
+            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet.',
           show: true
         },
         {
           id: 1,
-          question: 'Is shipping free ?',
-          answer: 'Yes, shipping around country is free',
+          question: 'Lorem ipsum, dolor sit amet adipisicing elit. ',
+          answer:
+            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet.',
           show: false
         },
         {
           id: 2,
-          question: 'Is shipping free ?',
-          answer: 'Yes, shipping around country is free',
+          question: 'Lorem ipsum, dolor sit amet consectetur elit.',
+          answer:
+            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet.',
           show: false
         },
         {
           id: 3,
-          question: 'Is shipping free ?',
-          answer: 'Yes, shipping around country is free',
+          question:
+            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet.',
+          answer: 'Lorem ipsum, dolor sit amet.',
           show: false
         },
         {
           id: 4,
-          question: 'Is shipping free ?',
-          answer: 'Yes, shipping around country is free',
+          question: 'Lorem ipsum, dolor sit amet. ',
+          answer:
+            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet.',
           show: false
         }
       ]

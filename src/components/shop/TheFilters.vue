@@ -110,7 +110,7 @@ input {
   background-color: var(--a-white);
 }
 .search-box > img {
-  opacity: 0.3;
+  opacity: 0.5;
   width: 2.5rem;
   height: 2.5rem;
   cursor: pointer;
@@ -120,12 +120,12 @@ input {
   top: 0;
   bottom: 0;
   right: 0;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
   padding: calc(var(--basic-font-size) / 5);
 }
 
-.search-box > img :hover img {
-  opacity: 1;
+img:hover {
+  opacity: 0.8;
 }
 
 .toggle-filters,

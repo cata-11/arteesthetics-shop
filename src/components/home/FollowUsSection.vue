@@ -9,8 +9,13 @@
 
     <template v-slot:content>
       <div class="follow-us-container">
-        <form action="">
-          <input type="text" placeholder="Enter your email" />
+        <form @submit.prevent="subscribe">
+          <input
+            type="text"
+            placeholder="Enter your email"
+            :class="{ error: emailError }"
+            v-model="email"
+          />
           <button>subscribe</button>
         </form>
         <div id="icons">
@@ -29,8 +34,52 @@
 <script>
 import BaseSection from '../base/BaseSection.vue';
 import BaseTitle from '../base/BaseTitle.vue';
+import firebase from 'firebase/compat/app';
 
 export default {
+  data() {
+    return {
+      email: '',
+      emailError: false
+    };
+  },
+  methods: {
+    validateEmail() {
+      if (this.email === '') {
+        this.emailError = true;
+        return false;
+      }
+      const regex =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (!regex.test(this.email)) {
+        this.emailError = true;
+        return false;
+      }
+      this.emailError = false;
+      return true;
+    },
+    async subscribe() {
+      if (!this.validateEmail()) {
+        return;
+      }
+      try {
+        this.$store.dispatch('loader/toggleLoader');
+        await firebase.database().ref('subscribers').push(this.email);
+      } catch (err) {
+        this.$store.dispatch('dialog/showDialog', {
+          msg: 'Something went wrong',
+          type: 'error'
+        });
+      }
+      this.$store.dispatch('loader/toggleLoader');
+      this.$store.dispatch('dialog/showDialog', {
+        msg: 'You are succesfully subscribed to our newsletter',
+        type: 'confirmation'
+      });
+      this.email = '';
+    }
+  },
+
   components: {
     BaseSection,
     BaseTitle
@@ -53,6 +102,10 @@ form {
   align-items: center;
   background-color: var(--a-white);
 }
+.error {
+  border: 2px solid var(--red) !important;
+  color: var(--red) !important;
+}
 input {
   border: none;
   outline: none;
@@ -62,9 +115,9 @@ input {
   font-size: var(--basic-font-size);
   background-color: var(--a-white);
   font-family: 'Roboto Slab', serif;
+  border: 2px solid transparent;
 }
 button {
-  border: none;
   cursor: pointer;
   padding: 1rem;
   color: var(--a-white);
@@ -75,6 +128,7 @@ button {
   font-size: var(--basic-font-size);
   transition: all 0.2s ease-in-out;
   font-family: 'Roboto Slab', serif;
+  border: 2px solid transparent;
 }
 button:hover {
   background-color: var(--violet);

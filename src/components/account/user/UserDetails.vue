@@ -187,7 +187,10 @@ export default {
           .ref('users/' + this.uid + '/' + key)
           .set(this.user[key]);
       } catch (err) {
-        console.log(err);
+        this.$store.dispatch('dialog/showDialog', {
+          msg: 'Something went wrong.\nTry again later',
+          type: 'error'
+        });
       }
     },
     async getUserData() {

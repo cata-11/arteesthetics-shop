@@ -1,5 +1,5 @@
 <template>
-  <section @click="closeDialog">
+  <section @click="closeDialog" :class="type.toLowerCase()">
     <div class="container">
       <h1>{{ type }}</h1>
       <p>{{ message }}</p>
@@ -19,6 +19,7 @@ export default {
       this.$store.dispatch('dialog/hideDialog');
     }
   },
+
   computed: {
     ...mapGetters({
       type: 'dialog/type',
@@ -29,6 +30,16 @@ export default {
 </script>
 
 <style scoped>
+.error {
+  --color: var(--red);
+}
+.confirmation {
+  --color: var(--violet);
+}
+.alert {
+  --color: var(--pink);
+}
+
 section {
   width: 100%;
   height: 100%;
@@ -44,13 +55,13 @@ section {
 .container {
   background-color: var(--a-white);
   padding: 1rem;
-  border-top: 0.25rem solid var(--red);
+  border-top: 0.25rem solid var(--color);
   max-width: 60%;
   display: flex;
   flex-direction: column;
 }
 h1 {
-  color: var(--red);
+  color: var(--color);
   font-size: calc(var(--basic-font-size) + 0.5rem);
   text-align: center;
   text-transform: uppercase;
@@ -58,10 +69,11 @@ h1 {
 p {
   color: var(--black);
   font-size: var(--basic-font-size);
-  border-left: 0.25rem solid var(--pink);
+  border-left: 0.25rem solid var(--color);
   padding-left: 0.5rem;
   margin: 2rem 0;
   white-space: pre-line;
+  text-transform: uppercase;
 }
 .btn {
   margin: 0 auto;
@@ -69,9 +81,10 @@ p {
   color: var(--black);
   border-width: 0.25rem;
   text-transform: uppercase;
+  border-color: var(--color);
 }
 .btn:hover {
   color: var(--a-white);
-  background-color: var(--violet);
+  background-color: var(--color);
 }
 </style>

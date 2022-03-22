@@ -7,7 +7,7 @@
         :product="product"
       />
     </div>
-    <div v-else>no find</div>
+    <div v-else class="empty-result">products not found</div>
   </section>
 </template>
 
@@ -33,6 +33,12 @@ section {
 }
 .grid-container {
   margin-bottom: 2rem;
+}
+.empty-result {
+  text-transform: uppercase;
+  font-size: var(--basic-font-size);
+  border-left: 5px solid var(--violet);
+  padding-left: 1rem;
 }
 
 @media only screen and (min-width: 320px) {

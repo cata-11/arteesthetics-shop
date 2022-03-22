@@ -1,6 +1,6 @@
 <template>
   <ProductsGrid :products="products" v-if="products.length" />
-  <div v-else>your wishlist is empty</div>
+  <div v-else class="empty-result">your wishlist is empty</div>
 </template>
 
 <script>
@@ -50,3 +50,12 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.empty-result {
+  text-transform: uppercase;
+  font-size: var(--basic-font-size);
+  border-left: 5px solid var(--violet);
+  padding-left: 1rem;
+}
+</style>

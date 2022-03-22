@@ -1,9 +1,9 @@
 <template>
   <li class="cart-item">
     <div class="static-info">
-      <div class="img-container">
+      <router-link :to="'/shop' + '/' + item.id" class="img-container">
         <img :src="item.coverImage" alt="" />
-      </div>
+      </router-link>
       <div class="text">
         <h2>{{ item.title }}</h2>
         <p>{{ item.size }}</p>
@@ -13,11 +13,51 @@
       <div class="price">
         <p>${{ item.price }}</p>
       </div>
-      <span>X</span>
-      <div class="quantity">
-        <input type="number" placeholder="2" min="1" max="10" />
+
+      <div class="svg">
+        <svg
+          id="Capa_1"
+          data-name="Capa 1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 460.77 460.77"
+        >
+          <path
+            d="M285.08,230.4,456.22,59.27a15.55,15.55,0,0,0,0-22L423.51,4.57a15.52,15.52,0,0,0-22,0L230.39,175.71,59.25,4.57a15.54,15.54,0,0,0-22,0L4.56,37.28a15.54,15.54,0,0,0,0,22L175.7,230.4,4.57,401.51a15.54,15.54,0,0,0,0,22l32.71,32.72a15.56,15.56,0,0,0,22,0L230.39,285.09,401.51,456.21a15.55,15.55,0,0,0,22,0l32.71-32.72a15.54,15.54,0,0,0,0-22Z"
+            fill="#f5f5f5"
+          />
+        </svg>
       </div>
-      <span>=</span>
+
+      <div class="quantity">
+        <input
+          type="number"
+          v-model.number="quantity"
+          min="1"
+          max="10"
+          @blur="changeQuantity"
+          :class="{ error: qtyErr }"
+          @input="isQtyValid"
+        />
+      </div>
+      <div class="svg">
+        <svg
+          id="Capa_1"
+          data-name="Capa 1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 460.77 270.94"
+        >
+          <path
+            d="M460.77,110.47v46.26a15.52,15.52,0,0,1-15.51,15.53H15.55A15.52,15.52,0,0,1,0,156.77v-46.3A15.57,15.57,0,0,1,15.55,94.92H445.23a15.57,15.57,0,0,1,15.54,15.55Z"
+            transform="translate(0 -94.92)"
+            fill="#f5f5f5"
+          />
+          <path
+            d="M460.77,304.06v46.26a15.53,15.53,0,0,1-15.52,15.54H15.55A15.53,15.53,0,0,1,0,350.35V304.06a15.57,15.57,0,0,1,15.55-15.55H445.23a15.57,15.57,0,0,1,15.54,15.55Z"
+            transform="translate(0 -94.92)"
+            fill="#f5f5f5"
+          />
+        </svg>
+      </div>
       <div class="subtotal">
         <p>${{ item.price * item.qty }}</p>
       </div>
@@ -28,8 +68,16 @@
 
 <script>
 export default {
-  emits: ['item-removed'],
+  emits: ['item-removed', 'quantity-changed'],
   props: ['item', 'idx'],
+
+  data() {
+    return {
+      quantity: this.item.qty,
+      qtyErr: false
+    };
+  },
+
   methods: {
     removeFromCart() {
       if (!confirm('Delete item from your cart ?')) {
@@ -40,6 +88,31 @@ export default {
         size: this.item.size
       };
       this.$emit('item-removed', cartItem);
+    },
+    isQtyValid() {
+      this.qtyErr = false;
+      if (
+        this.quantity === 0 ||
+        this.quantity === null ||
+        this.quantity === '' ||
+        isNaN(this.quantity)
+      ) {
+        this.qtyErr = true;
+        return false;
+      }
+      return true;
+    },
+    changeQuantity() {
+      if (this.item.qty === this.quantity) {
+        return;
+      }
+      if (this.isQtyValid()) {
+        const cartItem = {
+          id: this.item.id,
+          size: this.item.size
+        };
+        this.$emit('quantity-changed', this.quantity, cartItem);
+      }
     }
   }
 };
@@ -58,14 +131,21 @@ export default {
   width: 97.5%;
   box-sizing: border-box;
 }
-
+.img-container:hover {
+  filter: brightness(80%);
+}
 .static-info {
   display: flex;
   /* border: 1px solid white; */
   width: 55%;
 }
+.error {
+  border: 2px solid var(--red) !important;
+  color: var(--red);
+}
 
 .img-container {
+  transition: all 0.2s ease-in-out;
   border: 5px solid var(--a-white);
   min-width: 8rem;
   min-height: 8rem;
@@ -116,6 +196,9 @@ export default {
   justify-content: center;
   align-items: center;
   /* border: 1px solid salmon; */
+}
+.svg svg {
+  width: 50%;
 }
 .price,
 .quantity,

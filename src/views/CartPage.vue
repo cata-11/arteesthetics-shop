@@ -7,12 +7,13 @@
         :item="item"
         :idx="idx"
         @itemRemoved="removeItem"
+        @quantityChanged="updateQuantity"
       />
     </TransitionGroup>
-    <CartTotal />
+    <CartTotal :items="items" />
   </section>
   <section v-else>
-    <div>empty</div>
+    <div class="empty-result">your cart is empty</div>
   </section>
 </template>
 
@@ -43,6 +44,14 @@ export default {
   },
 
   methods: {
+    updateQuantity(qty, item) {
+      const itemToUpdate = this.items.find(
+        (i) => i.id === item.id && i.size === item.size
+      );
+      const idx = this.items.indexOf(itemToUpdate);
+      this.items[idx].qty = qty;
+      this.$store.dispatch('cart/updateQuantity', { item: itemToUpdate, qty });
+    },
     removeItem(item) {
       const itemToRemove = this.items.find(
         (i) => i.id === item.id && i.size === item.size
@@ -70,7 +79,6 @@ export default {
         this.isEmpty = true;
         return;
       }
-
       for (const item of this.cartItems) {
         const prodId = item.id;
 
@@ -115,6 +123,14 @@ export default {
 <style scoped>
 section {
   margin-top: 2rem;
+}
+.empty-result {
+  text-transform: uppercase;
+  font-size: var(--basic-font-size);
+
+  margin-bottom: 2rem;
+  border-left: 5px solid var(--violet);
+  padding-left: 1rem;
 }
 .list-leave-active {
   transition: all 0.3s ease-in-out;

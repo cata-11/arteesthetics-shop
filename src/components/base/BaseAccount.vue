@@ -3,7 +3,7 @@
     <div class="header">
       <h1>{{ data.type }} account</h1>
       <button @click="logOut">Log out</button>
-      <div>
+      <div @click="logOut">
         <img src="/exit.svg" alt="" />
       </div>
     </div>

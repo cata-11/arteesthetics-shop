@@ -8,15 +8,13 @@
     </template>
     <template v-slot:content>
       <div class="sneak-peeks-container">
+        <img src="1.png" alt="" />
         <img src="image1.png" alt="" />
+        <img src="3.png" alt="" />
+        <img src="4.png" alt="" />
         <img src="image1.png" alt="" />
-        <img src="image1.png" alt="" />
-        <img src="image1.png" alt="" />
-        <img src="image1.png" alt="" />
-        <img src="image1.png" alt="" />
-        <img src="image1.png" alt="" />
-        <img src="image1.png" alt="" />
-        <img src="image1.png" alt="" />
+        <img src="6.png" alt="" />
+        <img src="7.png" alt="" />
         <img src="image1.png" alt="" @load="animateImages" />
       </div>
     </template>

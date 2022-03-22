@@ -28,7 +28,7 @@ export default {
     },
     showDialog() {
       this.$store.dispatch('dialog/showDialog', {
-        type: 'message',
+        type: 'alert',
         msg: 'No products with this filter'
       });
       this.showAll();

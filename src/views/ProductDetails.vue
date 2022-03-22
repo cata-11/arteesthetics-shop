@@ -104,6 +104,10 @@ export default {
         size: this.selectedSize
       };
       this.$store.dispatch('cart/addToCart', item);
+      this.$store.dispatch('dialog/showDialog', {
+        msg: 'Succesfully added to your cart',
+        type: 'confirmation'
+      });
     },
     scrollToImage(idx) {
       const scroller = document.querySelector('.images-container');
@@ -133,7 +137,10 @@ export default {
     },
     async addToFavourites() {
       if (!this.$store.getters['auth/isAuth']) {
-        this.$router.push('/auth');
+        this.$store.dispatch('dialog/showDialog', {
+          msg: 'You have to login first',
+          type: 'alert'
+        });
         return;
       }
 
@@ -144,8 +151,16 @@ export default {
 
       if (this.isFavourite) {
         allFavProds = allFavProds.filter((p) => p !== prodId);
+        this.$store.dispatch('dialog/showDialog', {
+          msg: 'Succesfully removed from your wishlist',
+          type: 'confirmation'
+        });
       } else if (!this.isFavourite) {
         allFavProds.push(prodId);
+        this.$store.dispatch('dialog/showDialog', {
+          msg: 'Succesfully added to your wishlist',
+          type: 'confirmation'
+        });
       }
       this.$store.dispatch('auth/updateFav', {
         uid: uid,
